@@ -5,9 +5,9 @@ threshold: "A named cause, and a decision on whether to match music21 or diverge
 if_not: "Leave the parity test red rather than widening it, because a tolerance would make the only sensor on the port stop sensing."
 budget_minutes: 45
 status: answered
-finding: "music21 appends a slash bass as an extra pitch when its letter name differs from every chord tone, so a pitch class can be counted twice."
+finding: "music21 appends a slash bass as an extra pitch unless its exact spelled name is already a chord tone, so a pitch class can be counted twice."
 measured: 1
-elapsed_minutes: 25
+elapsed_minutes: 40
 ---
 
 # slash-bass-spelling
@@ -33,9 +33,24 @@ different letter — so music21 appends the bass as a fourth pitch instead of
 inverting. For `C/E` the bass letter E matches a chord tone, so it inverts and
 stays at three pitches.
 
-The rule is **letters, not pitch classes**: append the bass when its letter
-name is absent from the chord's spelled tones. `E-dim` is lettered E, G, B;
-`F#` is lettered F; so it appends.
+**First reading of the rule, and it was wrong.** Two examples suggested
+*letters*: `E-dim` is lettered E, G, B, and `F#` is lettered F, so it appends;
+`C/E` shares the letter E, so it inverts. Checking a wider set killed that:
+
+```
+C/E-    4 pitches  ['E-','E','G','C']   letter E IS present, still appends
+C7/B    5 pitches  ['B','B-','C','E','G']   letter B IS present, still appends
+Cdim/G- 3 pitches  ['G-','C','E-']      inverts
+```
+
+The rule is the **exact spelled name**: append the bass unless a chord tone
+is spelled identically, accidental included. `C/E-` appends because the third
+is `E`, not `E-`. Letters alone would have shipped a port that is wrong on
+every altered bass, and the fixture would have caught it as a *different*
+one-in-two-hundred, which is the kind of bug that eats an afternoon.
+
+Worth recording that the cheap version of this spike would have stopped at
+two examples and been confidently wrong.
 
 `src/chords.ts:194` does `set.add(chord.bass)` on a `Set`, so a pitch class
 already present is a no-op and the chord stays at three. The distribution
@@ -69,6 +84,38 @@ somebody typed F-sharp is not a musical judgement. Diverging from the oracle
 on purpose is a legitimate option — but it would have to be argued, written
 down, and the parity test's contract changed deliberately. It is not
 something to arrive at by lowering a number until the suite goes green.
+
+## Resolution
+
+Fixed rather than tolerated. `chords.ts` now carries the root letter and the
+bass letter-plus-accidental, spells each chord tone from a `LETTER_OFFSETS`
+table read out of music21, and returns a pitch-class **multiset**.
+
+The result, and one number moved that this spike did not predict:
+
+```
+                             before   after
+top reading disagreement       1/200    0/200
+ranking order disagreement     7/200    0/200
+score disagreement > 1e-6      2/200    0/200
+reordered within a tie             -    5/200   (not a disagreement)
+```
+
+The five remaining reorderings are **not** port bugs, and finding that out
+needed a second measurement. Two are exact ties — `Fdim Bbm Ebm` scores D
+major and C major both `-0.5697452319355997`, so their order is whichever way
+each implementation's enumeration ran before a stable sort. Three differ in
+the last bit: `-0.11800224012193235` against `-0.11800224012193242`. Python
+and JavaScript are both IEEE 754 and both right; they summed in a different
+order.
+
+So the parity test now asserts zero on the top reading and on every score,
+and counts reorderings within a tie separately rather than calling them
+failures. That is not the tolerance this record warned against: the fixture
+stores six decimal places and the ties survive at seventeen, so a total order
+over 24 keys was asking the oracle a question it cannot answer. The
+exemption is measured, bounded to exact ties, and does not extend to the
+answer itself.
 
 ## What this is not
 

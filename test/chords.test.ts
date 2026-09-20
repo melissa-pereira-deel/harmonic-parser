@@ -47,6 +47,44 @@ describe('pitchClasses', () => {
     expect(pitchClasses(parseChord('C/E')!)).toEqual([0, 4, 7]);
     expect(pitchClasses(parseChord('C/D')!)).toEqual([0, 2, 4, 7]);
   });
+
+  // Every expectation below was read out of music21 rather than reasoned
+  // about. The fixture already covers this indirectly, but it took one
+  // progression in two hundred to notice -- these name the rule so the next
+  // person does not have to rediscover it. See
+  // experiments/slash-bass-spelling.spike.md.
+  describe('decides by spelling, not by pitch class', () => {
+    it('inverts when the bass is spelled exactly like a chord tone', () => {
+      expect(pitchClasses(parseChord('C/G')!)).toEqual([0, 4, 7]);
+      // Gb IS the diminished fifth of C dim, spelled the same way.
+      expect(pitchClasses(parseChord('Cdim/Gb')!)).toEqual([0, 3, 6]);
+      expect(pitchClasses(parseChord('C7/Bb')!)).toEqual([0, 4, 7, 10]);
+    });
+
+    it('appends when the letter matches but the accidental does not', () => {
+      // E is in a C major triad; E-flat is not, so it is a fourth pitch.
+      expect(pitchClasses(parseChord('C/Eb')!)).toEqual([0, 3, 4, 7]);
+      // B-flat is the seventh of C7; B natural is not.
+      expect(pitchClasses(parseChord('C7/B')!)).toEqual([0, 4, 7, 10, 11]);
+    });
+
+    it('counts a pitch class twice when two spellings collide', () => {
+      // The one that cost a progression. F# and Gb are both pitch class 6,
+      // and music21 counts it twice because C dim spells its fifth Gb.
+      expect(pitchClasses(parseChord('Cdim/F#')!)).toEqual([0, 3, 6, 6]);
+      expect(pitchClasses(parseChord('Ebdim/F#')!)).toEqual([3, 6, 6, 9]);
+      // Even against the root: B# is pitch class 0, and so is C.
+      expect(pitchClasses(parseChord('C/B#')!)).toEqual([0, 0, 4, 7]);
+    });
+
+    it('is a multiset, so readings.ts weights the doubled pitch twice', () => {
+      // Why any of this matters: readings.ts counts these into a pitch-class
+      // distribution, so a duplicate is real extra weight on that class.
+      const pcs = pitchClasses(parseChord('Cdim/F#')!);
+      expect(pcs).toHaveLength(4);
+      expect(new Set(pcs).size).toBe(3);
+    });
+  });
 });
 
 describe('parseProgression', () => {

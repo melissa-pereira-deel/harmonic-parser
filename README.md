@@ -26,12 +26,13 @@ completely invisible unless somebody shows you.
 
 > **⚠️ Status: skeleton, and the tests are red on purpose.**
 >
-> The four layers, the key ranking and the parity harness all run. **Six tests
-> fail, and none of them should be made to pass by adjusting a number.** Two
-> answered spike records in [`experiments/`](experiments/) say why: the
-> confidence thresholds cannot be calibrated from the data available, and the
-> port disagrees with music21 on one progression in two hundred for a reason
-> that needs a real fix rather than a wider tolerance.
+> The four layers, the key ranking and the parity harness all run. The port
+> agrees with music21 on every top reading and every score across 200
+> progressions. **Five tests fail, and none should be made to pass by
+> adjusting a number.** An answered spike record in
+> [`experiments/`](experiments/) says why: the two confidence thresholds
+> cannot be calibrated from the data that exists, so the page's claims about
+> its own confidence are placeholders.
 >
 > There is no grammar, no trained model, no Roman-numeral *analysis* beyond a
 > lookup from the inferred key, and no audio. The `'model'` source in
@@ -65,8 +66,11 @@ that anything changed.
 progressions. `test/parity.test.ts` checks the TypeScript port against it and
 **prints the disagreement rate rather than asserting a tolerance**, the way
 `examples/02-config-lexer` in tiny-model-lab prints its torch-vs-ONNX and
-fp32-vs-int8 rates. Today that rate is 1/200 on the top reading, and the fix
-is a change to the parser rather than a change to the test.
+fp32-vs-int8 rates. That rate is **0/200** on the top reading and 0/200 on
+scores. Five rankings reorder within an exact tie, counted and printed
+separately because it is not a disagreement: the fixture stores six decimal
+places and those ties survive at seventeen, so a total order over 24 keys is
+a question the oracle cannot answer.
 
 music21 is pinned exactly rather than floored, which is a deliberate deviation
 from the sibling repo's policy. A floor says "at least this new"; here music21
@@ -74,7 +78,7 @@ from the sibling repo's policy. A floor says "at least this new"; here music21
 
 ```bash
 npm install
-npm test          # 6 failing, on purpose. Read experiments/ first.
+npm test          # 5 failing, on purpose. Read experiments/ first.
 npm run dev
 ```
 
