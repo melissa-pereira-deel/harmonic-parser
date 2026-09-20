@@ -101,16 +101,26 @@ python -m harness spikes
 harness for deciding whether a narrow task should be a model at all, and for
 proving it beat the simpler thing it replaced. Two seams meet this repo. The
 [spike record](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/templates/spike.md)
-is where the two answered questions in `experiments/` came from — this repo is
-the first thing to use it. And `LATENCY_BANDS_MS` in
+is where the three answered questions in `experiments/` came from — this repo
+is the first thing to use it. And `LATENCY_BANDS_MS` in
 [`harness/experiment.py`](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/experiment.py)
 puts the instant boundary at 100 ms and the flow boundary at 1 s.
 
-Note the disagreement that follows from it: the original 200 ms target for
-first reading sits in the **flow** band, not **instant**. At 200 ms this page
-is not direct manipulation, and the honest response is to design the
-acknowledgement rather than to describe the interaction as instant. Shared
-foundation, different conclusions about this particular number.
+That second seam used to be an assertion. It is now a measurement: **p95 from
+keystroke to painted is 27.6 ms**, so `band_landed_in()` returns `instant`
+with 72 ms of headroom. Method in [`tools/bench-latency.md`](tools/bench-latency.md),
+result in [`experiments/render-latency.spike.md`](experiments/render-latency.spike.md).
+
+Worth keeping the correction visible, because this README used to argue the
+other way. The original 200 ms target sits in **flow**, and the page was
+described here as needing a designed acknowledgement rather than direct
+manipulation. That was one unmeasured target disagreeing with another. The
+real number is seven times faster than the target, and the disagreement
+dissolves: the interaction is instant, and the honest thing is to say so and
+protect the headroom rather than spend it.
+
+Protecting it is why this page has no render debounce. Adding one was the
+plan until the number arrived.
 
 ## License
 

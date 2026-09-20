@@ -6,24 +6,32 @@
  * parser.
  */
 
+import { announcement, announcer } from './announce.ts';
 import './style.css';
 import type { State } from './ui.ts';
 import { initialState, render } from './ui.ts';
 
 const box = document.querySelector<HTMLInputElement>('#progression');
 const output = document.querySelector<HTMLElement>('#output');
+const live = document.querySelector<HTMLElement>('#status');
 
-if (box === null || output === null) {
-  throw new Error('index.html is missing #progression or #output');
+if (box === null || output === null || live === null) {
+  throw new Error('index.html is missing #progression, #output or #status');
 }
 
 const input = box;
 const panel = output;
 const state: State = initialState();
 
+// Two channels, two speeds, on purpose. The panel repaints immediately; the
+// live region waits for a pause. src/announce.ts says why fast is the wrong
+// answer for one of them.
+const announce = announcer(live);
+
 function update(): void {
   state.input = input.value;
-  render(panel, state);
+  const { readings, confidence, unparsed } = render(panel, state);
+  announce(announcement(readings, confidence, unparsed));
 }
 
 input.addEventListener('input', update);

@@ -11,6 +11,7 @@
  * It is not needed yet.
  */
 
+import type { Chord } from './chords.ts';
 import { parseProgression } from './chords.ts';
 import type { Confidence } from './confidence.ts';
 import { assess } from './confidence.ts';
@@ -99,8 +100,11 @@ function renderReading(reading: Reading, place: number): HTMLElement {
   return card;
 }
 
-function renderSuggestions(state: State, reading: Reading): HTMLElement {
-  const chords = parseProgression(state.input).chords;
+// Takes the already-parsed chords rather than `state`. It used to re-parse
+// `state.input` itself, which doubled the tokenising work on every keystroke
+// for no gain -- `parseProgression` is pure, so the second call could only
+// ever return what the first already had.
+function renderSuggestions(chords: readonly Chord[], reading: Reading): HTMLElement {
   const section = el('section', 'suggestions');
   section.append(el('h3', undefined, `What could come next in ${keyName(reading.key)}`));
   const list = el('ul');
@@ -120,8 +124,22 @@ function renderSuggestions(state: State, reading: Reading): HTMLElement {
   return section;
 }
 
+/**
+ * What one render worked out, handed back so nobody has to work it out again.
+ *
+ * `main.ts` needs the same readings to build the screen-reader announcement.
+ * Returning them keeps the computation in one place -- the alternative was a
+ * second `rank()` per keystroke, which is the mistake `renderSuggestions` was
+ * already making with `parseProgression`.
+ */
+export interface Rendered {
+  readonly readings: readonly Reading[];
+  readonly confidence: Confidence;
+  readonly unparsed: readonly string[];
+}
+
 /** Rebuild `mount` from `state`. Called on every keystroke; idempotent. */
-export function render(mount: HTMLElement, state: State): void {
+export function render(mount: HTMLElement, state: State): Rendered {
   mount.replaceChildren();
 
   const parsed = parseProgression(state.input);
@@ -131,7 +149,7 @@ export function render(mount: HTMLElement, state: State): void {
     mount.append(
       el('p', 'empty', 'Type a progression. Am F C G is a good place to start.'),
     );
-    return;
+    return { readings: [], confidence: assess([]), unparsed: parsed.unparsed };
   }
 
   const readings = rank(parsed.chords);
@@ -147,5 +165,7 @@ export function render(mount: HTMLElement, state: State): void {
   shown.forEach((reading, i) => list.append(renderReading(reading, i)));
   mount.append(list);
 
-  mount.append(renderSuggestions(state, readings[0]));
+  mount.append(renderSuggestions(parsed.chords, readings[0]));
+
+  return { readings, confidence, unparsed: parsed.unparsed };
 }
