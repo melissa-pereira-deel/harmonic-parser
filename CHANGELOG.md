@@ -27,9 +27,27 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   with music21's full 24-key ranking, regenerable byte-identically from
   `tools/generate-fixtures.py` and a seed held inside that script. The test
   prints the disagreement rate rather than asserting a tolerance.
-- Two answered spike records in `experiments/`, written with tiny-model-lab's
-  `harness/templates/spike.md`. This repo is the first thing to use that
-  template.
+- Three answered spike records in `experiments/`, written with
+  tiny-model-lab's `harness/templates/spike.md`. This repo is the first thing
+  to use that template.
+- A separate spoken channel. `aria-live="polite"` was on `<section
+  id="output">` — the whole render target, which `render()` replaces on every
+  keystroke — so typing `Am F C G` announced the full analysis eight times.
+  `#output` is no longer a live region; a visually-hidden `#status` outside it
+  receives one sentence 500 ms after typing stops (`src/announce.ts`). The
+  visible panel is untouched.
+
+  This is the fix the brief asked for, aimed somewhere else. The measurement
+  below says a *render* debounce would make the page worse.
+- `test/latency.test.ts` — the arithmetic, in Node, with the statistics
+  mirroring `harness/profile.py::latency_ms`. It prints its numbers and states
+  in its own header that it does **not** measure the render or paint, and so
+  is not the number `design-eval` asks for. Adding jsdom would have produced a
+  green CI number measuring a simulated DOM on the wrong hardware.
+- `tools/bench-latency.md` — the real browser procedure and its script, so
+  27.6 ms is reproducible rather than folklore.
+- `experiments/render-latency.spike.md`, the first spike here to inform a
+  contract field (`budgets.latency_band`) rather than `scope`.
 
 ### Fixed
 
@@ -54,6 +72,15 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Changed
 
+- `renderSuggestions` takes the already-parsed chords instead of `state`. It
+  used to re-parse `state.input` itself, tokenising the whole progression
+  twice per keystroke for nothing -- `parseProgression` is pure, so the
+  second call could only return what the first already had. Parity is
+  unchanged at 0/200, which is the check that the two parses really were
+  equivalent.
+- `render()` returns the readings, confidence and unparsed tokens it worked
+  out, so the announcement can reuse them instead of running `rank()` a
+  second time.
 - `test/parity.test.ts` counts a reordering *within a tie* separately from a
   disagreement, and still asserts zero on the top reading and on every score.
   Five cases remain reordered and none is a port bug: two are exact ties
@@ -75,4 +102,5 @@ be the exact failure the sibling repo's baseline gate exists to prevent.
   pair is not close under this scorer, and any threshold wide enough to flag
   it would flag most of the corpus. The test encodes a musically intuitive
   claim that the measurement falsified. It stays as written.
+
 Parity is no longer among them — see Fixed above.

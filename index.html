@@ -47,7 +47,14 @@
         <button type="button" data-example="C F#m7b5 Bb E">C F#m7b5 Bb E</button>
       </div>
 
-      <section id="output" aria-live="polite"></section>
+      <!-- Not a live region. It rebuilds wholesale on every keystroke, so
+           announcing it read the entire analysis out once per character. The
+           spoken channel is #status, which waits for a pause. -->
+      <section id="output"></section>
+
+      <!-- Screen-reader only, and deliberately the one part of this page that
+           is not instant. See src/announce.ts. -->
+      <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
 
       <footer class="page-foot">
         <p>
