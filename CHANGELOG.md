@@ -31,9 +31,42 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   `harness/templates/spike.md`. This repo is the first thing to use that
   template.
 
+### Fixed
+
+- The port now agrees with music21 on **every** top reading and every score:
+  1/200, 7/200 and 2/200 disagreements all go to 0/200.
+  `experiments/slash-bass-spelling.spike.md` has the whole trail. music21
+  appends a slash bass as an extra pitch unless a chord tone is spelled
+  *identically* — accidental included — so `Cdim/Gb` is three pitches and
+  `Cdim/F#` is four with pitch class 6 counted twice. `chords.ts` compared
+  pitch classes, could not tell those apart, and lost one progression in two
+  hundred.
+
+  The fix carries the root letter and the bass letter-plus-accidental through
+  the parser, spells each chord tone from a `LETTER_OFFSETS` table read out
+  of music21 and verified stable across all twelve roots, and makes
+  `pitchClasses` return a multiset rather than a `Set`. `readings.ts` counts
+  into a distribution, so the duplicate is real weight.
+
+  An earlier reading of the rule — match on *letter* — fit the first two
+  examples and was wrong: `C/E-` appends although letter E is present. Widen
+  the sample before believing a rule.
+
+### Changed
+
+- `test/parity.test.ts` counts a reordering *within a tie* separately from a
+  disagreement, and still asserts zero on the top reading and on every score.
+  Five cases remain reordered and none is a port bug: two are exact ties
+  (`Fdim Bbm Ebm` scores D major and C major both `-0.5697452319355997`, so
+  the order is enumeration order before a stable sort) and three differ in
+  the last bit of an IEEE 754 sum. The fixture stores six decimal places and
+  the ties survive at seventeen, so a total order over 24 keys was asking the
+  oracle a question it cannot answer. Bounded to exact ties, measured rather
+  than assumed, and it does not extend to the answer.
+
 ### Known failing
 
-Six tests, left red deliberately. Adjusting a number to make them pass would
+Five tests, left red deliberately. Adjusting a number to make them pass would
 be the exact failure the sibling repo's baseline gate exists to prevent.
 
 - Five in `test/confidence.test.ts`. `experiments/confidence-thresholds.spike.md`
@@ -42,8 +75,4 @@ be the exact failure the sibling repo's baseline gate exists to prevent.
   pair is not close under this scorer, and any threshold wide enough to flag
   it would flag most of the corpus. The test encodes a musically intuitive
   claim that the measurement falsified. It stays as written.
-- One in `test/parity.test.ts`. `experiments/slash-bass-spelling.spike.md`
-  found the cause: music21 appends a slash bass as an extra pitch when its
-  *letter name* differs from every chord tone, so `E-dim/F#` counts pitch
-  class 6 twice. `src/chords.ts` uses a `Set` and cannot. The fix is letter
-  names through the parser and a multiset, not a wider tolerance.
+Parity is no longer among them — see Fixed above.

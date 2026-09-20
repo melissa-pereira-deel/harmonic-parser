@@ -7,9 +7,21 @@
  * produces, so the parser can stay small enough to be obviously right and the
  * theory can stay in one place.
  *
- * Pitch classes are integers 0-11 with C = 0. Spelling is discarded here —
- * `Bb` and `A#` both become 10 — because every consumer downstream compares
- * pitch classes. Spelling comes back at the display edge, in `keyName()`.
+ * Pitch classes are integers 0-11 with C = 0, and that is what every consumer
+ * downstream compares. Spelling is *almost* discarded: `Bb` and `A#` both
+ * become 10, but the letter and accidental are kept alongside, because one
+ * thing genuinely depends on them.
+ *
+ * That thing is the slash bass. music21 appends the bass as an extra pitch
+ * unless its **exact spelled name** already appears among the chord tones —
+ * so `C/E` is three pitches and `C/E-` is four, and `Cdim/G-` is three while
+ * `Cdim/F#` is four even though G-flat and F-sharp are the same pitch class.
+ * A port comparing pitch classes cannot tell those apart, counts one pitch
+ * where music21 counts two, and lands on a different key. See
+ * `experiments/slash-bass-spelling.spike.md` for how that was found.
+ *
+ * So spelling survives as far as `pitchClasses()` and no further. Everything
+ * above this file still sees integers.
  */
 
 /** A pitch class: 0 = C, 1 = C#/Db, ... 11 = B. */
@@ -47,7 +59,18 @@ export interface Chord {
   readonly quality: Quality;
   /** The root again unless a slash named something else. */
   readonly bass: PitchClass;
+  /** Index into `C D E F G A B`. Spells the chord tones; see `pitchClasses`. */
+  readonly rootLetter: LetterIndex;
+  /** Index into `C D E F G A B` for the bass, the root's letter if no slash. */
+  readonly bassLetter: LetterIndex;
+  /** Semitones the bass accidental shifts its letter: -2 to 2, 0 for natural. */
+  readonly bassAlter: number;
 }
+
+/** 0 = C, 1 = D, ... 6 = B. Letters, not pitch classes: E and Eb share one. */
+export type LetterIndex = number;
+
+const LETTER_ORDER = 'CDEFGAB';
 
 /** Semitones above the root for each quality. */
 const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
@@ -68,6 +91,40 @@ const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
   dom9: [0, 2, 4, 7, 10],
   min9: [0, 2, 3, 7, 10],
   dom7sus4: [0, 5, 7, 10],
+};
+
+/**
+ * Letter steps above the root letter, parallel to `INTERVALS`.
+ *
+ * What spells each chord tone. A minor third is two letters up (C to E-flat),
+ * a diminished seventh is six (C to B-double-flat) — the letter follows the
+ * *degree*, never the semitone count, which is why a table is needed and
+ * arithmetic on `INTERVALS` will not do.
+ *
+ * Read out of music21 rather than derived by hand, and verified stable across
+ * all twelve roots for every quality here. `tools/generate-fixtures.py`
+ * already refuses to build a fixture for a quality music21 spells
+ * differently; this table is the same contract one level down, and
+ * `test/chords.test.ts` pins that it stays the same length as `INTERVALS`.
+ */
+const LETTER_OFFSETS: Readonly<Record<Quality, readonly number[]>> = {
+  maj: [0, 2, 4],
+  min: [0, 2, 4],
+  dim: [0, 2, 4],
+  aug: [0, 2, 4],
+  sus2: [0, 1, 4],
+  sus4: [0, 3, 4],
+  dom7: [0, 2, 4, 6],
+  maj7: [0, 2, 4, 6],
+  min7: [0, 2, 4, 6],
+  min7b5: [0, 2, 4, 6],
+  dim7: [0, 2, 4, 6],
+  maj6: [0, 2, 4, 5],
+  min6: [0, 2, 4, 5],
+  add9: [0, 1, 2, 4],
+  dom9: [0, 1, 2, 4, 6],
+  min9: [0, 1, 2, 4, 6],
+  dom7sus4: [0, 3, 4, 6],
 };
 
 const LETTERS: Readonly<Record<string, PitchClass>> = {
@@ -136,19 +193,32 @@ const SUFFIX_KEYS: readonly string[] = Object.keys(SUFFIXES).sort(
   (a, b) => b.length - a.length,
 );
 
-/** Read a root letter plus its accidentals off the front of `text`. */
-function readRoot(text: string): { pc: PitchClass; rest: string } | null {
+/**
+ * Read a root letter plus its accidentals off the front of `text`.
+ *
+ * Returns the letter and the accidental separately as well as the pitch
+ * class, because `pitchClasses` has to compare a bass against chord tones by
+ * spelling and cannot recover `F#` from `6`.
+ */
+function readRoot(
+  text: string,
+): { pc: PitchClass; letter: LetterIndex; alter: number; rest: string } | null {
   const letter = text[0]?.toUpperCase();
   if (letter === undefined || !(letter in LETTERS)) return null;
-  let pc = LETTERS[letter];
+  let alter = 0;
   let i = 1;
   // `-` is music21's flat and people paste it in from music21 output, so it
   // is accepted on input even though nothing here ever writes it.
   while (i < text.length && '#b-♯♭'.includes(text[i])) {
-    pc += text[i] === '#' || text[i] === '♯' ? 1 : -1;
+    alter += text[i] === '#' || text[i] === '♯' ? 1 : -1;
     i += 1;
   }
-  return { pc: ((pc % 12) + 12) % 12, rest: text.slice(i) };
+  return {
+    pc: (((LETTERS[letter] + alter) % 12) + 12) % 12,
+    letter: LETTER_ORDER.indexOf(letter),
+    alter,
+    rest: text.slice(i),
+  };
 }
 
 /**
@@ -169,30 +239,70 @@ export function parseChord(symbol: string): Chord | null {
   const suffix = SUFFIX_KEYS.find((key) => key === root.rest);
   if (suffix === undefined) return null;
 
-  let bass = root.pc;
+  let bass = root;
   if (slash !== undefined) {
     const bassRoot = readRoot(slash);
     if (bassRoot === null || bassRoot.rest !== '') return null;
-    bass = bassRoot.pc;
+    bass = bassRoot;
   }
 
-  return { symbol: trimmed, root: root.pc, quality: SUFFIXES[suffix], bass };
+  return {
+    symbol: trimmed,
+    root: root.pc,
+    quality: SUFFIXES[suffix],
+    bass: bass.pc,
+    rootLetter: root.letter,
+    bassLetter: bass.letter,
+    bassAlter: bass.alter,
+  };
 }
 
 /**
- * The pitch classes a chord sounds, deduplicated and sorted.
+ * The pitch classes a chord sounds, sorted. **A multiset, not a set.**
  *
- * A slash bass is added rather than substituted, which is what
- * `music21.harmony.ChordSymbol` does: `C/E` is still three pitch classes,
- * `C/D` is four. Getting this wrong is invisible on `C/E` and shifts every
- * key score on `C/D`, so it is pinned by the parity fixture.
+ * One pitch class can appear twice, and that is the whole point. music21
+ * builds the chord's tones and then *appends* the slash bass as a further
+ * pitch unless its exact spelled name is already among them:
+ *
+ * ```
+ * C/E        E  G  C            3 pitches, bass is a chord tone
+ * C/D     D  C  E  G            4, D is not
+ * C/E-    E- C  E  G            4, E-flat is not E
+ * Cdim/G-    G- C  E-           3, G-flat IS the diminished fifth
+ * Cdim/F# F# C  E- G-           4, and pitch class 6 twice
+ * ```
+ *
+ * The last two are the same four semitones and get different answers, so
+ * comparing pitch classes cannot work — the comparison has to be on spelling.
+ * `readings.ts` counts these into a distribution, so a duplicate genuinely
+ * weights that pitch class twice, which is what moved the key on the one
+ * progression in the fixture that used to disagree.
+ *
+ * This is music21's behaviour rather than a claim about music: double-counting
+ * G-flat because somebody typed F-sharp is a spelling artifact. Matching it is
+ * a deliberate choice to keep the oracle meaningful, argued in
+ * `experiments/slash-bass-spelling.spike.md`.
  */
 export function pitchClasses(chord: Chord): PitchClass[] {
-  const set = new Set<PitchClass>(
-    INTERVALS[chord.quality].map((i) => (chord.root + i) % 12),
+  const intervals = INTERVALS[chord.quality];
+  const offsets = LETTER_OFFSETS[chord.quality];
+  const out = intervals.map((i) => (chord.root + i) % 12);
+
+  // How the chord tone on the bass's letter is spelled, if there is one. The
+  // accidental is the gap between the pitch the tone actually sounds and the
+  // natural note its letter names.
+  const spelledOnBassLetter = offsets.findIndex(
+    (o) => (chord.rootLetter + o) % 7 === chord.bassLetter,
   );
-  set.add(chord.bass);
-  return [...set].sort((a, b) => a - b);
+  if (spelledOnBassLetter === -1) {
+    out.push(chord.bass);
+  } else {
+    const natural = LETTERS[LETTER_ORDER[chord.bassLetter]];
+    const alter = (((out[spelledOnBassLetter] - natural + 18) % 12) - 6);
+    if (alter !== chord.bassAlter) out.push(chord.bass);
+  }
+
+  return out.sort((a, b) => a - b);
 }
 
 export interface ParsedProgression {

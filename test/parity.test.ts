@@ -13,9 +13,15 @@
  * in `readings.ts`, this number is the one that tells you whether the
  * key-profile path still agrees with the thing it was ported from.
  *
- * Today the expected rate is zero: this is a port of the same arithmetic, not
- * an approximation of it. A non-zero rate is a bug in the port, not a
- * tolerance to widen.
+ * The expected rate is zero on the two things that are properties of the
+ * answer -- the top reading, and every score to six places. This is a port of
+ * the same arithmetic, not an approximation of it, and a non-zero rate on
+ * either is a bug in the port rather than a tolerance to widen.
+ *
+ * The one thing that is *not* asserted at zero is the order of keys that
+ * scored identically, which the fixture cannot determine. See `TIE` below;
+ * that exemption was measured, not assumed, and it does not extend to
+ * anything else.
  */
 
 import { describe, expect, it } from 'vitest';
@@ -38,6 +44,39 @@ function round6(x: number): number {
   return Math.round(x * 1e6) / 1e6;
 }
 
+/**
+ * Two keys are tied when the fixture cannot tell them apart.
+ *
+ * **This is not a tolerance on the answer.** Top reading and score parity are
+ * still asserted at zero, and must stay there. What this covers is the order
+ * of keys that scored *the same*, which is not a property the oracle can pin
+ * down, for two separate reasons found by measuring rather than guessing:
+ *
+ * - Some pairs are exactly equal in full precision. `Fdim Bbm Ebm` gives D
+ *   major and C major both `-0.5697452319355997`. Their order is whatever
+ *   each implementation's enumeration happened to be before a stable sort --
+ *   an artifact of iteration order, not a fact about the music.
+ * - Some differ in the last bit or two. `Gb7 Bbm Bbm Ab Bbm9/Db Gb` gives
+ *   `-0.11800224012193235` against `-0.11800224012193242`. Python and
+ *   JavaScript are both IEEE 754 and both correct; they accumulated the same
+ *   sum in a different order.
+ *
+ * No change to `chords.ts` fixes either, because neither is wrong. Asserting
+ * a total order over 24 values where several are equal asks the fixture a
+ * question it does not have the resolution to answer -- the scores are
+ * written rounded to six places, and the ties survive at seventeen.
+ *
+ * So: a reordering *within* a tie is counted and printed, and is not a
+ * failure. A reordering across a real gap still is.
+ */
+const TIE = 1e-9;
+
+/** What the fixture scored a given key in this case. */
+function scoreOf(c: Case, key: string): number {
+  const at = c.ranking.indexOf(key);
+  return at === -1 ? Number.NaN : c.scores[at];
+}
+
 describe('parity with music21', () => {
   it('has a fixture worth testing against', () => {
     expect(cases).toHaveLength(fixture.count);
@@ -56,14 +95,10 @@ describe('parity with music21', () => {
     expect(unreadable).toEqual([]);
   });
 
-  // KNOWN FAILING, deliberately. `it.fails` asserts this does NOT hold
-  // today, so it goes red in both directions: if somebody fixes it, and
-  // if somebody breaks it further. The assertion below is unchanged --
-  // see experiments/slash-bass-spelling.spike.md for what was measured, and
-  // why the number must not simply be adjusted until this passes.
-  it.fails('agrees with music21 on the top reading and the whole ranking', () => {
+  it('agrees with music21 on the top reading and the whole ranking', () => {
     let topDisagreements = 0;
     let orderDisagreements = 0;
+    let tieOrderings = 0;
     let scoreDisagreements = 0;
     const examples: string[] = [];
 
@@ -78,7 +113,18 @@ describe('parity with music21', () => {
           examples.push(`${c.progression.join(' ')}: ours ${ours[0]}, music21 ${c.ranking[0]}`);
         }
       }
-      if (ours.join('|') !== c.ranking.join('|')) orderDisagreements += 1;
+
+      if (ours.join('|') !== c.ranking.join('|')) {
+        // Order differs. That is only a real disagreement where the fixture
+        // says the two keys scored *differently* -- see the block comment
+        // above `TIE` for why order among equals is not a property this
+        // oracle can pin down.
+        const meaningful = ours.some(
+          (k, i) => k !== c.ranking[i] && Math.abs(c.scores[i] - scoreOf(c, k)) > TIE,
+        );
+        if (meaningful) orderDisagreements += 1;
+        else tieOrderings += 1;
+      }
 
       const worst = Math.max(
         ...readings.map((r, i) => Math.abs(round6(r.score) - c.scores[i])),
@@ -95,6 +141,7 @@ describe('parity with music21', () => {
         `parity over ${cases.length} progressions vs ${fixture.oracle}`,
         `  top reading disagreement:  ${topDisagreements}/${cases.length} (${rate(topDisagreements)})`,
         `  ranking order disagreement: ${orderDisagreements}/${cases.length} (${rate(orderDisagreements)})`,
+        `  reordered within a tie:     ${tieOrderings}/${cases.length} (${rate(tieOrderings)}) -- not a disagreement`,
         `  score disagreement > 1e-6:  ${scoreDisagreements}/${cases.length} (${rate(scoreDisagreements)})`,
         ...examples.map((e) => `  e.g. ${e}`),
       ].join('\n'),
