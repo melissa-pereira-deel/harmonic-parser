@@ -1,0 +1,18 @@
+# Dev-only. Nothing here is bundled into the page, and nothing under src/
+# imports any of it. These are what regenerates the parity fixture and what
+# gives this repo an experiments/ directory for the harness to find.
+
+# Pinned EXACTLY, not floored. This is a deliberate deviation from
+# tiny-model-lab's floor policy, and the reason is that the roles are
+# different: there a floor says "at least this new"; here music21 IS the
+# oracle. A floor lets the oracle move underneath you, so a fixture
+# regenerated six months from now would diff for reasons nobody chose and CI's
+# clean-tree check would fail on a bump rather than on a bug. Raise it
+# deliberately, regenerate, and read the diff.
+music21==10.5.0
+
+# The harness, for `python -m harness init` and, later, for gating the
+# 'model' source in src/readings.ts. Floored, not pinned, because this one is
+# a tool rather than an oracle and its gate arithmetic getting stricter is
+# something to find out about.
+tiny-model-lab @ git+https://github.com/melissa-pereira-deel/tiny-model-lab

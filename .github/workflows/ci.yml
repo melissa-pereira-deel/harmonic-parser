@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # Both ends report. A Windows-only or Node-24-only break is exactly the
+      # kind this matrix exists to catch, and fail-fast would hide the second
+      # one behind the first.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # The ends of the range declared in package.json "engines", not every
+        # version between. The floor is what somebody might still be on; the
+        # ceiling is what breaks first.
+        node: [22, 24]
+    defaults:
+      run:
+        # Windows runners default to PowerShell, where the `&&` and the glob
+        # below mean something else or nothing at all.
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      # v7 is the current major as of 2026-07 and runs Node 24 internally.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Six tests are expected failures, marked `it.fails` and each pointing
+      # at the spike record that measured why. That is green here on purpose:
+      # a permanently red badge cannot tell you when something NEW breaks.
+      # `it.fails` goes red in both directions instead.
+      - run: npm test
+      - run: npm run build
+
+  fixture:
+    # Separate job, and Ubuntu only: it installs music21, which is a large
+    # dev-time dependency the page never sees. Same shape as tiny-model-lab's
+    # example-02 job, and for the same reason.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install music21==10.5.0
+      - run: python tools/generate-fixtures.py
+      # The oracle must regenerate byte-identically. A diff here means either
+      # the generator stopped being deterministic or the pinned music21 moved
+      # -- both are real changes and both should be read, not merged.
+      - name: The fixture regenerates identically
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Regenerating the fixture changed the tree:"
+            git status --porcelain
+            git diff --stat
+            exit 1
+          fi

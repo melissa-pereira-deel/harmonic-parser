@@ -1,0 +1,53 @@
+# Organised by intent rather than by tool, following tiny-model-lab's
+# .gitignore. The principle there is "provenance is committed, bytes are not".
+# Here the fixture is provenance, not bytes: it is the oracle the port is
+# measured against, so it is tracked on purpose.
+
+# Build output
+dist
+dist-ssr
+*.local
+
+# Node
+node_modules
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Python — tools/ only. Nothing under src/ imports any of it, and none of it
+# is bundled. music21 is a dev-time oracle, not a dependency of the page.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# The fixture IS tracked. It is what test/parity.test.ts compares against, and
+# a repo that regenerates its own oracle on demand has no oracle.
+!fixtures/*.json
+
+# Harness output, if a contract ever lands in experiments/. Same split as
+# tiny-model-lab: manifests and ledgers are the decision trail and are kept;
+# the artifacts they describe are not.
+runs/*/artifacts/
+champion/
+!runs/*/manifest.json
+!runs/LEDGER.md
+
+# Exports of .claude/, once there is a .claude/ to export. Committing copies
+# would mean two divergent versions of the same hook in one repo.
+.agents/
+.codex/
+
+# Editor and OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

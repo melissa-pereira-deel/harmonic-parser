@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>harmonic-parser</title>
+    <meta
+      name="description"
+      content="Type a chord progression; read the key, the function of each chord, and whether the answer is ambiguous or just uncertain. Runs entirely in the browser."
+    />
+  </head>
+  <body>
+    <main>
+      <header class="page-head">
+        <h1>harmonic-parser</h1>
+        <p class="tagline">
+          Type a progression. Read the key, what each chord is doing, and what
+          could come next.
+        </p>
+        <!-- Privacy legibility, one of the five design checks this page exists
+             to give something to run against: nothing is sent anywhere, so say
+             it where a user can see it rather than in a README. -->
+        <p class="privacy">
+          Everything runs in this tab. No network call, no backend, no
+          analytics. The whole model is 24 key profiles of 12 numbers.
+        </p>
+      </header>
+
+      <label class="field" for="progression">Chord progression</label>
+      <input
+        id="progression"
+        name="progression"
+        type="text"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Am F C G"
+      />
+
+      <div class="examples">
+        <span>Try:</span>
+        <button type="button" data-example="Am F C G">Am F C G</button>
+        <button type="button" data-example="Dm7 G7 Cmaj7">Dm7 G7 Cmaj7</button>
+        <button type="button" data-example="C G/B Am F">C G/B Am F</button>
+        <button type="button" data-example="Bb Eb F Bb">Bb Eb F Bb</button>
+        <button type="button" data-example="C F#m7b5 Bb E">C F#m7b5 Bb E</button>
+      </div>
+
+      <section id="output" aria-live="polite"></section>
+
+      <footer class="page-foot">
+        <p>
+          Nothing on this page has been measured against real music. The
+          thresholds that decide "ambiguous" and "uncertain" were picked by
+          hand.
+          <a href="https://github.com/melissa-pereira-deel/harmonic-parser"
+            >Source</a
+          >.
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

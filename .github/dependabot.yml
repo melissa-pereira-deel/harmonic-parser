@@ -1,0 +1,29 @@
+version: 2
+
+# Monthly rather than weekly, following tiny-model-lab: a bump you read is
+# worth more than four you rubber-stamp.
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci
+
+  # tiny-model-lab deliberately excludes pip, on the grounds that its
+  # dependencies carry floors somebody chose and a bot raising them is noise.
+  # npm here is the opposite case and gets included: there are no runtime
+  # dependencies at all, the toolchain is pinned exactly in the lockfile, and
+  # a Vite or TypeScript major breaks the build rather than drifting. Those
+  # bumps are signal. Grouped so the toolchain moves in one reviewable PR
+  # rather than three.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: deps
+    groups:
+      toolchain:
+        patterns:
+          - "*"

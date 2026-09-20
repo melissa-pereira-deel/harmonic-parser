@@ -1,0 +1,23 @@
+{
+  "name": "harmonic-parser",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Type a chord progression; read the key, the function of each chord, and whether the answer is ambiguous or just uncertain.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

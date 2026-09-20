@@ -1,0 +1,265 @@
+/* One stylesheet, no framework. Ambiguity and uncertainty get different
+   colours because they are different claims; everything else is quiet. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbf9;
+  --fg: #1b1b1a;
+  --muted: #6a6a66;
+  --line: #dededa;
+  --card: #ffffff;
+  --clear: #2f7d4f;
+  --ambiguous: #9a6b13;
+  --uncertain: #a33a2a;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181a;
+    --fg: #ececeb;
+    --muted: #9a9a96;
+    --line: #2e3033;
+    --card: #1e2022;
+    --clear: #7bc79a;
+    --ambiguous: #e0b256;
+    --uncertain: #e88a78;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  margin: 0.4rem 0 0;
+}
+
+.privacy,
+.caveat,
+.page-foot {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.page-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.field {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+#progression {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font: 1.15rem/1.3 var(--mono);
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+#progression:focus {
+  outline: 2px solid var(--fg);
+  outline-offset: 1px;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.7rem 0 1.75rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.examples button {
+  font: 0.85rem var(--mono);
+  color: var(--fg);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+}
+
+.examples button:hover {
+  border-color: var(--fg);
+}
+
+.notice {
+  border-left: 3px solid var(--line);
+  padding: 0.6rem 0 0.6rem 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.notice-clear {
+  border-left-color: var(--clear);
+}
+
+.notice-ambiguous {
+  border-left-color: var(--ambiguous);
+}
+
+.notice-uncertain,
+.notice-error {
+  border-left-color: var(--uncertain);
+}
+
+.notice-body {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.readings {
+  display: grid;
+  gap: 1rem;
+}
+
+.reading {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  padding: 0.9rem 1rem;
+}
+
+.reading-top {
+  border-color: var(--fg);
+}
+
+.reading-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.reading-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.score {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.source {
+  margin-left: auto;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+}
+
+.functions {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+}
+
+.functions td {
+  padding: 0.2rem 0.5rem 0.2rem 0;
+  vertical-align: top;
+}
+
+.functions .chord {
+  width: 6rem;
+  font-weight: 600;
+}
+
+.functions .numeral {
+  width: 6rem;
+  color: var(--muted);
+}
+
+.functions tr.chromatic .numeral {
+  color: var(--ambiguous);
+}
+
+.role {
+  color: var(--muted);
+}
+
+.suggestions {
+  margin-top: 1.75rem;
+}
+
+.suggestions h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
+.suggestions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.suggestions li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.suggestions .chord {
+  min-width: 4rem;
+  font-weight: 600;
+}
+
+.reason {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.page-foot {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.page-foot a {
+  color: inherit;
+}
