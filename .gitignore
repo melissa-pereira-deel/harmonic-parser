@@ -52,6 +52,16 @@ champion/*
 !runs/*/manifest.json
 !runs/LEDGER.md
 
+# The blank contract `harness init` drops in experiments/. Not tracked, on the
+# same reasoning that keeps fixtures/ tracked, run backwards: the fixture is an
+# oracle and regenerating it on demand would leave this repo without one, while
+# this is a form that `init` rewrites on demand and that belongs to
+# tiny-model-lab. A vendored copy would drift from the original and say nothing
+# the original does not. It is also not a contract -- the guard's glob is
+# `*.yaml` and this is not one, which is the whole point of the name
+# (tiny-model-lab#21).
+experiments/*.yaml.template
+
 # Exports of .claude/, once there is a .claude/ to export. Committing copies
 # would mean two divergent versions of the same hook in one repo.
 .agents/

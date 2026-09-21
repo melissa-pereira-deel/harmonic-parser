@@ -33,7 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      # Six tests are expected failures, marked `it.fails` and each pointing
+      # Five tests are expected failures, marked `it.fails` and each pointing
       # at the spike record that measured why. That is green here on purpose:
       # a permanently red badge cannot tell you when something NEW breaks.
       # `it.fails` goes red in both directions instead.

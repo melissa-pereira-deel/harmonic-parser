@@ -2,12 +2,15 @@
 
 ## What's most wanted
 
-**Real progressions with a human judgement attached.** Both answered spikes in
-`experiments/` hit the same wall: there is no corpus of things people actually
-typed, with somebody saying which felt ambiguous. Without that, the two
-confidence thresholds are guesses with a plausible shape, and the page should
-not claim otherwise. A few hundred labelled progressions is worth more here
-than any amount of code.
+**Real progressions with a human judgement attached.** `confidence-thresholds`
+in `experiments/` hit this wall head-on: there is no corpus of things people
+actually typed, with somebody saying which felt ambiguous, so the parity
+fixture is the wrong population to calibrate against. Without that corpus the
+two confidence thresholds are guesses with a plausible shape, and the page
+should not claim otherwise. `suggest-baseline-shape` deferred the same question
+rather than answering it — it found a defect worth fixing first, and said to
+decide whether a corpus is worth obtaining only afterwards. A few hundred
+labelled progressions is worth more here than any amount of code.
 
 Then, in order: the slash-bass spelling fix described in
 `experiments/slash-bass-spelling.spike.md`; a harmonic grammar as a second
@@ -15,7 +18,7 @@ Then, in order: the slash-bass spelling fix described in
 
 ## Ground rules
 
-- **Do not adjust a number to make a test pass.** Six tests are marked
+- **Do not adjust a number to make a test pass.** Five tests are marked
   `it.fails` and each points at a spike record explaining what was measured.
   If you believe one is wrong, write a spike that measures it and say so
   there. Changing `AMBIGUITY_MARGIN` until the suite goes green is the exact

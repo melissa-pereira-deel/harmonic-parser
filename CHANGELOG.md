@@ -57,7 +57,7 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   with music21's full 24-key ranking, regenerable byte-identically from
   `tools/generate-fixtures.py` and a seed held inside that script. The test
   prints the disagreement rate rather than asserting a tolerance.
-- Three answered spike records in `experiments/`, written with
+- Four answered spike records in `experiments/`, written with
   tiny-model-lab's `harness/templates/spike.md`. This repo is the first thing
   to use that template.
 - **User override.** Every chord on the leading reading carries its numeral as
@@ -153,6 +153,29 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Changed
 
+- Setup no longer needs `rm experiments/experiment.yaml`, because the reason
+  for it is gone. `harness init` used to copy a blank contract in under that
+  name, and tiny-model-lab's training guard only checks that *some*
+  `experiments/*.yaml` exists — it never reads the file — so a freshly
+  scaffolded project had training unlocked by a file that exists in order to
+  be invalid. Fixed upstream in
+  [tiny-model-lab#21](https://github.com/melissa-pereira-deel/tiny-model-lab/issues/21):
+  `init` writes `experiments/experiment.yaml.template`, which that glob does
+  not see. The workaround did not merely become unnecessary — it became an
+  error, since `rm` on a missing path exits 1.
+
+  `experiments/*.yaml.template` is gitignored. It is tiny-model-lab's file and
+  `init` rewrites it on demand, so a vendored copy here would only drift.
+  Upstream also now writes a `.gitignore` into a project that lacks one
+  ([tiny-model-lab#30](https://github.com/melissa-pereira-deel/tiny-model-lab/issues/30));
+  this repo has one already, and `init` leaves it alone.
+- Corrected the counts, which had drifted independently in four places and
+  did not agree with each other or with the directory. There are **four**
+  answered spike records — `README.md` said three, `experiments/README.md`
+  said two, `CONTRIBUTING.md` said both — and **five** expected failures, not
+  the six claimed in `CONTRIBUTING.md` and the CI comment. `CONTRIBUTING.md`
+  also said the answered spikes all hit the missing-corpus wall; one did, and
+  `suggest-baseline-shape` deferred that question rather than answering it.
 - `renderSuggestions` takes the already-parsed chords instead of `state`. It
   used to re-parse `state.input` itself, tokenising the whole progression
   twice per keystroke for nothing -- `parseProgression` is pure, so the
