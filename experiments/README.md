@@ -11,7 +11,9 @@ while empty.
 
 ## What lives here
 
-Three kinds of committed file, the same three as in tiny-model-lab:
+Three kinds of committed file, the same three as in tiny-model-lab. `harness
+init` also drops `experiment.yaml.template` here, which is none of them and is
+gitignored — see below.
 
 - `<slug>.yaml` — a contract. **There are none yet**, and there should not be
   until `src/readings.ts` grows a `'model'` source. A contract authorises
@@ -22,24 +24,37 @@ Three kinds of committed file, the same three as in tiny-model-lab:
   consequence, a budget in minutes, and a finding. Check them with
   `python -m harness spikes`.
 
-Two spikes are answered here already, and both said no. Read them before
-trusting anything this page says about its own confidence.
+Four spikes are answered here already. Two of them stopped something: the
+confidence thresholds cannot be calibrated from the data that exists, and a
+third of the suggestion baseline's contexts turn out to be decided by
+`localeCompare` rather than by music. The other two changed a decision rather
+than ending one — a debounce that was about to be added would have cost the
+`instant` band, and music21's slash-bass rule is about the exact spelled name
+rather than the letter. Read them before trusting anything this page says about
+its own confidence.
 
 ## Setting it up
 
 ```bash
 pip install -r tools/requirements.txt
 python -m harness init
-rm experiments/experiment.yaml
 ```
 
-That `rm` is a workaround, not a preference. `harness init` copies a blank
-`experiment.yaml` here, and the training guard
-(`.claude/hooks/guard-experiment.sh` in tiny-model-lab) only checks that *some*
-`experiments/*.yaml` exists — it never reads the file. So a freshly scaffolded
-project has training unlocked by a file that exists to be invalid. Filed
-against tiny-model-lab; deleting the file is the honest state until it is
-fixed.
+There used to be a third line here — `rm experiments/experiment.yaml` — and the
+reason is worth keeping visible. `init` copied a blank contract in under that
+name, and the training guard (`.claude/hooks/guard-experiment.sh` in
+tiny-model-lab) only checks that *some* `experiments/*.yaml` exists; it never
+reads the file. So a freshly scaffolded project had training unlocked by a file
+that exists in order to be invalid, and deleting it was the honest state.
 
-Spike records are `.md`, so they unlock nothing. That is tested rather than
-assumed, in `tests/test_guard_hook.py::test_a_spike_record_does_not_unlock_training`.
+Fixed in [tiny-model-lab#21](https://github.com/melissa-pereira-deel/tiny-model-lab/issues/21).
+`init` writes `experiments/experiment.yaml.template` now, which that glob does
+not see, so this directory stays locked and there is nothing to delete. The
+template is the blank form to copy when `src/readings.ts` grows a `'model'`
+source. It is gitignored until then: it is tiny-model-lab's file, `init`
+rewrites it on demand, and a vendored copy would drift from the original.
+
+Spike records are `.md`, so they unlock nothing either. Both properties are
+tested rather than assumed, in tiny-model-lab's `tests/test_guard_hook.py` —
+`test_a_spike_record_does_not_unlock_training` and
+`test_scaffolding_a_project_does_not_unlock_training`.

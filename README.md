@@ -91,7 +91,7 @@ for, and this repo is set up to be measured by it from outside:
 
 ```bash
 pip install -r tools/requirements.txt
-python -m harness init && rm experiments/experiment.yaml   # see experiments/README.md
+python -m harness init          # see experiments/README.md
 python -m harness spikes
 ```
 
@@ -101,7 +101,7 @@ python -m harness spikes
 harness for deciding whether a narrow task should be a model at all, and for
 proving it beat the simpler thing it replaced. Two seams meet this repo. The
 [spike record](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/templates/spike.md)
-is where the three answered questions in `experiments/` came from — this repo
+is where the four answered questions in `experiments/` came from — this repo
 is the first thing to use it. And `LATENCY_BANDS_MS` in
 [`harness/experiment.py`](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/experiment.py)
 puts the instant boundary at 100 ms and the flow boundary at 1 s.
