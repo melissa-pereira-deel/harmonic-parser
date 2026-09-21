@@ -94,7 +94,7 @@ either project with an interface, so the first thing able to answer them.
 
 | Check | Answer |
 |---|---|
-| Failure state | A suggestion you ignore costs nothing; a doubtful reading dims rather than asserting |
+| Failure state | When no key clears the floor the readings go dashed and dimmed, no card is emphasised, the score turns the uncertain colour, and the suggestions are **withheld with a stated reason** rather than offered for a key the page has just disowned |
 | Uncertainty legibility | Two distinct states, above — and the page must not present either as calibrated until they are |
 | User override | Pin any chord's function; everything re-derives |
 | Privacy legibility | "Runs entirely in your browser." True: the model is 288 numbers in the bundle |

@@ -156,6 +156,28 @@ h1 {
   border-color: var(--fg);
 }
 
+/* The designed wrong-state. When no key fits, the readings are still shown --
+   suppressing them entirely would leave the page with nothing to say -- but
+   they stop looking like answers. Nothing here hides information; it removes
+   the emphasis that was claiming more than the score supports.
+
+   `renderReading` already withholds .reading-top in this case, so no card is
+   picked out as the winner of a race nobody won. */
+.readings-unsure .reading {
+  border-style: dashed;
+  opacity: 0.72;
+}
+
+.readings-unsure .score {
+  color: var(--uncertain);
+}
+
+/* Withheld, not missing. Same box as .suggestions so the layout does not
+   jump, without the list. */
+.suggestions-withheld h3 {
+  color: var(--muted);
+}
+
 .reading-head {
   display: flex;
   align-items: baseline;

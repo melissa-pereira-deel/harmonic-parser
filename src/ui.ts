@@ -74,8 +74,17 @@ function renderConfidence(confidence: Confidence): HTMLElement {
   return box;
 }
 
-function renderReading(reading: Reading, place: number): HTMLElement {
-  const card = el('article', place === 0 ? 'reading reading-top' : 'reading');
+/**
+ * One reading.
+ *
+ * `confident` decides whether the leading card gets its emphasis border, and
+ * it is not the same question as `place === 0`. Something is always first;
+ * being first is not an achievement. When nothing fits, the top of a bad list
+ * is still a bad reading, and drawing a border around it tells the reader the
+ * opposite of what the page just said in the banner above.
+ */
+function renderReading(reading: Reading, place: number, confident: boolean): HTMLElement {
+  const card = el('article', place === 0 && confident ? 'reading reading-top' : 'reading');
   const head = el('header', 'reading-head');
   head.append(
     el('h3', undefined, keyName(reading.key)),
@@ -125,6 +134,28 @@ function renderSuggestions(chords: readonly Chord[], reading: Reading): HTMLElem
 }
 
 /**
+ * The withheld state, which has to be visible rather than simply absent.
+ *
+ * A section that silently disappears reads as a bug. Saying what is missing
+ * and why keeps the page's account of itself consistent: it declined to
+ * guess, rather than failing to load.
+ */
+function renderNoSuggestions(): HTMLElement {
+  const section = el('section', 'suggestions suggestions-withheld');
+  section.append(el('h3', undefined, 'No suggestions'));
+  section.append(
+    el(
+      'p',
+      'caveat',
+      'These follow from the key, and no key fits this well enough to follow ' +
+        'from. The readings above are the least bad ones, not an answer to ' +
+        'build on.',
+    ),
+  );
+  return section;
+}
+
+/**
  * What one render worked out, handed back so nobody has to work it out again.
  *
  * `main.ts` needs the same readings to build the screen-reader announcement.
@@ -161,11 +192,23 @@ export function render(mount: HTMLElement, state: State): Rendered {
   // one plus two runners-up, so the ranking is visible without pretending
   // the runners-up are live options.
   const shown = confidence.ambiguous ? confidence.contenders : readings.slice(0, 3);
-  const list = el('div', 'readings');
-  shown.forEach((reading, i) => list.append(renderReading(reading, i)));
+  const list = el('div', confidence.uncertain ? 'readings readings-unsure' : 'readings');
+  shown.forEach((reading, i) =>
+    list.append(renderReading(reading, i, !confidence.uncertain)),
+  );
   mount.append(list);
 
-  mount.append(renderSuggestions(parsed.chords, readings[0]));
+  // Suggestions follow from a key. When no key fits, they would be an
+  // assertion the page has just disowned one element higher up -- "what
+  // could come next in C major" under a banner saying C major is only the
+  // least bad guess. design-eval offers two options for low confidence,
+  // surface it or suppress the output, and here the honest one is to
+  // suppress and say why.
+  mount.append(
+    confidence.uncertain
+      ? renderNoSuggestions()
+      : renderSuggestions(parsed.chords, readings[0]),
+  );
 
   return { readings, confidence, unparsed: parsed.unparsed };
 }
