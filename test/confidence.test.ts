@@ -64,6 +64,32 @@ describe('ambiguity is not uncertainty', () => {
   });
 });
 
+describe('the wrong-state is reachable', () => {
+  // The page has a designed degraded state -- dashed cards, no emphasised
+  // winner, suggestions withheld -- and all of it hangs off
+  // `confidence.uncertain`. If UNCERTAINTY_FLOOR is ever tuned down far
+  // enough that nothing trips it, that whole design becomes dead code and
+  // nothing else in the suite would notice. This is the tripwire.
+  //
+  // 16 of the 200 fixture progressions score below the floor; these are the
+  // two lowest.
+  it.each([['C#9 C#dim Abm6 F#aug Gaug Dm'], ['F#9 Abm9 C9']])(
+    'calls %s uncertain',
+    (progression) => {
+      const { chords, unparsed } = parseProgression(progression);
+      expect(unparsed, 'every chord must parse or the case proves nothing').toEqual([]);
+      expect(assess(rank(chords)).uncertain).toBe(true);
+    },
+  );
+
+  it('does not call an ordinary progression uncertain', () => {
+    // The other half of the tripwire. A floor raised until everything trips
+    // it would make the wrong-state permanent, which is equally broken.
+    expect(read('Am F C G').uncertain).toBe(false);
+    expect(read('Dm7 G7 Cmaj7').uncertain).toBe(false);
+  });
+});
+
 describe('the thresholds are separate numbers', () => {
   // KNOWN FAILING, deliberately. `it.fails` asserts this does NOT hold
   // today, so it goes red in both directions: if somebody fixes it, and

@@ -30,6 +30,27 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 - Three answered spike records in `experiments/`, written with
   tiny-model-lab's `harness/templates/spike.md`. This repo is the first thing
   to use that template.
+- A designed wrong-state. When no key clears `UNCERTAINTY_FLOOR` the page
+  stops asserting: the reading cards go dashed and dimmed, **no card gets the
+  emphasis border**, the score turns the uncertain colour, and the
+  suggestions are withheld behind a stated reason instead of being offered
+  for a key the banner has just disowned.
+
+  Previously only the banner changed. Everything below it rendered
+  identically at 0.41 and 0.95, including a cheerful *"What could come next
+  in C major"* under a notice saying C major was merely the least bad guess.
+  `design-eval` offers two options for low confidence — surface it or
+  suppress the output — and the page was doing neither below the fold.
+
+  Two details worth keeping. The top card's emphasis now depends on
+  confidence rather than on position: something is always first, and being
+  first is not an achievement. And the withheld suggestions say so out loud,
+  because a section that silently disappears reads as a bug rather than as a
+  decision.
+
+  `test/confidence.test.ts` pins that the state is reachable in both
+  directions — two real progressions trip it, two ordinary ones do not — so
+  tuning the floor cannot quietly turn the whole design into dead code.
 - A separate spoken channel. `aria-live="polite"` was on `<section
   id="output">` — the whole render target, which `render()` replaces on every
   keystroke — so typing `Am F C G` announced the full analysis eight times.
