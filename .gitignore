@@ -31,8 +31,24 @@ __pycache__/
 # Harness output, if a contract ever lands in experiments/. Same split as
 # tiny-model-lab: manifests and ledgers are the decision trail and are kept;
 # the artifacts they describe are not.
+#
+# `champion/*` and not `champion/`. With the trailing slash git excludes the
+# directory and never descends into it, so no `!` below can rescue anything
+# inside -- which quietly loses champion.json, the card naming which run is
+# current and what it scored. In a fresh clone harness's _load_champion()
+# would then find nothing, and the *next* promotion's strict-improvement
+# check would not run at all. A gitignore line would have disabled the guard
+# that promote.py exists to provide.
+#
+# The card is provenance, so it is kept. The promoted artifact is not kept
+# yet, because nothing has been promoted and where it should live is an open
+# decision: a table small enough for the page to bundle is arguably source
+# rather than a checkpoint, which would invert this file's usual rule the way
+# fixtures/ does above. Decide that when there is something to promote, and
+# add the `!` line then rather than pre-committing to an answer here.
 runs/*/artifacts/
-champion/
+champion/*
+!champion/champion.json
 !runs/*/manifest.json
 !runs/LEDGER.md
 

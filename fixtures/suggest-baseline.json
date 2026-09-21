@@ -1,0 +1,7353 @@
+{
+ "generator": "tools/export-suggest-baseline.ts",
+ "source": "src/suggest.ts",
+ "limit": 8,
+ "contexts": 288,
+ "note": "The complete baseline. suggest() reads only the last chord root and the key, so 12 tonics x 2 modes x 12 degrees is its entire input domain. Generated, never edited by hand: test/suggest.test.ts re-derives it and CI fails on any diff.",
+ "rows": [
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Bdim",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Dm",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Em",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Bdim",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Dm",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Em",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Dm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C major",
+   "tonic": 0,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Fm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "A#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "D#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Ddim",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Fm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "G#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Fm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "A",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "A#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "D#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Ddim",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Fm",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "G#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "A",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Gm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Fm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Ddim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C minor",
+   "tonic": 0,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Cm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Cdim",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "D#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Fm",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Cdim",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "D#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Fm",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "A#m",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "D#m",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# major",
+   "tonic": 1,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#m",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A#",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 8,
+     "symbol": "A",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "B",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "D#dim",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "E",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#m",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "A#",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "A#",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 8,
+     "symbol": "A",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "B",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "D#dim",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "E",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "A#",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#m",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "F#m",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "D#dim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "C# minor",
+   "tonic": 1,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "C#m",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 5,
+     "symbol": "G",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "C#dim",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Em",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "F#m",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "G",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "G",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "C#dim",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Em",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "F#m",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "G",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "G",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Em",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D major",
+   "tonic": 2,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "D",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 5,
+     "symbol": "Gm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "B",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 8,
+     "symbol": "A#",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "C",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Edim",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "F",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Gm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Gm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "B",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "B",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 8,
+     "symbol": "A#",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "C",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Edim",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "F",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Gm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "B",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Gm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Edim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "D minor",
+   "tonic": 2,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Dm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ab",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Ab",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Ddim",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Fm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Gm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ab",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Ab",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Ddim",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Fm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Gm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Cm",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ab",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Fm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb major",
+   "tonic": 3,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Abm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Abm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "B",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Db",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Fdim",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Gb",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Abm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "C",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Abm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "B",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Db",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Fdim",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Gb",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "C",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Abm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Fdim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Eb minor",
+   "tonic": 3,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "A",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "A",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "D#dim",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "F#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "G#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "A",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "A",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "D#dim",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "F#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "G#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "C#m",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "A",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "F#m",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E major",
+   "tonic": 4,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Am",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C#",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Am",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "C",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "D",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "F#dim",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "G",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Am",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "C#",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "C#",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 5,
+     "symbol": "Am",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "C",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "D",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "F#dim",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "G",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "C#",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Am",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "F#dim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "E minor",
+   "tonic": 4,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bb",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 4,
+     "symbol": "Am",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bb",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Edim",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Gm",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bb",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 4,
+     "symbol": "Am",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bb",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Edim",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Gm",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Dm",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bb",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Gm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F major",
+   "tonic": 5,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bbm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "Ab",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bbm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "Db",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Eb",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Gdim",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bbm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "D",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "Ab",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bbm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "Db",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Eb",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Gdim",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "D",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bbm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Gdim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F minor",
+   "tonic": 5,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "B",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 4,
+     "symbol": "A#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "B",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Fdim",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "G#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "B",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 4,
+     "symbol": "A#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "B",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Fdim",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "G#m",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "D#m",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "B",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "G#m",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# major",
+   "tonic": 6,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D#",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "A",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bm",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "D",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "E",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "G#dim",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "D#",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "D#",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "A",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Bm",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "D",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "E",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "G#dim",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "D#",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Bm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "G#dim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "F# minor",
+   "tonic": 6,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Am",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Bm",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "C",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "F#dim",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Am",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Bm",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "C",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "F#dim",
+     "reason": "diatonic in G major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Em",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Am",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G major",
+   "tonic": 7,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Cm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "E",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "A#",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Adim",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Cm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "D#",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "F",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Cm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "E",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "E",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 3,
+     "symbol": "A#",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Adim",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Cm",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "D#",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "F",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "E",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Cm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Adim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G minor",
+   "tonic": 7,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Gm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Db",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bbm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Cm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Db",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Gdim",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Db",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bbm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Cm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Db",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Gdim",
+     "reason": "diatonic in Ab major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Fm",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Eb",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Db",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Bbm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Ab major",
+   "tonic": 8,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C#m",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "A#dim",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "B",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "C#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "E",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "F#",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C#m",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "F",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "A#dim",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "B",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "C#m",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "E",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "F#",
+     "reason": "diatonic in G# minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "F",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "C#m",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "A#dim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "G# minor",
+   "tonic": 8,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "G#m",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "D",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bm",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "C#m",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "D",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "G#dim",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "D",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bm",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "C#m",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "D",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "G#dim",
+     "reason": "diatonic in A major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "F#m",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "D",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Bm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A major",
+   "tonic": 9,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "A",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Dm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F#",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bdim",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "C",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Dm",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "F",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "G",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Dm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "F#",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "F#",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "Bdim",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "C",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Dm",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "F",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "G",
+     "reason": "diatonic in A minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "F#",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Em",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Dm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Bdim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "A minor",
+   "tonic": 9,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Am",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Eb",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 11,
+     "symbol": "Adim",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Cm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Dm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Eb",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Eb",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 11,
+     "symbol": "Adim",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Cm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Dm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Eb",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "Gm",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Eb",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Cm",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb major",
+   "tonic": 10,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ebm",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "Ab",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Cdim",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Db",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Ebm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "Gb",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ebm",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "G",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "Ab",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "Cdim",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Db",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Ebm",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "Gb",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "G",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Fm",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Ebm",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "Cdim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "Bb minor",
+   "tonic": 10,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bbm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "E",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 11,
+     "symbol": "A#dim",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "C#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "D#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "E",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "E",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 11,
+     "symbol": "A#dim",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "C#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "D#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "E",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "G#m",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "E",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "C#m",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B major",
+   "tonic": 11,
+   "mode": "major",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "B",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 0,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Em",
+     "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "I to V — opens the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G#",
+     "reason": "I to vi — the soft turn",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 1,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "A",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "C#dim",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "D",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Em",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "G",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 2,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "ii to V — the other half of ii-V-I",
+     "weight": 10
+    },
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "ii back to I",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 3,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Em",
+     "reason": "bIII to IV — borrowed, then home",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 4,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 9,
+     "symbol": "G#",
+     "reason": "iii to vi — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 5,
+   "fallback": false,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "IV to V — builds the cadence",
+     "weight": 8
+    },
+    {
+     "degree": 9,
+     "symbol": "G#",
+     "reason": "IV to vi",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 6,
+   "fallback": true,
+   "topIsTied": true,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 3
+    },
+    {
+     "degree": 10,
+     "symbol": "A",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 2,
+     "symbol": "C#dim",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "D",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "Em",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "G",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 7,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "V to I — the cadence",
+     "weight": 10
+    },
+    {
+     "degree": 9,
+     "symbol": "G#",
+     "reason": "V to vi — the deceptive cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 8,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#m",
+     "reason": "bVI to V — the chromatic approach",
+     "weight": 4
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 9,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 5,
+     "symbol": "Em",
+     "reason": "vi to IV — the four-chord loop",
+     "weight": 8
+    },
+    {
+     "degree": 2,
+     "symbol": "C#dim",
+     "reason": "vi to ii — down the circle",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 10,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "bVII to I — the rock cadence",
+     "weight": 6
+    }
+   ]
+  },
+  {
+   "key": "B minor",
+   "tonic": 11,
+   "mode": "minor",
+   "from": 11,
+   "fallback": false,
+   "topIsTied": false,
+   "candidates": [
+    {
+     "degree": 0,
+     "symbol": "Bm",
+     "reason": "vii to I — the leading tone resolves",
+     "weight": 8
+    }
+   ]
+  }
+ ]
+}

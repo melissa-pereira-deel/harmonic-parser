@@ -14,6 +14,36 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Added
 
+- **The baseline, as a file, and the first tests it has ever had.**
+  `src/suggest.ts` shipped in the first commit calling itself "the baseline
+  any future model has to beat" and nothing had ever asserted one of its
+  suggestions was right. `tools/export-suggest-baseline.ts` writes all 288
+  contexts it can be asked about — `suggest()` reads only the last chord's
+  root and the key, so 12 tonics x 2 modes x 12 degrees is its whole input
+  domain — to `fixtures/suggest-baseline.json`. `test/suggest.test.ts`
+  re-derives it and a CI job fails on any diff.
+
+  The point is not tidiness. The next-chord experiment
+  ([tiny-model-lab#18](https://github.com/melissa-pereira-deel/tiny-model-lab/issues/18))
+  has to score this baseline from Python, and the alternative to a committed
+  fixture is re-implementing seventeen rules, two spelling tables, a quality
+  table, the fallback and the tie-break in a second language — where every
+  transcription slip is invisible and favours the model. There is no port to
+  get wrong if there is no port.
+
+  **And exporting it immediately found a bug.** See
+  `experiments/suggest-baseline-shape.spike.md`: 96 of the 288 contexts have
+  their top suggestion decided by `localeCompare` on the spelled chord name
+  rather than by the rule table, concentrated on degrees 0 and 5 — I and IV,
+  most of the traffic in tonal music. After a IV chord the page suggests I in
+  six major keys and V in six, the same situation with opposite answers. `Ab
+  major` and `G# minor` share a tonic pitch class and disagree, because one
+  spells it A-flat and the other G-sharp.
+
+  `suggest.ts` is deliberately unchanged. The tie-break is what ships, so it
+  is the honest baseline, and editing it before measuring is the move #18
+  warns against even when the edit is an improvement. The fixture records the
+  before.
 - The four layers. `chords.ts` parses a chord symbol to `{root, quality,
   bass}`; `keyprofiles.ts` holds 24 Krumhansl-Schmuckler profiles ported from
   music21; `readings.ts` ranks all 24 keys and returns `Reading[]`;
