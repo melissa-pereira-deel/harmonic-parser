@@ -286,6 +286,76 @@ h1 {
   color: inherit;
 }
 
+/* The numeral as a control. It has to read as editable without shouting --
+   the page is still primarily something you read, and 24 dropdowns would be
+   a form. So: no border until you approach it, and the monospace column
+   width is preserved so rows stay aligned with the cards below. */
+.pin {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0 0.15rem;
+  margin: -1px 0;
+  cursor: pointer;
+  appearance: none;
+}
+
+.pin:hover,
+.pin:focus-visible {
+  border-color: var(--line);
+  background: var(--bg);
+}
+
+.pin-set {
+  border-color: var(--ambiguous);
+  color: var(--ambiguous);
+}
+
+.pin-mark {
+  margin-left: 0.4rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ambiguous);
+}
+
+.pinbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px dashed var(--ambiguous);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* The way out. Never hidden behind a hover or a menu -- an override you
+   cannot undo is a trap, not a control. */
+.pin-clear {
+  margin-left: auto;
+  font: inherit;
+  font-size: 0.85rem;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.15rem 0.6rem;
+  cursor: pointer;
+}
+
+.pin-clear:hover,
+.pin-clear:focus-visible {
+  border-color: var(--fg);
+}
+
+.notice .pin-clear {
+  margin: 0.6rem 0 0;
+}
+
 /* Present to a screen reader, absent from the screen. `display: none` and
    `visibility: hidden` would remove it from the accessibility tree too, and
    for a live region that means announcing nothing at all. */

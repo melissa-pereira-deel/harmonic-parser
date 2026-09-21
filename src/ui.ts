@@ -16,17 +16,29 @@ import { parseProgression } from './chords.ts';
 import type { Confidence } from './confidence.ts';
 import { assess } from './confidence.ts';
 import { keyName } from './keyprofiles.ts';
-import type { Reading } from './readings.ts';
+import type { PinOption, Pins } from './pins.ts';
+import { applyPins, optionsFor } from './pins.ts';
+import type { Reading, RomanNumeral } from './readings.ts';
 import { rank } from './readings.ts';
 import { suggest } from './suggest.ts';
 
 export interface State {
-  /** Exactly what is in the box. The only thing a keystroke changes. */
+  /** Exactly what is in the box. */
   input: string;
+  /**
+   * Chord index -> the numeral the person insisted on.
+   *
+   * The second thing a keystroke can change, and the reason this is a map
+   * rather than a single value: one pin very nearly picks a key on its own,
+   * so narrowing a genuinely ambiguous progression takes more than one. Two
+   * pins can also contradict each other, which is the only way the reading
+   * list comes back empty -- see `applyPins`.
+   */
+  pins: Map<number, string>;
 }
 
 export function initialState(): State {
-  return { input: '' };
+  return { input: '', pins: new Map() };
 }
 
 function el(tag: string, className?: string, text?: string): HTMLElement {
@@ -83,7 +95,14 @@ function renderConfidence(confidence: Confidence): HTMLElement {
  * is still a bad reading, and drawing a border around it tells the reader the
  * opposite of what the page just said in the banner above.
  */
-function renderReading(reading: Reading, place: number, confident: boolean): HTMLElement {
+function renderReading(
+  reading: Reading,
+  place: number,
+  confident: boolean,
+  editable: boolean,
+  options: readonly (readonly PinOption[])[],
+  pins: Pins,
+): HTMLElement {
   const card = el('article', place === 0 && confident ? 'reading reading-top' : 'reading');
   const head = el('header', 'reading-head');
   head.append(
@@ -95,18 +114,58 @@ function renderReading(reading: Reading, place: number, confident: boolean): HTM
 
   const table = el('table', 'functions');
   const body = el('tbody');
-  for (const fn of reading.functions) {
+  reading.functions.forEach((fn, index) => {
     const row = el('tr', fn.diatonic ? undefined : 'chromatic');
     row.append(
       el('td', 'mono chord', fn.symbol),
-      el('td', 'mono numeral', fn.numeral),
+      // Only the leading card is editable. The pin is a statement about the
+      // chord, not about this card, so offering the same control on three
+      // cards would be three ways to do one thing -- and after a pin lands
+      // the leading card is the one that satisfies it anyway.
+      editable ? pinCell(fn, index, options[index] ?? [], pins) : el('td', 'mono numeral', fn.numeral),
       el('td', 'role', fn.role),
     );
     body.append(row);
-  }
+  });
   table.append(body);
   card.append(table);
   return card;
+}
+
+/**
+ * The numeral, as a control rather than a label.
+ *
+ * A `<select>` instead of a custom popup: it is keyboard-operable, screen
+ * readers already know what it is, it works on a phone, and it costs no
+ * JavaScript. The design-eval check here is *escape*, and a control nobody
+ * can reach with a keyboard does not provide one.
+ */
+function pinCell(
+  fn: RomanNumeral,
+  index: number,
+  options: readonly PinOption[],
+  pins: Pins,
+): HTMLElement {
+  const cell = el('td', 'mono numeral');
+  const pinned = pins.has(index);
+  const select = document.createElement('select');
+  select.className = pinned ? 'pin pin-set' : 'pin';
+  select.dataset.chord = String(index);
+  select.setAttribute('aria-label', `Read ${fn.symbol} as`);
+
+  for (const option of options) {
+    const node = document.createElement('option');
+    node.value = option.numeral;
+    // Name the key each numeral implies. "IV" alone asks the reader to do
+    // the transposition; "IV (G major)" is the thing they are choosing.
+    node.textContent = `${option.numeral} — ${keyName(option.exampleKey)}`;
+    node.selected = option.numeral === fn.numeral;
+    select.append(node);
+  }
+
+  cell.append(select);
+  if (pinned) cell.append(el('span', 'pin-mark', 'pinned'));
+  return cell;
 }
 
 // Takes the already-parsed chords rather than `state`. It used to re-parse
@@ -131,6 +190,71 @@ function renderSuggestions(chords: readonly Chord[], reading: Reading): HTMLElem
     ),
   );
   return section;
+}
+
+function pinPhrases(pins: Pins, chords: readonly Chord[]): string[] {
+  return [...pins]
+    .sort(([a], [b]) => a - b)
+    .map(([index, numeral]) => `${chords[index]?.symbol ?? '?'} as ${numeral}`);
+}
+
+/**
+ * What is currently being forced, and the way out.
+ *
+ * Shown whenever a pin is set, because a filtered ranking that does not say
+ * it is filtered is just a wrong ranking. The clear button is the opt-out
+ * half of design-eval's override check -- being able to correct the page is
+ * only useful if you can also take the correction back.
+ */
+function renderPinBar(pins: Pins, chords: readonly Chord[]): HTMLElement {
+  const bar = el('div', 'pinbar');
+  const phrases = pinPhrases(pins, chords);
+  bar.append(
+    el('strong', undefined, phrases.length === 1 ? 'Pinned. ' : `${phrases.length} pins. `),
+    el('span', undefined, `Showing only readings where ${phrases.join(' and ')}.`),
+  );
+  const clear = document.createElement('button');
+  clear.type = 'button';
+  clear.className = 'pin-clear';
+  clear.dataset.clearPins = 'all';
+  clear.textContent = phrases.length === 1 ? 'Clear pin' : 'Clear pins';
+  bar.append(clear);
+  return bar;
+}
+
+/**
+ * No key satisfies every pin.
+ *
+ * The one state `applyPins` can produce that nothing else on the page can.
+ * It names the pins rather than saying "no results", because the person can
+ * only fix it if they can see what they asked for -- and the thing to fix is
+ * their own input, not the progression.
+ */
+function renderPinConflict(pins: Pins, chords: readonly Chord[]): HTMLElement {
+  const box = el('div', 'notice notice-uncertain');
+  const phrases = pinPhrases(pins, chords);
+  box.append(
+    el('strong', undefined, 'No reading fits those pins. '),
+    el(
+      'span',
+      undefined,
+      `You asked for ${phrases.join(' and ')}, and no key does all of that at once.`,
+    ),
+  );
+  box.append(
+    el(
+      'p',
+      'notice-body',
+      'Nothing is wrong with the progression. Clear a pin and the readings come back.',
+    ),
+  );
+  const clear = document.createElement('button');
+  clear.type = 'button';
+  clear.className = 'pin-clear';
+  clear.dataset.clearPins = 'all';
+  clear.textContent = 'Clear pins';
+  box.append(clear);
+  return box;
 }
 
 /**
@@ -183,8 +307,21 @@ export function render(mount: HTMLElement, state: State): Rendered {
     return { readings: [], confidence: assess([]), unparsed: parsed.unparsed };
   }
 
-  const readings = rank(parsed.chords);
+  const all = rank(parsed.chords);
+  const readings = applyPins(all, state.pins);
+
+  // Every pin contradicted. Not a failure of the model -- the person asked
+  // for something no key provides -- so the page says which pins did it and
+  // offers the only exit, rather than quietly dropping one to keep a list on
+  // screen. That would be the page overruling the person inside the feature
+  // whose whole purpose is letting the person overrule the page.
+  if (readings.length === 0) {
+    mount.append(renderPinConflict(state.pins, parsed.chords));
+    return { readings: [], confidence: assess([]), unparsed: parsed.unparsed };
+  }
+
   const confidence = assess(readings);
+  if (state.pins.size > 0) mount.append(renderPinBar(state.pins, parsed.chords));
   mount.append(renderConfidence(confidence));
 
   // Show every contender when the reading is ambiguous, because that is the
@@ -193,8 +330,13 @@ export function render(mount: HTMLElement, state: State): Rendered {
   // the runners-up are live options.
   const shown = confidence.ambiguous ? confidence.contenders : readings.slice(0, 3);
   const list = el('div', confidence.uncertain ? 'readings readings-unsure' : 'readings');
+  // Options come from every reading, not from `shown`. The menu has to offer
+  // readings that are not currently on screen -- otherwise you could only
+  // pin your way towards what the page already showed you, which is not an
+  // override, it is a shortcut.
+  const options = parsed.chords.map((_, i) => optionsFor(all, i));
   shown.forEach((reading, i) =>
-    list.append(renderReading(reading, i, !confidence.uncertain)),
+    list.append(renderReading(reading, i, !confidence.uncertain, i === 0, options, state.pins)),
   );
   mount.append(list);
 

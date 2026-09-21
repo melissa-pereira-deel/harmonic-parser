@@ -96,7 +96,7 @@ either project with an interface, so the first thing able to answer them.
 |---|---|
 | Failure state | When no key clears the floor the readings go dashed and dimmed, no card is emphasised, the score turns the uncertain colour, and the suggestions are **withheld with a stated reason** rather than offered for a key the page has just disowned |
 | Uncertainty legibility | Two distinct states, above — and the page must not present either as calibrated until they are |
-| User override | Pin any chord's function; everything re-derives |
+| User override | Pin any chord's function from the leading card and the ranking re-filters. Pins are a filter over keys, not a re-parse — `functions` is deterministic from key plus chord, so every reading a pin can reach is already in the list. Contradictory pins return nothing, which the page says plainly and offers a way out of |
 | Privacy legibility | "Runs entirely in your browser." True: the model is 288 numbers in the bundle |
 | First-run cost | There is none. No download, no warm-up |
 
