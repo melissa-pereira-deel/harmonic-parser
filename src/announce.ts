@@ -45,11 +45,16 @@ export function announcement(
   readings: readonly Reading[],
   confidence: Confidence,
   unparsed: readonly string[],
+  pinCount = 0,
 ): string {
   if (readings.length === 0) {
-    return unparsed.length > 0
-      ? `No readable chords. Could not read ${unparsed.join(', ')}.`
-      : '';
+    if (unparsed.length > 0) return `No readable chords. Could not read ${unparsed.join(', ')}.`;
+    // Empty with nothing unreadable and a pin set means the pins contradict.
+    // Worth saying out loud: a listener cannot see the conflict notice, and
+    // silence here would be indistinguishable from the page having nothing
+    // to say about a progression they just typed.
+    if (pinCount > 0) return 'No reading fits those pins. Clear a pin to see the readings again.';
+    return '';
   }
 
   const top = keyName(readings[0].key);

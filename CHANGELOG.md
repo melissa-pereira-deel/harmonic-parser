@@ -30,6 +30,36 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 - Three answered spike records in `experiments/`, written with
   tiny-model-lab's `harness/templates/spike.md`. This repo is the first thing
   to use that template.
+- **User override.** Every chord on the leading reading carries its numeral as
+  a control; changing it pins that chord to that function and the ranking
+  re-filters. Tap the `C` in `Am F C G`, read it as IV, and the top reading
+  becomes G major — the original PRD's own scenario, and the last of the five
+  `design-eval` checks.
+
+  It is a filter over keys, not a re-parse. `functions` is deterministic from
+  key plus chord, so the readings a pin can reach are already in the list of
+  24 and there is nothing to re-derive. That also makes the menu safe: every
+  option offered came from a reading, so a *single* pin can never empty the
+  result — `test/pins.test.ts` checks that property across every option of
+  three progressions rather than trusting it.
+
+  Two pins can contradict, and that is a real answer rather than an error.
+  Ask for `C as I` and `G as I` and no key provides both; the page names the
+  pins you set, says nothing is wrong with the progression, and offers the
+  clear button. It does **not** silently drop a pin to keep a list on screen
+  — the page overruling the person inside the feature whose purpose is
+  letting the person overrule the page would be the worst available failure,
+  so a test pins that too.
+
+  The control is a `<select>` rather than a custom popup: keyboard-operable,
+  already meaningful to a screen reader, and works on a phone, for no
+  JavaScript. Pins are held by chord index and dropped when the chord they
+  name changes, so editing the box cannot leave an invisible constraint
+  behind.
+
+  The wide half of correction — re-parse with the constraint baked in, so the
+  parser can reach a reading the ranker never generated — still needs a
+  parser to bake it into.
 - A designed wrong-state. When no key clears `UNCERTAINTY_FLOOR` the page
   stops asserting: the reading cards go dashed and dimmed, **no card gets the
   emphasis border**, the score turns the uncertain colour, and the
