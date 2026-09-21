@@ -132,6 +132,14 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- `LICENSE` names the author the same way the README footer does —
+  *Melissa de Britto*. It had said *Melissa Pereira*, inherited when the file
+  was copied from tiny-model-lab, so the two spellings sat in one repo with
+  the copyright notice holding the one nothing else used. Decided and fixed
+  upstream in
+  [tiny-model-lab#22](https://github.com/melissa-pereira-deel/tiny-model-lab/issues/22);
+  this is the same change on this side. `package.json` gains no `author`
+  field: an absent one contradicts nothing.
 - The port now agrees with music21 on **every** top reading and every score:
   1/200, 7/200 and 2/200 disagreements all go to 0/200.
   `experiments/slash-bass-spelling.spike.md` has the whole trail. music21
