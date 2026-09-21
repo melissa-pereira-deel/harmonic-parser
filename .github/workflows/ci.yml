@@ -40,6 +40,31 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  baseline:
+    # The baseline as a flat file. `fixtures/suggest-baseline.json` is all 288
+    # contexts suggest() can be asked about, and the next-chord experiment
+    # scores it by reading that file rather than re-implementing seventeen
+    # rules in Python. This job is what makes the file trustworthy: touch
+    # suggest.ts without regenerating, or hand-edit the fixture, and the build
+    # fails. No Python and no install -- Node 22 strips the types natively.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node tools/export-suggest-baseline.ts
+      - name: The baseline regenerates identically
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Regenerating the baseline changed the tree:"
+            git status --porcelain
+            git diff --stat
+            exit 1
+          fi
+
   fixture:
     # Separate job, and Ubuntu only: it installs music21, which is a large
     # dev-time dependency the page never sees. Same shape as tiny-model-lab's
