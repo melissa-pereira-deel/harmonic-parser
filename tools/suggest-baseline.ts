@@ -57,8 +57,8 @@ export interface Row {
   readonly from: number;
   /** True when no rule matched and the key's own chords were used instead. */
   readonly fallback: boolean;
-  /** Whether the top two candidates share a weight, so order came from the
-   *  alphabet rather than from the table. */
+  /** Whether the top two candidates share a weight, so order came from where
+   *  the move sits in the table rather than from its weight. */
   readonly topIsTied: boolean;
   readonly candidates: Candidate[];
 }

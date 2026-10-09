@@ -32,7 +32,7 @@ const fanout = new Map<number, number>();
 for (const r of rows) fanout.set(r.candidates.length, (fanout.get(r.candidates.length) ?? 0) + 1);
 
 console.log(`wrote ${out} — ${rows.length} contexts, limit ${fixture.limit}`);
-console.log(`  top choice decided by the alphabet: ${tied.length}/${rows.length}`);
+console.log(`  top choice decided by table order:   ${tied.length}/${rows.length}`);
 console.log(`  fell through to the fallback:        ${fallback.length}/${rows.length}`);
 console.log(
   `  fan-out: ${[...fanout.entries()].sort((a, b) => a[0] - b[0]).map(([n, c]) => `${n}->${c}`).join('  ')}`,

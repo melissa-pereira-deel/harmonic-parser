@@ -158,6 +158,23 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   An earlier reading of the rule — match on *letter* — fit the first two
   examples and was wrong: `C/E-` appends although letter E is present. Widen
   the sample before believing a rule.
+- **`suggest()` no longer breaks ties by the alphabet.** Where two moves
+  share a weight, the one listed first in `MOVES` now wins; in the fallback,
+  the lower degree does. Both are decisions about degrees, so transposing a
+  progression transposes its suggestions and nothing else — which had failed
+  in 8 of the 24 (mode, last degree) contexts. After IV the page now suggests
+  I in every key, where it used to suggest I in six major keys and V in six;
+  `Ab major` and `G# minor` agree.
+
+  The weights are untouched, so the 96 tied contexts are still 96: only what
+  decides them changed. 57 of 288 rows reorder and 41 change their top
+  suggestion; no row gains or loses a candidate. The fixture is regenerated,
+  and the "before" it recorded is in git and in
+  `experiments/suggest-baseline-shape.spike.md`, which now has a Resolution.
+
+  Going home after IV rather than to the dominant is the table's own order,
+  not a new judgement — but it is a judgement, and it is now the one that
+  ships everywhere instead of in half the keys.
 
 ### Changed
 
