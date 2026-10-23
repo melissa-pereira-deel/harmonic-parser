@@ -26,8 +26,8 @@ gitignored — see below.
 
 Four spikes are answered here already. Two of them stopped something: the
 confidence thresholds cannot be calibrated from the data that exists, and a
-third of the suggestion baseline's contexts turn out to be decided by
-`localeCompare` rather than by music. The other two changed a decision rather
+third of the suggestion baseline's contexts turned out to be decided by
+`localeCompare` rather than by music, since fixed. The other two changed a decision rather
 than ending one — a debounce that was about to be added would have cost the
 `instant` band, and music21's slash-bass rule is about the exact spelled name
 rather than the letter. Read them before trusting anything this page says about

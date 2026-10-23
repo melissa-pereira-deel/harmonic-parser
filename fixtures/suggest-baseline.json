@@ -54,18 +54,6 @@
      "weight": 3
     },
     {
-     "degree": 9,
-     "symbol": "Am",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Bdim",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "Dm",
      "reason": "diatonic in C major — no rule covers this move",
@@ -80,6 +68,18 @@
     {
      "degree": 5,
      "symbol": "F",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Bdim",
      "reason": "diatonic in C major — no rule covers this move",
      "weight": 2
     }
@@ -188,18 +188,6 @@
      "weight": 3
     },
     {
-     "degree": 9,
-     "symbol": "Am",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Bdim",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "Dm",
      "reason": "diatonic in C major — no rule covers this move",
@@ -214,6 +202,18 @@
     {
      "degree": 5,
      "symbol": "F",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Am",
+     "reason": "diatonic in C major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Bdim",
      "reason": "diatonic in C major — no rule covers this move",
      "weight": 2
     }
@@ -360,20 +360,14 @@
      "weight": 3
     },
     {
-     "degree": 10,
-     "symbol": "A#",
+     "degree": 2,
+     "symbol": "Ddim",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
     {
      "degree": 3,
      "symbol": "D#",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Ddim",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
@@ -386,6 +380,12 @@
     {
      "degree": 8,
      "symbol": "G#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "A#",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     }
@@ -494,20 +494,14 @@
      "weight": 3
     },
     {
-     "degree": 10,
-     "symbol": "A#",
+     "degree": 2,
+     "symbol": "Ddim",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
     {
      "degree": 3,
      "symbol": "D#",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Ddim",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
@@ -520,6 +514,12 @@
     {
      "degree": 8,
      "symbol": "G#",
+     "reason": "diatonic in C minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "A#",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     }
@@ -664,6 +664,24 @@
      "symbol": "G#",
      "reason": "diatonic in C# major — no rule covers this move",
      "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "D#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Fm",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 9,
@@ -676,24 +694,6 @@
      "symbol": "Cdim",
      "reason": "diatonic in C# major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "D#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Fm",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -798,6 +798,24 @@
      "symbol": "G#",
      "reason": "diatonic in C# major — no rule covers this move",
      "weight": 3
+    },
+    {
+     "degree": 2,
+     "symbol": "D#m",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Fm",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 5,
+     "symbol": "F#",
+     "reason": "diatonic in C# major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 9,
@@ -810,24 +828,6 @@
      "symbol": "Cdim",
      "reason": "diatonic in C# major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "D#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Fm",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -972,18 +972,6 @@
      "weight": 3
     },
     {
-     "degree": 8,
-     "symbol": "A",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "B",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "D#dim",
      "reason": "diatonic in C# minor — no rule covers this move",
@@ -998,6 +986,18 @@
     {
      "degree": 5,
      "symbol": "F#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "A",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "B",
      "reason": "diatonic in C# minor — no rule covers this move",
      "weight": 2
     }
@@ -1106,18 +1106,6 @@
      "weight": 3
     },
     {
-     "degree": 8,
-     "symbol": "A",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "B",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "D#dim",
      "reason": "diatonic in C# minor — no rule covers this move",
@@ -1132,6 +1120,18 @@
     {
      "degree": 5,
      "symbol": "F#m",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "A",
+     "reason": "diatonic in C# minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "B",
      "reason": "diatonic in C# minor — no rule covers this move",
      "weight": 2
     }
@@ -1238,15 +1238,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "A",
-     "reason": "I to V — opens the cadence",
-     "weight": 8
-    },
-    {
      "degree": 5,
      "symbol": "G",
      "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "I to V — opens the cadence",
      "weight": 8
     },
     {
@@ -1266,28 +1266,16 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "A",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "D",
      "reason": "diatonic in D major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 9,
-     "symbol": "Bm",
+     "degree": 7,
+     "symbol": "A",
      "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "C#dim",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
@@ -1304,6 +1292,18 @@
     {
      "degree": 5,
      "symbol": "G",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "C#dim",
      "reason": "diatonic in D major — no rule covers this move",
      "weight": 2
     }
@@ -1372,15 +1372,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "A",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "D",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -1400,28 +1400,16 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "A",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "D",
      "reason": "diatonic in D major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 9,
-     "symbol": "Bm",
+     "degree": 7,
+     "symbol": "A",
      "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "C#dim",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
@@ -1438,6 +1426,18 @@
     {
      "degree": 5,
      "symbol": "G",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 9,
+     "symbol": "Bm",
+     "reason": "diatonic in D major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "C#dim",
      "reason": "diatonic in D major — no rule covers this move",
      "weight": 2
     }
@@ -1544,15 +1544,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "I to V — opens the cadence",
-     "weight": 8
-    },
-    {
      "degree": 5,
      "symbol": "Gm",
      "reason": "I to IV — leaves home",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "I to V — opens the cadence",
      "weight": 8
     },
     {
@@ -1572,28 +1572,16 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "Dm",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 8,
-     "symbol": "A#",
+     "degree": 7,
+     "symbol": "Am",
      "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "C",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
@@ -1610,6 +1598,18 @@
     {
      "degree": 5,
      "symbol": "Gm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "A#",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "C",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 2
     }
@@ -1678,15 +1678,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Dm",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Am",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -1706,28 +1706,16 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "Dm",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 8,
-     "symbol": "A#",
+     "degree": 7,
+     "symbol": "Am",
      "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "C",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
@@ -1744,6 +1732,18 @@
     {
      "degree": 5,
      "symbol": "Gm",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 8,
+     "symbol": "A#",
+     "reason": "diatonic in D minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "C",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 2
     }
@@ -1878,16 +1878,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bb",
      "reason": "diatonic in Eb major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Eb",
+     "degree": 2,
+     "symbol": "Fm",
      "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Gm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -1906,18 +1918,6 @@
      "symbol": "Ddim",
      "reason": "diatonic in Eb major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Fm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Gm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -1984,15 +1984,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Bb",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Eb",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -2012,16 +2012,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bb",
      "reason": "diatonic in Eb major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Eb",
+     "degree": 2,
+     "symbol": "Fm",
      "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "Gm",
+     "reason": "diatonic in Eb major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2040,18 +2052,6 @@
      "symbol": "Ddim",
      "reason": "diatonic in Eb major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Fm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Gm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -2184,16 +2184,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bbm",
      "reason": "diatonic in Eb minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Ebm",
+     "degree": 2,
+     "symbol": "Fdim",
      "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Gb",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2210,18 +2222,6 @@
     {
      "degree": 10,
      "symbol": "Db",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Fdim",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Gb",
      "reason": "diatonic in Eb minor — no rule covers this move",
      "weight": 2
     }
@@ -2290,15 +2290,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Bbm",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Ebm",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bbm",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -2318,16 +2318,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Ebm",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bbm",
      "reason": "diatonic in Eb minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Ebm",
+     "degree": 2,
+     "symbol": "Fdim",
      "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "Gb",
+     "reason": "diatonic in Eb minor — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2344,18 +2356,6 @@
     {
      "degree": 10,
      "symbol": "Db",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Fdim",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Gb",
      "reason": "diatonic in Eb minor — no rule covers this move",
      "weight": 2
     }
@@ -2490,16 +2490,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "B",
      "reason": "diatonic in E major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "E",
+     "degree": 2,
+     "symbol": "F#m",
      "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "G#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2516,18 +2528,6 @@
     {
      "degree": 11,
      "symbol": "D#dim",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "F#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "G#m",
      "reason": "diatonic in E major — no rule covers this move",
      "weight": 2
     }
@@ -2596,15 +2596,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "B",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "E",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -2624,16 +2624,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "E",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "B",
      "reason": "diatonic in E major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "E",
+     "degree": 2,
+     "symbol": "F#m",
      "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 4,
+     "symbol": "G#m",
+     "reason": "diatonic in E major — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2650,18 +2662,6 @@
     {
      "degree": 11,
      "symbol": "D#dim",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "F#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "G#m",
      "reason": "diatonic in E major — no rule covers this move",
      "weight": 2
     }
@@ -2796,16 +2796,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bm",
      "reason": "diatonic in E minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Em",
+     "degree": 2,
+     "symbol": "F#dim",
      "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "G",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2822,18 +2834,6 @@
     {
      "degree": 10,
      "symbol": "D",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "F#dim",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "G",
      "reason": "diatonic in E minor — no rule covers this move",
      "weight": 2
     }
@@ -2902,15 +2902,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Bm",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Em",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Bm",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -2930,16 +2930,28 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Em",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Bm",
      "reason": "diatonic in E minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Em",
+     "degree": 2,
+     "symbol": "F#dim",
      "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "G",
+     "reason": "diatonic in E minor — no rule covers this move",
+     "weight": 2
     },
     {
      "degree": 5,
@@ -2956,18 +2968,6 @@
     {
      "degree": 10,
      "symbol": "D",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "F#dim",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "G",
      "reason": "diatonic in E minor — no rule covers this move",
      "weight": 2
     }
@@ -3102,16 +3102,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C",
      "reason": "diatonic in F major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F",
+     "degree": 2,
+     "symbol": "Gm",
      "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 4,
@@ -3136,12 +3142,6 @@
      "symbol": "Edim",
      "reason": "diatonic in F major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Gm",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -3208,15 +3208,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "C",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "F",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -3236,16 +3236,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F",
+     "reason": "diatonic in F major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C",
      "reason": "diatonic in F major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F",
+     "degree": 2,
+     "symbol": "Gm",
      "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 4,
@@ -3268,12 +3274,6 @@
     {
      "degree": 11,
      "symbol": "Edim",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Gm",
      "reason": "diatonic in F major — no rule covers this move",
      "weight": 2
     }
@@ -3408,16 +3408,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Cm",
      "reason": "diatonic in F minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Fm",
+     "degree": 2,
+     "symbol": "Gdim",
      "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 3,
@@ -3440,12 +3446,6 @@
     {
      "degree": 10,
      "symbol": "Eb",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Gdim",
      "reason": "diatonic in F minor — no rule covers this move",
      "weight": 2
     }
@@ -3514,15 +3514,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Cm",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Fm",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Cm",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -3542,16 +3542,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "Fm",
+     "reason": "diatonic in F minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "Cm",
      "reason": "diatonic in F minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "Fm",
+     "degree": 2,
+     "symbol": "Gdim",
      "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 3,
@@ -3574,12 +3580,6 @@
     {
      "degree": 10,
      "symbol": "Eb",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "Gdim",
      "reason": "diatonic in F minor — no rule covers this move",
      "weight": 2
     }
@@ -3714,16 +3714,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C#",
      "reason": "diatonic in F# major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F#",
+     "degree": 2,
+     "symbol": "G#m",
      "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 4,
@@ -3748,12 +3754,6 @@
      "symbol": "Fdim",
      "reason": "diatonic in F# major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "G#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -3820,15 +3820,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "C#",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "F#",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -3848,16 +3848,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "diatonic in F# major — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C#",
      "reason": "diatonic in F# major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F#",
+     "degree": 2,
+     "symbol": "G#m",
      "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 4,
@@ -3882,12 +3888,6 @@
      "symbol": "Fdim",
      "reason": "diatonic in F# major — no rule covers this move",
      "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "G#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
     }
    ]
   },
@@ -4020,16 +4020,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C#m",
      "reason": "diatonic in F# minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F#m",
+     "degree": 2,
+     "symbol": "G#dim",
      "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 3,
@@ -4052,12 +4058,6 @@
     {
      "degree": 10,
      "symbol": "E",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "G#dim",
      "reason": "diatonic in F# minor — no rule covers this move",
      "weight": 2
     }
@@ -4126,15 +4126,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "C#m",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "F#m",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "C#m",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -4154,16 +4154,22 @@
    "topIsTied": true,
    "candidates": [
     {
+     "degree": 0,
+     "symbol": "F#m",
+     "reason": "diatonic in F# minor — no rule covers this move",
+     "weight": 3
+    },
+    {
      "degree": 7,
      "symbol": "C#m",
      "reason": "diatonic in F# minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "F#m",
+     "degree": 2,
+     "symbol": "G#dim",
      "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
+     "weight": 2
     },
     {
      "degree": 3,
@@ -4186,12 +4192,6 @@
     {
      "degree": 10,
      "symbol": "E",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 2,
-     "symbol": "G#dim",
      "reason": "diatonic in F# minor — no rule covers this move",
      "weight": 2
     }
@@ -4326,14 +4326,14 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D",
+     "degree": 0,
+     "symbol": "G",
      "reason": "diatonic in G major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "G",
+     "degree": 7,
+     "symbol": "D",
      "reason": "diatonic in G major — no rule covers this move",
      "weight": 3
     },
@@ -4432,15 +4432,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "G",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -4460,14 +4460,14 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D",
+     "degree": 0,
+     "symbol": "G",
      "reason": "diatonic in G major — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "G",
+     "degree": 7,
+     "symbol": "D",
      "reason": "diatonic in G major — no rule covers this move",
      "weight": 3
     },
@@ -4632,26 +4632,26 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Dm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "Gm",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 3,
-     "symbol": "A#",
+     "degree": 7,
+     "symbol": "Dm",
      "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
      "symbol": "Adim",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "A#",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
@@ -4738,15 +4738,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Dm",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "Gm",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "Dm",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -4766,26 +4766,26 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "Dm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
      "degree": 0,
      "symbol": "Gm",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 3,
-     "symbol": "A#",
+     "degree": 7,
+     "symbol": "Dm",
      "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
+     "weight": 3
     },
     {
      "degree": 2,
      "symbol": "Adim",
+     "reason": "diatonic in G minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 3,
+     "symbol": "A#",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
@@ -5244,14 +5244,14 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D#m",
+     "degree": 0,
+     "symbol": "G#m",
      "reason": "diatonic in G# minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "G#m",
+     "degree": 7,
+     "symbol": "D#m",
      "reason": "diatonic in G# minor — no rule covers this move",
      "weight": 3
     },
@@ -5350,15 +5350,15 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D#m",
-     "reason": "IV to V — builds the cadence",
-     "weight": 8
-    },
-    {
      "degree": 0,
      "symbol": "G#m",
      "reason": "IV to I — the plagal cadence",
+     "weight": 8
+    },
+    {
+     "degree": 7,
+     "symbol": "D#m",
+     "reason": "IV to V — builds the cadence",
      "weight": 8
     },
     {
@@ -5378,14 +5378,14 @@
    "topIsTied": true,
    "candidates": [
     {
-     "degree": 7,
-     "symbol": "D#m",
+     "degree": 0,
+     "symbol": "G#m",
      "reason": "diatonic in G# minor — no rule covers this move",
      "weight": 3
     },
     {
-     "degree": 0,
-     "symbol": "G#m",
+     "degree": 7,
+     "symbol": "D#m",
      "reason": "diatonic in G# minor — no rule covers this move",
      "weight": 3
     },
@@ -6174,12 +6174,6 @@
      "weight": 3
     },
     {
-     "degree": 11,
-     "symbol": "Adim",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "Cm",
      "reason": "diatonic in Bb major — no rule covers this move",
@@ -6200,6 +6194,12 @@
     {
      "degree": 9,
      "symbol": "Gm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Adim",
      "reason": "diatonic in Bb major — no rule covers this move",
      "weight": 2
     }
@@ -6308,12 +6308,6 @@
      "weight": 3
     },
     {
-     "degree": 11,
-     "symbol": "Adim",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "Cm",
      "reason": "diatonic in Bb major — no rule covers this move",
@@ -6334,6 +6328,12 @@
     {
      "degree": 9,
      "symbol": "Gm",
+     "reason": "diatonic in Bb major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "Adim",
      "reason": "diatonic in Bb major — no rule covers this move",
      "weight": 2
     }
@@ -6478,12 +6478,6 @@
      "symbol": "Fm",
      "reason": "diatonic in Bb minor — no rule covers this move",
      "weight": 3
-    },
-    {
-     "degree": 10,
-     "symbol": "Ab",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
     },
     {
      "degree": 2,
@@ -6508,6 +6502,12 @@
      "symbol": "Gb",
      "reason": "diatonic in Bb minor — no rule covers this move",
      "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Ab",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
     }
    ]
   },
@@ -6612,12 +6612,6 @@
      "symbol": "Fm",
      "reason": "diatonic in Bb minor — no rule covers this move",
      "weight": 3
-    },
-    {
-     "degree": 10,
-     "symbol": "Ab",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
     },
     {
      "degree": 2,
@@ -6642,6 +6636,12 @@
      "symbol": "Gb",
      "reason": "diatonic in Bb minor — no rule covers this move",
      "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "Ab",
+     "reason": "diatonic in Bb minor — no rule covers this move",
+     "weight": 2
     }
    ]
   },
@@ -6786,12 +6786,6 @@
      "weight": 3
     },
     {
-     "degree": 11,
-     "symbol": "A#dim",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "C#m",
      "reason": "diatonic in B major — no rule covers this move",
@@ -6812,6 +6806,12 @@
     {
      "degree": 9,
      "symbol": "G#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "A#dim",
      "reason": "diatonic in B major — no rule covers this move",
      "weight": 2
     }
@@ -6920,12 +6920,6 @@
      "weight": 3
     },
     {
-     "degree": 11,
-     "symbol": "A#dim",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "C#m",
      "reason": "diatonic in B major — no rule covers this move",
@@ -6946,6 +6940,12 @@
     {
      "degree": 9,
      "symbol": "G#m",
+     "reason": "diatonic in B major — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 11,
+     "symbol": "A#dim",
      "reason": "diatonic in B major — no rule covers this move",
      "weight": 2
     }
@@ -7092,12 +7092,6 @@
      "weight": 3
     },
     {
-     "degree": 10,
-     "symbol": "A",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "C#dim",
      "reason": "diatonic in B minor — no rule covers this move",
@@ -7118,6 +7112,12 @@
     {
      "degree": 8,
      "symbol": "G",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "A",
      "reason": "diatonic in B minor — no rule covers this move",
      "weight": 2
     }
@@ -7226,12 +7226,6 @@
      "weight": 3
     },
     {
-     "degree": 10,
-     "symbol": "A",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
      "degree": 2,
      "symbol": "C#dim",
      "reason": "diatonic in B minor — no rule covers this move",
@@ -7252,6 +7246,12 @@
     {
      "degree": 8,
      "symbol": "G",
+     "reason": "diatonic in B minor — no rule covers this move",
+     "weight": 2
+    },
+    {
+     "degree": 10,
+     "symbol": "A",
      "reason": "diatonic in B minor — no rule covers this move",
      "weight": 2
     }

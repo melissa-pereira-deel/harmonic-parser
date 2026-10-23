@@ -41,6 +41,12 @@ interface Move {
  * Weights are hand-assigned on one scale: 10 for a cadence that resolves, 8
  * for a strong functional step, 6 for a common move, 4 for a colour. They
  * were not fitted to anything.
+ *
+ * **Order matters.** Where two moves from the same degree share a weight, the
+ * one listed first wins: I goes to IV before V, and IV goes home before it
+ * goes to V. That is a decision about degrees, so it gives the same answer in
+ * every key. It used to be decided by how the chord names sorted, which
+ * suggested I after IV in six major keys and V in the other six.
  */
 const MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to I — the cadence', weight: 10 },
@@ -112,18 +118,24 @@ export function suggest(
   const from = (last.root - key.tonic + 12) % 12;
   const diatonic = new Set(scalePitchClasses(key));
 
-  const scored = new Map<number, Suggestion>();
-  for (const move of MOVES) {
-    if (move.from !== from) continue;
+  // `rank` breaks weight ties, and is never shown: the move's position in
+  // MOVES, or the degree above the tonic in the fallback. Either way it is
+  // about degrees, never about spelling.
+  const scored = new Map<number, { suggestion: Suggestion; rank: number }>();
+  MOVES.forEach((move, rank) => {
+    if (move.from !== from) return;
     const pc = (key.tonic + move.to) % 12;
     const existing = scored.get(pc);
-    if (existing !== undefined && existing.weight >= move.weight) continue;
+    if (existing !== undefined && existing.suggestion.weight >= move.weight) return;
     scored.set(pc, {
-      symbol: spell(pc, key) + triadQuality(move.to, key),
-      reason: move.reason,
-      weight: move.weight,
+      suggestion: {
+        symbol: spell(pc, key) + triadQuality(move.to, key),
+        reason: move.reason,
+        weight: move.weight,
+      },
+      rank,
     });
-  }
+  });
 
   // Nothing in the table matched, so fall back to the key's own chords. A
   // blank panel would read as "there is no answer" when the truth is "this
@@ -133,14 +145,18 @@ export function suggest(
       if (pc === last.root) continue;
       const semitones = (pc - key.tonic + 12) % 12;
       scored.set(pc, {
-        symbol: spell(pc, key) + triadQuality(semitones, key),
-        reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
-        weight: semitones === 0 || semitones === 7 ? 3 : 2,
+        suggestion: {
+          symbol: spell(pc, key) + triadQuality(semitones, key),
+          reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
+          weight: semitones === 0 || semitones === 7 ? 3 : 2,
+        },
+        rank: semitones,
       });
     }
   }
 
   return [...scored.values()]
-    .sort((a, b) => b.weight - a.weight || a.symbol.localeCompare(b.symbol))
-    .slice(0, limit);
+    .sort((a, b) => b.suggestion.weight - a.suggestion.weight || a.rank - b.rank)
+    .slice(0, limit)
+    .map((s) => s.suggestion);
 }

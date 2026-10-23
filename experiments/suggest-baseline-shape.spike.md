@@ -100,6 +100,32 @@ tie-break is what ships, so it is the honest baseline, and editing it before
 measuring is the move tiny-model-lab#18 warns against even when the edit is an
 improvement. The fixture records the before.
 
+## Resolution
+
+Fixed in its own change, after this record and the fixture had kept the
+before. Ties now go to the move listed first in `MOVES`, and in the fallback
+to the lower degree — both about degrees, so no spelling can reach the order.
+The weights did not move.
+
+```
+                                           before   after
+top suggestion decided by a tie              96/288   96/288   (weights unchanged)
+(mode, degree) answers that vary by tonic      8/24     0/24
+minor/major order flips on shared rules        1        0
+after IV, suggests I                         11/24    24/24
+after I, suggests IV                         22/24    24/24
+rows reordered                                    -   57/288
+rows whose top suggestion changed                 -   41/288
+rows whose candidate set changed                  -    0/288
+```
+
+The record above says this was filed as an issue. It was not; this change
+is the fix it would have tracked.
+
+What comes next is the order the record already gave: re-read these numbers
+— now, for the first time, about the rules rather than the alphabet — and
+only then decide whether a corpus is worth obtaining.
+
 ## What this is not
 
 Not a run. One question against one written threshold, answered no, inside its
