@@ -69,7 +69,7 @@ describe('the fixture is the baseline', () => {
 
 describe('what the rule table can offer', () => {
   it('fans out to at most three from the rule path', () => {
-    // 17 moves over 12 antecedents. Degrees 0 and 5 have three; most have one
+    // Moves over 12 antecedents. Degrees 0 and 5 have three; most have one
     // or two. This is the ceiling for any matched-k comparison later: a model
     // that always emits three would otherwise be scored at a different k
     // from a baseline that can only emit one.
@@ -188,65 +188,54 @@ describe('suggestions are spelled by key signature', () => {
   });
 });
 
-describe('the rule path is mode-blind; only the fallback is not', () => {
-  // I expected the whole thing to be mode-blind and the fixture said
-  // otherwise, which is the argument for exporting it before reasoning about
-  // it. The 17-move table never consults `mode` when choosing a degree -- but
-  // the fallback calls `scalePitchClasses(key)`, which really does return the
-  // minor scale in a minor key. So the file is half mode-aware, and the half
-  // that is not is the half that does the work.
+describe('minor keys have their own rules', () => {
+  // The rule table used to be major-only and applied unchanged in minor, which
+  // sent every minor key to degree 9, a note outside its scale. In A minor that
+  // was a suggestion of F#. See experiments/suggest-baseline-shape.spike.md.
+  const minorRows = committed.rows.filter((r) => r.mode === 'minor');
+  const MINOR_SCALE = [0, 2, 3, 5, 7, 8, 10];
 
-  it('suggests identical degrees in minor and major wherever a rule fires', () => {
-    // In a minor key the diatonic degrees are 3, 8 and 10, and rules like
-    // vi->IV and iii->vi are major-mode idioms. suggest() applies them
-    // unchanged, using `mode` only to spell the chord and pick its triad
-    // quality.
-    for (let tonic = 0; tonic < 12; tonic++) {
-      for (let from = 0; from < 12; from++) {
-        if (from === 1 || from === 6) continue; // the fallback, asserted below
-        const major = committed.rows.find(
-          (r) => r.tonic === tonic && r.mode === 'major' && r.from === from,
-        );
-        const minor = committed.rows.find(
-          (r) => r.tonic === tonic && r.mode === 'minor' && r.from === from,
-        );
-        // The *set* is identical everywhere, and since the tie-break
-        // stopped reading spellings, so is the order -- see below.
-        expect(
-          minor?.candidates.map((c) => c.degree).sort((a, b) => a - b),
-          `${major?.key} vs ${minor?.key} after degree ${from}`,
-        ).toEqual(major?.candidates.map((c) => c.degree).sort((a, b) => a - b));
+  it('never suggests a degree outside the minor scale', () => {
+    for (const row of minorRows) {
+      for (const candidate of row.candidates) {
+        expect(MINOR_SCALE, `${row.key} after degree ${row.from}`).toContain(candidate.degree);
       }
     }
   });
 
-  it('no longer flips an answer on how the tonic is spelled', () => {
-    // This was the tightest demonstration of the old tie-break. Ab major and
-    // G# minor have the same tonic pitch class and hit the same rules, and
-    // after a IV chord they used to disagree -- because one spells its tonic
-    // A-flat and the other G-sharp, and `localeCompare` noticed.
+  it('covers the same contexts as major', () => {
+    // Only degrees 1 and 6 fall back, in both modes. Whether that is a gap is a
+    // separate decision, and this table should not move it.
+    const fallback = minorRows.filter((r) => r.fallback).map((r) => r.from);
+    expect([...new Set(fallback)].sort((a, b) => a - b)).toEqual([1, 6]);
+  });
+
+  it('resolves the dominant to the tonic, with a major dominant as the target', () => {
+    const afterFive = minorRows.find((r) => r.key === 'A minor' && r.from === 7);
+    expect(afterFive?.candidates[0].symbol).toBe('Am');
+    expect(afterFive?.candidates[0].reason).toContain('V to i');
+
+    const afterTwo = minorRows.find((r) => r.key === 'A minor' && r.from === 2);
+    expect(afterTwo?.candidates[0].symbol).toBe('E');
+  });
+
+  it('names the deceptive cadence on the flat sixth', () => {
+    const afterFive = minorRows.find((r) => r.key === 'A minor' && r.from === 7);
+    expect(afterFive?.candidates[1].symbol).toBe('F');
+  });
+
+  it('does not flip an answer on how the tonic is spelled', () => {
+    // Ab major and G# minor share a tonic pitch class. This was the tightest
+    // demonstration of the old alphabetical tie-break.
     const flat = committed.rows.find((r) => r.key === 'Ab major' && r.from === 5);
     const sharp = committed.rows.find((r) => r.key === 'G# minor' && r.from === 5);
 
     expect(flat?.tonic).toBe(sharp?.tonic);
     expect(flat?.candidates[0].degree).toBe(0);
     expect(sharp?.candidates[0].degree).toBe(0);
-
-    // It was the only row where minor and major ordered the same rules
-    // differently. Now there are none.
-    const orderFlips = committed.rows.filter((r) => {
-      if (r.mode !== 'minor' || r.from === 1 || r.from === 6) return false;
-      const major = committed.rows.find(
-        (m) => m.tonic === r.tonic && m.mode === 'major' && m.from === r.from,
-      );
-      const a = r.candidates.map((c) => c.degree).join();
-      const b = major?.candidates.map((c) => c.degree).join();
-      return a !== b;
-    });
-    expect(orderFlips).toHaveLength(0);
   });
 
-  it('does consult the mode in the fallback, where it offers the key scale', () => {
+  it('offers the key scale in the fallback', () => {
     const majorFallback = committed.rows.find((r) => r.key === 'C major' && r.from === 1);
     const minorFallback = committed.rows.find((r) => r.key === 'C minor' && r.from === 1);
 
@@ -256,13 +245,5 @@ describe('the rule path is mode-blind; only the fallback is not', () => {
     expect(minorFallback?.candidates.map((c) => c.degree).sort((a, b) => a - b)).toEqual(
       [0, 2, 3, 5, 7, 8, 10],
     );
-  });
-
-  it('still labels them with major-mode reasons in minor', () => {
-    // In A minor, a G chord is bVII. The table calls the move "V to I".
-    const aMinorAfterSeven = committed.rows.find(
-      (r) => r.key === 'A minor' && r.from === 7,
-    );
-    expect(aMinorAfterSeven?.candidates[0].reason).toContain('V to I');
   });
 });

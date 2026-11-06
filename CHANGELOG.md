@@ -180,6 +180,13 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   candidates change their spelling; no suggestion changes its pitch or order,
   so the baseline's choices are the same. The table's `Db`, `Gb` and `D` entries
   are gone: `tonicName` never produced the first two, and the third did nothing.
+- **Minor keys have their own suggestion rules.** The table was major-only and
+  applied unchanged in minor, so every minor key was offered a chord on a degree
+  outside its scale: `F#` in A minor. 48 such suggestions go to 0, and 12 of
+  those were the top pick. No major row changes. The dominant is suggested as a
+  major chord in minor (`E` in A minor), since that is what the cadence needs.
+  This moves the baseline: 84 of 288 top suggestions change, recorded in
+  `experiments/suggest-baseline-shape.spike.md`.
 
 ### Changed
 
