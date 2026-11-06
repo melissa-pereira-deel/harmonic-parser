@@ -161,6 +161,33 @@ describe('ties are broken by degree, never by spelling', () => {
   });
 });
 
+describe('suggestions are spelled by key signature', () => {
+  it.each(['C minor', 'D minor', 'G minor', 'F minor', 'Bb minor', 'Eb minor', 'F major', 'Bb major', 'Eb major', 'Ab major'])(
+    'never uses a sharp in %s',
+    (key) => {
+      const symbols = committed.rows
+        .filter((r) => r.key === key)
+        .flatMap((r) => r.candidates.map((c) => c.symbol));
+      expect(symbols.length).toBeGreaterThan(0);
+      expect(symbols.filter((s) => s.includes('#'))).toEqual([]);
+    },
+  );
+
+  it('spells the flat side of C minor with flats', () => {
+    const symbols = committed.rows
+      .filter((r) => r.key === 'C minor')
+      .flatMap((r) => r.candidates.map((c) => c.symbol.replace(/m|dim/, '')));
+    expect(symbols).toEqual(expect.arrayContaining(['Eb', 'Ab', 'Bb']));
+  });
+
+  it('keeps sharps in the sharp keys', () => {
+    const symbols = committed.rows
+      .filter((r) => r.key === 'E major')
+      .flatMap((r) => r.candidates.map((c) => c.symbol));
+    expect(symbols.some((s) => s.includes('#'))).toBe(true);
+  });
+});
+
 describe('the rule path is mode-blind; only the fallback is not', () => {
   // I expected the whole thing to be mode-blind and the fixture said
   // otherwise, which is the argument for exporting it before reasoning about

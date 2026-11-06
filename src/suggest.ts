@@ -14,7 +14,7 @@
  */
 
 import type { Chord, PitchClass } from './chords.ts';
-import type { Key } from './keyprofiles.ts';
+import type { Key, Mode } from './keyprofiles.ts';
 import { tonicName } from './keyprofiles.ts';
 import { scalePitchClasses } from './readings.ts';
 
@@ -71,19 +71,20 @@ const MOVES: readonly Move[] = [
 const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
 
-/** Keys whose signature is flats, so a suggestion is spelled with flats. */
-const FLAT_TONICS: Readonly<Record<string, boolean>> = {
-  F: true,
-  Bb: true,
-  Eb: true,
-  Ab: true,
-  Db: true,
-  Gb: true,
-  D: false,
+/**
+ * Keys whose signature is flats, so a suggestion is spelled with flats.
+ *
+ * By mode, because the same tonic can sit on either side: D major has sharps
+ * and D minor has a flat. Tonics are spelled as `tonicName` spells them, and it
+ * names C# and F# major with sharps, so those stay out of this table.
+ */
+const FLAT_TONICS: Readonly<Record<Mode, ReadonlySet<string>>> = {
+  major: new Set(['F', 'Bb', 'Eb', 'Ab']),
+  minor: new Set(['D', 'G', 'C', 'F', 'Bb', 'Eb']),
 };
 
 function spell(pc: PitchClass, key: Key): string {
-  const names = FLAT_TONICS[tonicName(key)] ? FLAT_NAMES : SHARP_NAMES;
+  const names = FLAT_TONICS[key.mode].has(tonicName(key)) ? FLAT_NAMES : SHARP_NAMES;
   return names[pc];
 }
 

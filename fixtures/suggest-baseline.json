@@ -367,7 +367,7 @@
     },
     {
      "degree": 3,
-     "symbol": "D#",
+     "symbol": "Eb",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
@@ -379,13 +379,13 @@
     },
     {
      "degree": 8,
-     "symbol": "G#",
+     "symbol": "Ab",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
     {
      "degree": 10,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     }
@@ -501,7 +501,7 @@
     },
     {
      "degree": 3,
-     "symbol": "D#",
+     "symbol": "Eb",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
@@ -513,13 +513,13 @@
     },
     {
      "degree": 8,
-     "symbol": "G#",
+     "symbol": "Ab",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     },
     {
      "degree": 10,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in C minor — no rule covers this move",
      "weight": 2
     }
@@ -1603,7 +1603,7 @@
     },
     {
      "degree": 8,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 2
     },
@@ -1737,7 +1737,7 @@
     },
     {
      "degree": 8,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in D minor — no rule covers this move",
      "weight": 2
     },
@@ -4651,7 +4651,7 @@
     },
     {
      "degree": 3,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
@@ -4663,7 +4663,7 @@
     },
     {
      "degree": 8,
-     "symbol": "D#",
+     "symbol": "Eb",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
@@ -4785,7 +4785,7 @@
     },
     {
      "degree": 3,
-     "symbol": "A#",
+     "symbol": "Bb",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
@@ -4797,7 +4797,7 @@
     },
     {
      "degree": 8,
-     "symbol": "D#",
+     "symbol": "Eb",
      "reason": "diatonic in G minor — no rule covers this move",
      "weight": 2
     },
