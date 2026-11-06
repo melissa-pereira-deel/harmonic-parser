@@ -10,11 +10,11 @@ two confidence thresholds are guesses with a plausible shape, and the page
 should not claim otherwise. `suggest-baseline-shape` deferred the same question
 rather than answering it — it found a defect worth fixing first, and said to
 decide whether a corpus is worth obtaining only afterwards. A few hundred
-labelled progressions is worth more here than any amount of code.
+labelled progressions is worth more here than any amount of code (#15).
 
-Then, in order: the slash-bass spelling fix described in
-`experiments/slash-bass-spelling.spike.md`; a harmonic grammar as a second
-`Reading` producer; and better `suggest.ts` than a rule table.
+Then, in order: a harmonic grammar as a second `Reading` producer (#16); and
+better `suggest.ts` than a rule table — the next-chord experiment, whose
+ordered plan is #17.
 
 ## Ground rules
 
