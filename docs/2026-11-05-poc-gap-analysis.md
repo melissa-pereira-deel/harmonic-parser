@@ -24,7 +24,7 @@ question cannot be answered until somebody other than its author can use it.
 | `src/keyprofiles.ts` | 24 Krumhansl-Schmuckler profiles from music21 10.5.0 | Profile choice is "untested" (`:14`) |
 | `src/readings.ts` | Ranks all 24 keys; numeral and role per chord | Every inversion renders the literal `/bass` (`:148`), so `G/B` shows `V/bass`. `'grammar'` and `'model'` have no producer. Equal chord weighting is unmeasured (`:162`) |
 | `src/confidence.ts` | Computes ambiguity and uncertainty separately | Both thresholds unmeasured (`:37`, `:47`). The header's examples are wrong: `Am F C G` is clear, not ambiguous |
-| `src/suggest.ts` | 17 rules, ties broken by degree since #11 | Rule path ignores mode (#12). D, G, C and F minor get sharp spellings (`:75-86`), for example `D#` in C minor. 48 of 288 contexts have no rule (#13) |
+| `src/suggest.ts` | 17 rules, ties broken by degree since #11 | Rule path ignores mode (#12). C, D and G minor get sharp spellings (`:75-86`), 12 candidates in all, for example `D#` in C minor. 48 of 288 contexts have no rule (#13) |
 | `src/pins.ts`, `src/ui.ts` | Pin a chord's function, re-filter, named conflict state, designed wrong-state | Narrow override only; the wide half needs a parser (`pins.ts:12`, #16). No per-chord unpin, only "Clear pins" |
 | `src/announce.ts` | One spoken sentence after typing stops | 500 ms is unmeasured (`:34`) |
 | Tests | 64 cases in 7 files, 5 of them `it.fails`; parity with music21 at 0/200 | README (`:27`, `:31`, `:81`) says tests fail, but `npm test` is green |
