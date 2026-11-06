@@ -3,6 +3,8 @@
 [![ci](https://github.com/melissa-pereira-deel/harmonic-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/melissa-pereira-deel/harmonic-parser/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+**Try it:** <https://melissa-pereira-deel.github.io/harmonic-parser/>
+
 Type `Am F C G` into a box. The page tells you it is probably C major, puts a
 Roman numeral under each chord, and shows you the readings it did not pick.
 

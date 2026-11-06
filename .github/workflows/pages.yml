@@ -1,0 +1,48 @@
+name: pages
+
+# Separate from ci.yml because that one runs on every PR, and only main should
+# ever reach the live page. Nothing here re-runs the tests: ci.yml does that on
+# the same push, and a failing test there does not stop this deploy, so watch
+# both after a merge.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# A deploy that started should finish. Cancelling one mid-upload can leave the
+# environment stuck, and the next push queues behind it anyway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
