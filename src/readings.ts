@@ -106,8 +106,9 @@ const FIGURES: Readonly<Record<string, string>> = {
   min7: '7',
   min7b5: 'ø7',
   dim7: '°7',
-  maj6: '6',
-  min6: '6',
+  // Not `6`: that is the first-inversion figure, and C6 is not C/E.
+  maj6: 'add6',
+  min6: 'add6',
   add9: 'add9',
   dom9: '9',
   min9: '9',

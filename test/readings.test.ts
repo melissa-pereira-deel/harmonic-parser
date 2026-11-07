@@ -52,6 +52,13 @@ describe('inversions', () => {
     expect(numeralOf(symbol)).toBe(numeral);
   });
 
+  it('keeps a sixth chord apart from a first inversion', () => {
+    // Both used to read I6: one figure for two different chords.
+    expect(numeralOf('C6')).toBe('Iadd6');
+    expect(numeralOf('C/E')).toBe('I6');
+    expect(numeralOf('Am6', A_MINOR)).toBe('iadd6');
+  });
+
   it('reads the bass degree against the key, not the chord', () => {
     expect(numeralOf('E/A', A_MINOR)).toBe('V/I');
   });
