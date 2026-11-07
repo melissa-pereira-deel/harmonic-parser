@@ -2,19 +2,36 @@
 
 ## What's most wanted
 
-**Real progressions with a human judgement attached.** `confidence-thresholds`
-in `experiments/` hit this wall head-on: there is no corpus of things people
-actually typed, with somebody saying which felt ambiguous, so the parity
-fixture is the wrong population to calibrate against. Without that corpus the
-two confidence thresholds are guesses with a plausible shape, and the page
-should not claim otherwise. `suggest-baseline-shape` deferred the same question
-rather than answering it — it found a defect worth fixing first, and said to
-decide whether a corpus is worth obtaining only afterwards. A few hundred
-labelled progressions is worth more here than any amount of code (#15).
+**Real progressions with a human judgement attached** (#15).
+`confidence-thresholds` in `experiments/` hit this wall head-on: there is no
+corpus of things people actually typed, with somebody saying which felt
+ambiguous, so the parity fixture is the wrong population to calibrate
+against. Without that corpus the two confidence thresholds are guesses with a
+plausible shape, and the page should not claim otherwise. A few hundred
+labelled progressions is worth more here than any amount of code. They are
+collected through the page's feedback form
+(`.github/ISSUE_TEMPLATE/reading-feedback.yml`, linked from the page footer
+and from `docs/tester-guide.md`), one progression per submission.
 
-Then, in order: a harmonic grammar as a second `Reading` producer (#16); and
-better `suggest.ts` than a rule table — the next-chord experiment, whose
-ordered plan is #17.
+**That is not the next-chord corpus.** The two are easy to confuse, and
+obtaining one does not help with the other.
+
+| | Calibration corpus | Next-chord corpus |
+|---|---|---|
+| Issue | #15 | #14, #28 |
+| What it is | Progressions people typed, each with a person's label: one reading, two, or nothing fits | Chord sequences from existing music. Self-supervised: the next chord is the label, so nobody labels anything |
+| What it is for | Calibrating `AMBIGUITY_MARGIN` and `UNCERTAINTY_FLOOR` | Training the next-chord model and gating it against `suggest.ts` |
+| How it is obtained | The feedback form | A licensed corpus. ChoCo's audit is `docs/choco-licence-audit.md`; the include/exclude verdict is pending and is the owner's |
+
+Whether the next-chord corpus is worth obtaining is decided: it is.
+`suggest-baseline-shape` deferred that question until a defect in the rules
+was fixed; once it was, #17 re-read the numbers and recorded the decision.
+What gates the corpus now is the licence verdict (#14) and the contract
+(#28), written before any corpus data is opened.
+
+Also wanted: the next-chord experiment itself, whose ordered plan is #17; and
+a harmonic grammar as a second `Reading` producer (#16), which is still a
+scoping question.
 
 ## Ground rules
 

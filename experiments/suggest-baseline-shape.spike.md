@@ -126,6 +126,10 @@ What comes next is the order the record already gave: re-read these numbers
 — now, for the first time, about the rules rather than the alphabet — and
 only then decide whether a corpus is worth obtaining.
 
+That decision has since been made. #17 re-read the numbers on 2026-10-09 and
+recorded that the next-chord corpus is worth obtaining; what gates it now is
+the licence audit (#14) and the contract (#28).
+
 ### The second fix: minor keys
 
 The rule table was major-only and applied unchanged in minor, the half of the

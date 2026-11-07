@@ -40,7 +40,8 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   major` and `G# minor` share a tonic pitch class and disagree, because one
   spells it A-flat and the other G-sharp.
 
-  `suggest.ts` is deliberately unchanged. The tie-break is what ships, so it
+  This change left `suggest.ts` alone on purpose; it changed later, under
+  Fixed, and the reason for waiting was this. The tie-break is what ships, so it
   is the honest baseline, and editing it before measuring is the move #18
   warns against even when the edit is an improvement. The fixture records the
   before.

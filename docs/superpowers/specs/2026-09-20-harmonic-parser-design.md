@@ -33,7 +33,8 @@ Six of the eight rows of the PRD's product table, with no model.
 
 ## Architecture
 
-Four layers plus a UI, and the seam between them is the design.
+A handful of small modules plus a UI, and the seams between them are the
+design.
 
 | Module | Responsibility |
 |---|---|
@@ -63,7 +64,9 @@ lookup from key plus chord — no grammar required for that part.
 Two questions that must never collapse into one number:
 
 - **Ambiguity** — the top two scores are close. The *music* supports both.
-  Show both, and highlight the chord where they diverge.
+  Show both. This also said to highlight the chord where they diverge; that
+  highlight was never built, and the page shows the contenders side by side
+  without it.
 - **Uncertainty** — the top score is low in absolute terms. Nothing fits. Dim
   the reading and stop asserting.
 
@@ -71,9 +74,11 @@ Krumhansl-Schmuckler returns a Pearson correlation, which is bounded and
 comparable across inputs, so an absolute threshold is meaningful in a way a
 raw log-probability would not be.
 
-**Both thresholds are currently unmeasured and one is provably unsettable
-from available data** — see `experiments/confidence-thresholds.spike.md`. The
-distinction survives; the numbers do not yet mean anything.
+**Both thresholds are currently unmeasured, and neither can be calibrated
+from available data** — see `experiments/confidence-thresholds.spike.md`. Five
+tests in `test/confidence.test.ts` are marked `it.fails` and keep the
+falsified claims on record. The distinction survives; the numbers do not yet
+mean anything.
 
 ## The oracle and the parity test
 
@@ -83,9 +88,12 @@ asserting a tolerance**, mirroring `examples/02-config-lexer` in
 tiny-model-lab. music21 is pinned exactly, not floored: it is the oracle, and
 a floor lets the oracle move underneath you.
 
-Current rate: 1/200 top reading, 7/200 ranking order, 2/200 scores. The cause
-is known and recorded (`experiments/slash-bass-spelling.spike.md`) and the fix
-is a change to the parser, not to the test.
+When this was written the rate was 1/200 top reading, 7/200 ranking order and
+2/200 scores. The cause was recorded in
+`experiments/slash-bass-spelling.spike.md`, and the fix was a change to the
+parser, not to the test. Since it landed the rate is **0/200** on all three.
+Five rankings reorder within a tie, and those are counted separately because
+they are not disagreements.
 
 ## The five design checks
 
@@ -110,22 +118,60 @@ No grammar, no chart parser, no phrase brackets, no pivot detection, no
 training, no corpus, no audio, no accounts, no persistence beyond
 localStorage, no framework.
 
+## Scope revisited (2026-11-07)
+
+The list above is the scope as decided on 2026-09-20, kept as the record.
+Some of it has moved, and this is where that is written down.
+
+- **A corpus and a next-chord model are on the roadmap.** Next-chord
+  prediction is the one planned learned model (#17). It is gated twice: by the
+  contract, `experiments/next-chord.yaml` (#28), written before any corpus
+  data is opened; and by the licence verdict on the corpus (#14). The
+  per-partition audit is `docs/choco-licence-audit.md`. The verdict is
+  pending, and it is the owner's to give.
+- **It would feed suggestions, not readings.** The model would be a second
+  source of suggestions in `suggest.ts`, beside the rule table it has to
+  beat. `Reading.source: 'model'` has no plan behind it, so the trained
+  scorer that the architecture above names as a third producer is a type,
+  not a roadmap.
+- **The baseline will cover every context.** #13 adds rules for degrees 1
+  and 6, so that the rule table answers all 288 contexts instead of falling
+  back on 48.
+- **First-run cost stops being free if the model ships.**
+  `experiments/next-chord-size.spike.md` found that a bundled count table
+  will not fit the page's first round trip, so it would load after first
+  paint, as a designed download rather than a discovered one.
+- **Modal ranking is proposed, not planned.** Naming Dorian or Mixolydian
+  rather than only major and minor waits on a scoping spike (#29).
+- **A grammar stays out.** #16 is a scoping question: which theory, and what
+  oracle, before any code.
+- **localStorage is still unused.** The list allowed it; nothing uses it.
+- The modules in the architecture table have been joined by `pins.ts` (user
+  override), `announce.ts` (the spoken channel) and `main.ts` (wiring).
+
 ## What it sets up
 
-When a trained scorer is worth building, the contract nearly writes itself,
-and it avoids the PRD's trap:
+When a trained next-chord model is worth building, the contract nearly writes
+itself, and it avoids the PRD's trap:
 
 - **Labels are free.** Next-chord prediction is self-supervised — the next
   chord is the label — so the corpus needs no harmonic annotation and no
   parser-derived silver labels.
 - **The baseline is the shipped rule table**, with a number measured from
   this page rather than invented.
-- **Split by genre, not by song.** The PRD's own Q4 says a per-genre model may
-  be the single biggest quality win; if genre is where the quality is, genre
-  is the axis generalisation has to cross. Splitting by song measures memorised
-  genre convention and reports it as harmonic understanding.
+- **Split by song, and report by genre.** This line first read *split by
+  genre, not by song*: the PRD's own Q4 says a per-genre model may be the
+  single biggest quality win, so genre looked like the axis generalisation has
+  to cross. The current plan (#28) is `split_by: song`, never random, for
+  leakage control, because a progression's neighbours are its own bars. The
+  genre question moves to reporting: results are broken down per partition
+  and genre as well as overall, and that is where generalisation across genre
+  is read.
 - There are published reference numbers: the Chordonomicon authors benchmarked
-  next-chord prediction on this dataset at 354K-1.33M parameters.
+  next-chord prediction on their dataset at 354K-1.33M parameters. They are a
+  reference only. Chordonomicon is CC BY-NC 4.0, which #14 rules out for
+  commercial use, so those numbers were not measured on any corpus this repo
+  would train on.
 
 ## Decisions worth revisiting
 
