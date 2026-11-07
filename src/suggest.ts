@@ -1,9 +1,9 @@
 /**
  * What could come next. A rule table, not a model.
  *
- * Seventeen rules over scale degrees, scored and sorted. It knows that V goes
- * to I, that ii goes to V, that IV goes home, and that in pop bVII is a
- * cadence rather than a mistake. It does not know anything else, and in
+ * A table of rules over scale degrees for each mode, scored and sorted. It knows
+ * that V goes to I, that ii goes to V, that IV goes home, and that in pop bVII
+ * is a cadence rather than a mistake. It does not know anything else, and in
  * particular it cannot see further back than the last chord.
  *
  * **This table is the baseline.** When a next-chord model arrives — and
@@ -33,10 +33,12 @@ interface Move {
   readonly to: number;
   readonly reason: string;
   readonly weight: number;
+  /** Overrides the key's own triad, for a chord borrowed from outside it. */
+  readonly quality?: string;
 }
 
 /**
- * The rule table. Degrees are semitones above the tonic.
+ * The rule tables. Degrees are semitones above the tonic.
  *
  * Weights are hand-assigned on one scale: 10 for a cadence that resolves, 8
  * for a strong functional step, 6 for a common move, 4 for a colour. They
@@ -48,7 +50,7 @@ interface Move {
  * every key. It used to be decided by how the chord names sorted, which
  * suggested I after IV in six major keys and V in the other six.
  */
-const MOVES: readonly Move[] = [
+const MAJOR_MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to I — the cadence', weight: 10 },
   { from: 7, to: 9, reason: 'V to vi — the deceptive cadence', weight: 6 },
   { from: 5, to: 0, reason: 'IV to I — the plagal cadence', weight: 8 },
@@ -67,6 +69,42 @@ const MOVES: readonly Move[] = [
   { from: 3, to: 5, reason: 'bIII to IV — borrowed, then home', weight: 4 },
   { from: 8, to: 7, reason: 'bVI to V — the chromatic approach', weight: 4 },
 ];
+
+/**
+ * Written for minor rather than translated from major: the idioms differ, and
+ * a shared table sent every minor key to a degree outside its scale.
+ *
+ * The dominant is major wherever it is the target, because the cadence needs
+ * the leading tone even though natural minor does not contain it. Degrees 4 and
+ * 9 are outside the scale but keep a rule, so that this table covers the same
+ * contexts as the major one.
+ */
+const MINOR_MOVES: readonly Move[] = [
+  { from: 7, to: 0, reason: 'V to i — the cadence', weight: 10 },
+  { from: 7, to: 8, reason: 'V to bVI — the deceptive cadence', weight: 6 },
+  { from: 5, to: 0, reason: 'iv to i — the plagal cadence', weight: 8 },
+  { from: 5, to: 7, reason: 'iv to V — builds the cadence', weight: 8, quality: '' },
+  { from: 5, to: 8, reason: 'iv to bVI', weight: 4 },
+  { from: 2, to: 7, reason: 'ii° to V — the other half of ii°-V-i', weight: 10, quality: '' },
+  { from: 2, to: 0, reason: 'ii° back to i', weight: 4 },
+  { from: 0, to: 5, reason: 'i to iv — leaves home', weight: 8 },
+  { from: 0, to: 7, reason: 'i to V — opens the cadence', weight: 8, quality: '' },
+  { from: 0, to: 8, reason: 'i to bVI — the soft turn', weight: 6 },
+  { from: 8, to: 7, reason: 'bVI to V — the half-step approach', weight: 8, quality: '' },
+  { from: 8, to: 10, reason: 'bVI to bVII — the climb', weight: 6 },
+  { from: 10, to: 3, reason: 'bVII to bIII — the relative cadence', weight: 8 },
+  { from: 10, to: 0, reason: 'bVII to i — the Aeolian cadence', weight: 6 },
+  { from: 3, to: 8, reason: 'bIII to bVI — down the circle', weight: 6 },
+  { from: 3, to: 5, reason: 'bIII to iv', weight: 4 },
+  { from: 11, to: 0, reason: 'vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
+  { from: 4, to: 5, reason: 'III to iv — a borrowed secondary dominant', weight: 4 },
+  { from: 9, to: 7, reason: 'raised sixth to V — the chromatic approach', weight: 4, quality: '' },
+];
+
+const MOVES: Readonly<Record<Mode, readonly Move[]>> = {
+  major: MAJOR_MOVES,
+  minor: MINOR_MOVES,
+};
 
 const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
@@ -120,17 +158,17 @@ export function suggest(
   const diatonic = new Set(scalePitchClasses(key));
 
   // `rank` breaks weight ties, and is never shown: the move's position in
-  // MOVES, or the degree above the tonic in the fallback. Either way it is
+  // its table, or the degree above the tonic in the fallback. Either way it is
   // about degrees, never about spelling.
   const scored = new Map<number, { suggestion: Suggestion; rank: number }>();
-  MOVES.forEach((move, rank) => {
+  MOVES[key.mode].forEach((move, rank) => {
     if (move.from !== from) return;
     const pc = (key.tonic + move.to) % 12;
     const existing = scored.get(pc);
     if (existing !== undefined && existing.suggestion.weight >= move.weight) return;
     scored.set(pc, {
       suggestion: {
-        symbol: spell(pc, key) + triadQuality(move.to, key),
+        symbol: spell(pc, key) + (move.quality ?? triadQuality(move.to, key)),
         reason: move.reason,
         weight: move.weight,
       },

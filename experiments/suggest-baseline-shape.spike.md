@@ -126,6 +126,25 @@ What comes next is the order the record already gave: re-read these numbers
 — now, for the first time, about the rules rather than the alphabet — and
 only then decide whether a corpus is worth obtaining.
 
+### The second fix: minor keys
+
+The rule table was major-only and applied unchanged in minor, the half of the
+file this record said was mode-blind. Minor now has its own table. The major
+table did not change, and no major row moved.
+
+```
+                                     before   after
+suggestions outside the minor scale    48        0
+...of which the top suggestion         12        0
+minor rows changed                      -      120/144
+top suggestions changed                 -       84/288
+top suggestion decided by a tie        96/288   96/288
+fell through to the fallback           48/288   48/288
+```
+
+Its weights are hand-assigned too, on the same scale. Writing them is a musical
+judgement that nothing has measured.
+
 ## What this is not
 
 Not a run. One question against one written threshold, answered no, inside its
