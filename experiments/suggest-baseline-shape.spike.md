@@ -145,6 +145,35 @@ fell through to the fallback           48/288   48/288
 Its weights are hand-assigned too, on the same scale. Writing them is a musical
 judgement that nothing has measured.
 
+### The third fix: uncovered contexts
+
+Degrees 1 and 6, `bII` and the tritone, had no rule in either table, which is
+the 48 this record found falling back. The owner decided in #13 that this was
+a gap, not a boundary, and approved two rules for each degree in each mode:
+the tritone substitution and the Neapolitan from `bII`, and `#iv°` to V or
+to the tonic from the tritone. No other row moved.
+
+```
+                                     before   after
+fell through to the fallback          48/288    0/288
+top suggestion decided by a tie       96/288   48/288
+rows changed                               -   48/288
+top suggestions changed                    -   36/288
+widest fan-out                             7        3
+suggestions outside the minor scale        0        0
+```
+
+The ties that went were all fallback rows, where the tonic and dominant tie
+at 3; the 48 left follow I and IV in both modes, decided by table order as
+before. The widest fan-out was the fallback's seven, and the rule path's
+widest is still three. Top suggestions changed in 36 rows, not 48, because
+the fallback already put the tonic first, and in major the tritone
+substitution after `bII` goes there too.
+
+The weights are hand-assigned and unmeasured, like the rest of the table. The
+reasons are keyed on the degree, not the chord, so "bII7" is the reason after
+a plain `bII` triad and "#iv°" after any chord on the raised fourth.
+
 ## What this is not
 
 Not a run. One question against one written threshold, answered no, inside its

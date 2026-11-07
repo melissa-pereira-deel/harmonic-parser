@@ -187,6 +187,20 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   major chord in minor (`E` in A minor), since that is what the cadence needs.
   This moves the baseline: 84 of 288 top suggestions change, recorded in
   `experiments/suggest-baseline-shape.spike.md`.
+- **Every scale degree has a suggestion rule, so nothing falls back.** `bII`
+  and the tritone had no rule in either mode, and their 48 of 288 contexts got
+  the key's seven diatonic chords marked "no rule covers this move". Each now
+  has two rules per mode, as approved in #13: after `Db` in C major the page
+  suggests `C` (the tritone substitution) then `G` (the Neapolitan), and after
+  `Bb` in A minor it suggests `E` then `Am`. Fallback goes from 48/288 to 0/288,
+  and ties on the top suggestion from 96 to 48, because the ties that went were
+  the fallback's own. The fallback code stays, unreachable, so that removing
+  a rule shows the key's chords rather than an empty panel.
+
+  This moves the baseline by design: 48 rows change and 36 top suggestions
+  change, all after degrees 1 and 6. Recorded in
+  `experiments/suggest-baseline-shape.spike.md`. The weights are hand-assigned,
+  like the rest of the table.
 
 ### Changed
 
