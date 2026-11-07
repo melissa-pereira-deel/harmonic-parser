@@ -73,7 +73,7 @@ export type LetterIndex = number;
 const LETTER_ORDER = 'CDEFGAB';
 
 /** Semitones above the root for each quality. */
-const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
+export const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
   maj: [0, 4, 7],
   min: [0, 3, 7],
   dim: [0, 3, 6],

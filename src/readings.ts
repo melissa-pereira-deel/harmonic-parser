@@ -16,7 +16,7 @@
  */
 
 import type { Chord, PitchClass } from './chords.ts';
-import { pitchClasses } from './chords.ts';
+import { INTERVALS, pitchClasses } from './chords.ts';
 import type { Key, Mode } from './keyprofiles.ts';
 import { KEY_PROFILES } from './keyprofiles.ts';
 
@@ -106,8 +106,9 @@ const FIGURES: Readonly<Record<string, string>> = {
   min7: '7',
   min7b5: 'ø7',
   dim7: '°7',
-  maj6: '6',
-  min6: '6',
+  // Not `6`: that is the first-inversion figure, and C6 is not C/E.
+  maj6: 'add6',
+  min6: 'add6',
   add9: 'add9',
   dom9: '9',
   min9: '9',
@@ -140,15 +141,51 @@ const ROLES: Readonly<Record<string, string>> = {
   '#VII': 'leading tone — the harmonic minor seventh',
 };
 
+/**
+ * How each stacked-thirds quality reads when a chord tone other than the root
+ * is in the bass: the mark that stays, then the figure for each chord tone
+ * above the root. The figure replaces a seventh's `7`, so `G7/F` is `V42`.
+ *
+ * Only these qualities are here. Figures count thirds above the bass, so they
+ * mean nothing useful for a sus or add chord, which take the slash form below.
+ */
+const TRIAD_FIGURES = ['6', '64'];
+const SEVENTH_FIGURES = ['65', '43', '42'];
+const INVERSIONS: Readonly<
+  Record<string, { readonly mark: string; readonly figures: readonly string[] }>
+> = {
+  maj: { mark: '', figures: TRIAD_FIGURES },
+  min: { mark: '', figures: TRIAD_FIGURES },
+  dim: { mark: '°', figures: TRIAD_FIGURES },
+  aug: { mark: '+', figures: TRIAD_FIGURES },
+  dom7: { mark: '', figures: SEVENTH_FIGURES },
+  maj7: { mark: 'maj', figures: SEVENTH_FIGURES },
+  min7: { mark: '', figures: SEVENTH_FIGURES },
+  min7b5: { mark: 'ø', figures: SEVENTH_FIGURES },
+  dim7: { mark: '°', figures: SEVENTH_FIGURES },
+};
+
+/** What follows the degree in a numeral, including any inversion. */
+function figure(chord: Chord, key: Key): string {
+  const rootPosition = FIGURES[chord.quality];
+  if (chord.bass === chord.root) return rootPosition;
+
+  // A bass that is not a chord tone has no position, so no figure.
+  const inversion = INVERSIONS[chord.quality];
+  const position = INTERVALS[chord.quality].indexOf((chord.bass - chord.root + 12) % 12);
+  const inverted = inversion?.figures[position - 1];
+  if (inverted !== undefined) return inversion.mark + inverted;
+
+  return `${rootPosition}/${DEGREES[key.mode][(chord.bass - key.tonic + 12) % 12]}`;
+}
+
 function romanNumeral(chord: Chord, key: Key): RomanNumeral {
   const semitones = (chord.root - key.tonic + 12) % 12;
   const degree = DEGREES[key.mode][semitones];
   const lower = LOWERCASE_QUALITIES.has(chord.quality);
-  const numeral = (lower ? degree.toLowerCase() : degree) + FIGURES[chord.quality];
-  const inversion = chord.bass === chord.root ? '' : '/bass';
   return {
     symbol: chord.symbol,
-    numeral: numeral + inversion,
+    numeral: (lower ? degree.toLowerCase() : degree) + figure(chord, key),
     role: ROLES[degree] ?? 'chromatic',
     diatonic: SCALE[key.mode].includes(semitones),
   };
