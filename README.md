@@ -41,6 +41,8 @@ completely invisible unless somebody shows you.
 > Treat every claim this page makes about its own confidence as a placeholder
 > with a plausible shape.
 
+Testing it? Start with the [tester guide](docs/tester-guide.md).
+
 ## How it fits together
 
 Four layers, and the seam between them is the point.

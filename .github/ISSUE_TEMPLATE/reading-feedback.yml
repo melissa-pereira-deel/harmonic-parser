@@ -1,0 +1,52 @@
+name: Feedback on a reading
+description: Tell us what a progression felt like, and what the page said about it.
+labels: [corpus]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One progression per report. This is public, so only include what you are happy to share.
+  - type: input
+    id: progression
+    attributes:
+      label: Progression
+      description: Exactly as you typed it.
+      placeholder: Am F C G
+    validations:
+      required: true
+  - type: dropdown
+    id: what_the_page_said
+    attributes:
+      label: What the page said
+      options:
+        - Clear
+        - Musical ambiguity
+        - Model uncertainty
+    validations:
+      required: true
+  - type: dropdown
+    id: what_you_felt
+    attributes:
+      label: What it felt like to you
+      description: Your own hearing, before or regardless of what the page said.
+      options:
+        - One reading
+        - Two readings
+        - Nothing fits
+    validations:
+      required: true
+  - type: input
+    id: your_key
+    attributes:
+      label: What key would you call it?
+      placeholder: C major, or "not sure"
+  - type: textarea
+    id: pins
+    attributes:
+      label: Did you change a numeral?
+      description: Which chord, what you changed it to, and whether the result made sense.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Confusing wording, wrong suggestions, anything that broke.
