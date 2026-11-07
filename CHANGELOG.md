@@ -133,6 +133,13 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- **Changing a pin keeps keyboard focus on it** (#38). The panel is rebuilt
+  on every render, so the select that had just changed was destroyed and
+  focus fell to `<body>`. Keyboard and screen-reader users lost their place
+  on every pin, and where ArrowDown fires `change` on each press (Windows and
+  Linux Chrome) they could only move one option per Tab cycle. Focus now
+  returns to the same chord's select. When the pins contradict, the selects
+  are gone, so focus goes to "Clear pins" on the conflict notice instead.
 - **Eb minor's flat sixth is spelled `Cb`, not `B`** (#37). Suggestions were
   spelled from two twelve-name tables, sharp and flat, picked per key. No
   table of twelve names can produce `Cb`, so "i to bVI" in Eb minor offered

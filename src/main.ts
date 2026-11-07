@@ -53,8 +53,18 @@ input.addEventListener('input', update);
 panel.addEventListener('change', (event) => {
   const target = event.target;
   if (!(target instanceof HTMLSelectElement) || target.dataset.chord === undefined) return;
-  state.pins.set(Number(target.dataset.chord), target.value);
+  const chord = target.dataset.chord;
+  state.pins.set(Number(chord), target.value);
   update();
+  // `update` rebuilt the panel and destroyed the select that had focus, which
+  // left keyboard and screen-reader users on <body> after every pin (#38).
+  // Return them to the same chord's select. If the pins now contradict, the
+  // selects are gone and the conflict notice's clear button is the only way
+  // forward, so focus goes there.
+  const restore =
+    panel.querySelector<HTMLElement>(`select[data-chord="${chord}"]`) ??
+    panel.querySelector<HTMLElement>('[data-clear-pins]');
+  restore?.focus();
 });
 
 panel.addEventListener('click', (event) => {
