@@ -49,6 +49,11 @@ interface Move {
  * goes to V. That is a decision about degrees, so it gives the same answer in
  * every key. It used to be decided by how the chord names sorted, which
  * suggested I after IV in six major keys and V in the other six.
+ *
+ * **Every degree has a rule**, in both tables. The last four here cover bII
+ * and the tritone, which had none: degree 1 carries the tritone substitution
+ * and the Neapolitan, degree 6 the raised-fourth diminished. Rules key on the
+ * degree alone, so "bII7" is the reason after a plain bII triad too.
  */
 const MAJOR_MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to I — the cadence', weight: 10 },
@@ -68,6 +73,10 @@ const MAJOR_MOVES: readonly Move[] = [
   { from: 5, to: 9, reason: 'IV to vi', weight: 4 },
   { from: 3, to: 5, reason: 'bIII to IV — borrowed, then home', weight: 4 },
   { from: 8, to: 7, reason: 'bVI to V — the chromatic approach', weight: 4 },
+  { from: 1, to: 0, reason: 'bII7 to I — the tritone substitution', weight: 8 },
+  { from: 1, to: 7, reason: 'bII to V — the Neapolitan', weight: 6 },
+  { from: 6, to: 7, reason: '#iv° to V', weight: 6 },
+  { from: 6, to: 0, reason: '#iv°7 to I — the passing diminished', weight: 4 },
 ];
 
 /**
@@ -75,9 +84,10 @@ const MAJOR_MOVES: readonly Move[] = [
  * a shared table sent every minor key to a degree outside its scale.
  *
  * The dominant is major wherever it is the target, because the cadence needs
- * the leading tone even though natural minor does not contain it. Degrees 4 and
- * 9 are outside the scale but keep a rule, so that this table covers the same
- * contexts as the major one.
+ * the leading tone even though natural minor does not contain it. Every degree
+ * has a rule, the ones outside the scale included, so this table covers all
+ * twelve contexts, the same as the major one. From bII the Neapolitan ranks
+ * first here, where major ranks the tritone substitution first.
  */
 const MINOR_MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to i — the cadence', weight: 10 },
@@ -99,6 +109,10 @@ const MINOR_MOVES: readonly Move[] = [
   { from: 11, to: 0, reason: 'vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
   { from: 4, to: 5, reason: 'III to iv — a borrowed secondary dominant', weight: 4 },
   { from: 9, to: 7, reason: 'raised sixth to V — the chromatic approach', weight: 4, quality: '' },
+  { from: 1, to: 7, reason: 'bII to V — the Neapolitan', weight: 8, quality: '' },
+  { from: 1, to: 0, reason: 'bII7 to i', weight: 6 },
+  { from: 6, to: 7, reason: '#iv° to V', weight: 6, quality: '' },
+  { from: 6, to: 0, reason: '#iv°7 to i — the passing diminished', weight: 4 },
 ];
 
 const MOVES: Readonly<Record<Mode, readonly Move[]>> = {
@@ -142,6 +156,48 @@ function triadQuality(semitones: number, key: Key): string {
 }
 
 /**
+ * A suggestion with the value that breaks its weight ties.
+ *
+ * `rank` is never shown: it is the move's position in its table, or the degree
+ * above the tonic in the fallback. Either way it is about degrees, never about
+ * spelling.
+ */
+interface Ranked {
+  readonly suggestion: Suggestion;
+  readonly rank: number;
+}
+
+function inOrder(ranked: Iterable<Ranked>): Suggestion[] {
+  return [...ranked]
+    .sort((a, b) => b.suggestion.weight - a.suggestion.weight || a.rank - b.rank)
+    .map((s) => s.suggestion);
+}
+
+/**
+ * The key's own chords, in order, for a last chord the table has no rule for.
+ *
+ * Every diatonic triad except the last chord itself, tonic and dominant first
+ * and the rest by degree. The reason says plainly that no rule matched, so the
+ * panel never passes a guess off as a rule.
+ */
+export function diatonicFallback(lastRoot: PitchClass, key: Key): Suggestion[] {
+  const ranked: Ranked[] = [];
+  for (const pc of scalePitchClasses(key)) {
+    if (pc === lastRoot) continue;
+    const semitones = (pc - key.tonic + 12) % 12;
+    ranked.push({
+      suggestion: {
+        symbol: spell(pc, key) + triadQuality(semitones, key),
+        reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
+        weight: semitones === 0 || semitones === 7 ? 3 : 2,
+      },
+      rank: semitones,
+    });
+  }
+  return inOrder(ranked);
+}
+
+/**
  * Rank candidate next chords for a progression heard in `key`.
  *
  * Only the last chord is consulted. Two chords of context would already be a
@@ -155,12 +211,8 @@ export function suggest(
   if (chords.length === 0) return [];
   const last = chords[chords.length - 1];
   const from = (last.root - key.tonic + 12) % 12;
-  const diatonic = new Set(scalePitchClasses(key));
 
-  // `rank` breaks weight ties, and is never shown: the move's position in
-  // its table, or the degree above the tonic in the fallback. Either way it is
-  // about degrees, never about spelling.
-  const scored = new Map<number, { suggestion: Suggestion; rank: number }>();
+  const scored = new Map<number, Ranked>();
   MOVES[key.mode].forEach((move, rank) => {
     if (move.from !== from) return;
     const pc = (key.tonic + move.to) % 12;
@@ -176,26 +228,11 @@ export function suggest(
     });
   });
 
-  // Nothing in the table matched, so fall back to the key's own chords. A
-  // blank panel would read as "there is no answer" when the truth is "this
-  // table has no rule for that".
-  if (scored.size === 0) {
-    for (const pc of diatonic) {
-      if (pc === last.root) continue;
-      const semitones = (pc - key.tonic + 12) % 12;
-      scored.set(pc, {
-        suggestion: {
-          symbol: spell(pc, key) + triadQuality(semitones, key),
-          reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
-          weight: semitones === 0 || semitones === 7 ? 3 : 2,
-        },
-        rank: semitones,
-      });
-    }
-  }
-
-  return [...scored.values()]
-    .sort((a, b) => b.suggestion.weight - a.suggestion.weight || a.rank - b.rank)
-    .slice(0, limit)
-    .map((s) => s.suggestion);
+  // Nothing in the table matched, so fall back to the key's own chords.
+  // Unreachable while every degree has a rule, in both modes. It stays so
+  // that removing a rule degrades to the key's own chords rather than to an
+  // empty panel, which would read as "there is no answer" when the truth is
+  // "this table has no rule for that".
+  const ranked = scored.size > 0 ? inOrder(scored.values()) : diatonicFallback(last.root, key);
+  return ranked.slice(0, limit);
 }

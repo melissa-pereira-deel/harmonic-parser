@@ -26,6 +26,11 @@
 
 import { describe, expect, it } from 'vitest';
 
+import type { Chord } from '../src/chords.ts';
+import { parseChord } from '../src/chords.ts';
+import type { Key } from '../src/keyprofiles.ts';
+import type { Suggestion } from '../src/suggest.ts';
+import { diatonicFallback, suggest } from '../src/suggest.ts';
 import type { Fixture } from '../tools/suggest-baseline.ts';
 import { buildFixture } from '../tools/suggest-baseline.ts';
 import committedJson from '../fixtures/suggest-baseline.json' with { type: 'json' };
@@ -35,6 +40,21 @@ import committedJson from '../fixtures/suggest-baseline.json' with { type: 'json
 // typechecks, in a repo with no @types/node and no runtime dependencies. The
 // byte-for-byte half is CI's job: it regenerates and fails on any diff.
 const committed = committedJson as unknown as Fixture;
+
+const C_MAJOR: Key = { tonic: 0, mode: 'major' };
+const C_MINOR: Key = { tonic: 0, mode: 'minor' };
+const A_MINOR: Key = { tonic: 9, mode: 'minor' };
+
+function chord(symbol: string): Chord {
+  const parsed = parseChord(symbol);
+  if (parsed === null) throw new Error(`test chord "${symbol}" does not parse`);
+  return parsed;
+}
+
+/** Degrees above the key's tonic, read back through the parser as the fixture does. */
+function degrees(suggestions: readonly Suggestion[], key: Key): number[] {
+  return suggestions.map((s) => (chord(s.symbol).root - key.tonic + 12) % 12);
+}
 
 describe('the fixture is the baseline', () => {
   it('re-derives from the real suggest()', () => {
@@ -70,20 +90,23 @@ describe('the fixture is the baseline', () => {
 describe('what the rule table can offer', () => {
   it('fans out to at most three from the rule path', () => {
     // Moves over 12 antecedents. Degrees 0 and 5 have three; most have one
-    // or two. This is the ceiling for any matched-k comparison later: a model
-    // that always emits three would otherwise be scored at a different k
-    // from a baseline that can only emit one.
+    // or two, and 1 and 6 have two each. This is the ceiling for any matched-k
+    // comparison later: a model that always emits three would otherwise be
+    // scored at a different k from a baseline that can only emit one.
     const ruleRows = committed.rows.filter((r) => !r.fallback);
     const widest = Math.max(...ruleRows.map((r) => r.candidates.length));
     expect(widest).toBe(3);
   });
 
-  it('has no rule at all for two degrees, and falls back for them', () => {
-    // bII and #IV/bV. Nothing in MOVES has either as an antecedent.
-    const fallbackDegrees = new Set(
-      committed.rows.filter((r) => r.fallback).map((r) => r.from),
-    );
-    expect([...fallbackDegrees].sort((a, b) => a - b)).toEqual([1, 6]);
+  it('has a rule for every degree in both modes, so nothing falls back', () => {
+    // This used to assert [1, 6]: bII and #IV/bV had no antecedent in either
+    // table, so 48 of 288 contexts fell back to the key's own chords. #13
+    // decided that was a gap rather than a boundary, and gave each two rules.
+    // 48/288 is now 0/288, and every context has at least one rule.
+    expect(committed.rows.filter((r) => r.fallback)).toEqual([]);
+    for (const row of committed.rows) {
+      expect(row.candidates.length, `${row.key} after degree ${row.from}`).toBeGreaterThan(0);
+    }
   });
 
   it('never suggests staying on the same chord', () => {
@@ -108,11 +131,16 @@ describe('ties are broken by degree, never by spelling', () => {
   // it was fixed; these tests pin what replaced it. Ties now go to the move
   // listed first in MOVES, and in the fallback to the lower degree.
 
-  it('still has ties in a third of all contexts -- only what decides them changed', () => {
-    // The weights are untouched, so the count of tied rows is the spike's 96
-    // exactly. If this moves, a weight changed, and that is a different PR.
+  it('has ties in a sixth of all contexts, all of them after I or IV', () => {
+    // This was 96 of 288, the spike's count, which the tie-break fix left alone
+    // because it moved no weight. Half of those were the fallback after bII and
+    // the tritone, where the tonic and dominant tie at 3. Those degrees now have
+    // rules with two different weights each, so 96 is now 48: degrees 0 and 5 in
+    // both modes, where table order decides. If this moves, a weight changed,
+    // and that is a different PR.
     const tied = committed.rows.filter((r) => r.topIsTied);
-    expect(tied).toHaveLength(96);
+    expect(tied).toHaveLength(48);
+    expect([...new Set(tied.map((r) => r.from))].sort((a, b) => a - b)).toEqual([0, 5]);
   });
 
   it('gives the same answer in every key', () => {
@@ -154,10 +182,18 @@ describe('ties are broken by degree, never by spelling', () => {
   it('orders the fallback by degree, tonic first', () => {
     // The fallback ties too: the tonic and dominant at 3, everything else at
     // 2. Lower degree wins, so the order is the scale read upwards.
-    const cMajor = committed.rows.find((r) => r.key === 'C major' && r.from === 1);
-    expect(cMajor?.candidates.map((c) => c.degree)).toEqual([0, 7, 2, 4, 5, 9, 11]);
-    const aMinor = committed.rows.find((r) => r.key === 'A minor' && r.from === 6);
-    expect(aMinor?.candidates.map((c) => c.degree)).toEqual([0, 7, 2, 3, 5, 8, 10]);
+    //
+    // This read the fixture's C major and A minor rows after degrees 1 and 6.
+    // Those rows now have rules, and no row falls back (48/288 is 0/288), so
+    // it calls the fallback directly: the same function suggest() calls when
+    // no rule matches, with the same last chords the fixture probed. What it
+    // cannot show is suggest() reaching it, because nothing does.
+    const cMajor = diatonicFallback(chord('C#').root, C_MAJOR);
+    expect(degrees(cMajor, C_MAJOR)).toEqual([0, 7, 2, 4, 5, 9, 11]);
+    const aMinor = diatonicFallback(chord('D#').root, A_MINOR);
+    expect(degrees(aMinor, A_MINOR)).toEqual([0, 7, 2, 3, 5, 8, 10]);
+    expect(aMinor.map((s) => s.weight)).toEqual([3, 3, 2, 2, 2, 2, 2]);
+    expect(aMinor[0].reason).toBe('diatonic in A minor — no rule covers this move');
   });
 });
 
@@ -204,10 +240,14 @@ describe('minor keys have their own rules', () => {
   });
 
   it('covers the same contexts as major', () => {
-    // Only degrees 1 and 6 fall back, in both modes. Whether that is a gap is a
-    // separate decision, and this table should not move it.
-    const fallback = minorRows.filter((r) => r.fallback).map((r) => r.from);
-    expect([...new Set(fallback)].sort((a, b) => a - b)).toEqual([1, 6]);
+    // This asserted [1, 6] in both modes, deliberately: whether those degrees
+    // were a gap was a separate decision, and the minor table did not move it.
+    // #13 decided it, and both tables gained rules for both degrees. The minor
+    // fallback set is now empty, 24/144 to 0/144, and so is the major one.
+    const fallbackFrom = (mode: 'major' | 'minor') =>
+      committed.rows.filter((r) => r.mode === mode && r.fallback).map((r) => r.from);
+    expect(fallbackFrom('minor')).toEqual([]);
+    expect(fallbackFrom('minor')).toEqual(fallbackFrom('major'));
   });
 
   it('resolves the dominant to the tonic, with a major dominant as the target', () => {
@@ -236,14 +276,42 @@ describe('minor keys have their own rules', () => {
   });
 
   it('offers the key scale in the fallback', () => {
-    const majorFallback = committed.rows.find((r) => r.key === 'C major' && r.from === 1);
-    const minorFallback = committed.rows.find((r) => r.key === 'C minor' && r.from === 1);
+    // Read from the fixture's C major and C minor rows after degree 1 until
+    // those rows gained rules. Called directly now, for the reason given in
+    // 'orders the fallback by degree, tonic first'.
+    const majorFallback = diatonicFallback(chord('C#').root, C_MAJOR);
+    const minorFallback = diatonicFallback(chord('C#').root, C_MINOR);
 
-    expect(majorFallback?.candidates.map((c) => c.degree).sort((a, b) => a - b)).toEqual(
+    expect(degrees(majorFallback, C_MAJOR).sort((a, b) => a - b)).toEqual(
       [0, 2, 4, 5, 7, 9, 11],
     );
-    expect(minorFallback?.candidates.map((c) => c.degree).sort((a, b) => a - b)).toEqual(
+    expect(degrees(minorFallback, C_MINOR).sort((a, b) => a - b)).toEqual(
       [0, 2, 3, 5, 7, 8, 10],
     );
+  });
+});
+
+describe('bII and the tritone have rules', () => {
+  // Neither degree had a rule in either mode until #13, and all 48 of their
+  // contexts fell back to the key's diatonic chords, tonic first. The owner
+  // approved two idioms for each. The weights are hand-assigned, like the
+  // rest of the table, and nothing has measured them.
+  const after = (symbol: string, key: Key) => suggest([chord(symbol)], key).map((s) => s.symbol);
+
+  it('resolves bII to I, then V, in major -- the tritone substitution first', () => {
+    expect(after('Db', C_MAJOR)).toEqual(['C', 'G']);
+  });
+
+  it('resolves #iv° to V, then I, in major', () => {
+    expect(after('F#dim', C_MAJOR)).toEqual(['G', 'C']);
+  });
+
+  it('resolves bII to a major V, then i, in minor -- the Neapolitan first', () => {
+    // The order from bII is reversed between the modes, as the owner decided.
+    expect(after('Bb', A_MINOR)).toEqual(['E', 'Am']);
+  });
+
+  it('resolves #iv° to a major V, then i, in minor', () => {
+    expect(after('D#dim', A_MINOR)).toEqual(['E', 'Am']);
   });
 });

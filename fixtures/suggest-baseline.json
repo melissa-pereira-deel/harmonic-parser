@@ -38,50 +38,20 @@
    "tonic": 0,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "C",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "G",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Dm",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Em",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Am",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Bdim",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -172,50 +142,20 @@
    "tonic": 0,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "C",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "G",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Dm",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Em",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Am",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Bdim",
-     "reason": "diatonic in C major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "C",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -344,50 +284,20 @@
    "tonic": 0,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Cm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Gm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Ddim",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Eb",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Fm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Ab",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Bb",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -484,50 +394,20 @@
    "tonic": 0,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Cm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Gm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Ddim",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Eb",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Fm",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Ab",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Bb",
-     "reason": "diatonic in C minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -662,50 +542,20 @@
    "tonic": 1,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "C#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "G#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "D#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Fm",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "A#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Cdim",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -796,50 +646,20 @@
    "tonic": 1,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "C#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "G#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "D#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Fm",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "A#m",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Cdim",
-     "reason": "diatonic in C# major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "C#",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -968,50 +788,20 @@
    "tonic": 1,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "C#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "G#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "D#dim",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "E",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "A",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "B",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -1108,50 +898,20 @@
    "tonic": 1,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "G#",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "C#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "G#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "D#dim",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "E",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "F#m",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "A",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "B",
-     "reason": "diatonic in C# minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -1286,50 +1046,20 @@
    "tonic": 2,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "D",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "A",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Em",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "F#m",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "G",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Bm",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "C#dim",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -1420,50 +1150,20 @@
    "tonic": 2,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "D",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "A",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Em",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "F#m",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "G",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Bm",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "C#dim",
-     "reason": "diatonic in D major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "D",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -1592,50 +1292,20 @@
    "tonic": 2,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Dm",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Edim",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "F",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Gm",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Bb",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "C",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -1732,50 +1402,20 @@
    "tonic": 2,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "A",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Dm",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Am",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Edim",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "F",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Gm",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Bb",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "C",
-     "reason": "diatonic in D minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -1910,50 +1550,20 @@
    "tonic": 3,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "Eb",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "Bb",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Fm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Gm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Ab",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Cm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Ddim",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -2044,50 +1654,20 @@
    "tonic": 3,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "Eb",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "Bb",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Fm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Gm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Ab",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Cm",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Ddim",
-     "reason": "diatonic in Eb major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "Eb",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -2216,50 +1796,20 @@
    "tonic": 3,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Ebm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Bbm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Fdim",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Gb",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Abm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "B",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Db",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -2356,50 +1906,20 @@
    "tonic": 3,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "Bb",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Ebm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Bbm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Fdim",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Gb",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Abm",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "B",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Db",
-     "reason": "diatonic in Eb minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -2534,50 +2054,20 @@
    "tonic": 4,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "E",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "B",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "F#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "G#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "A",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "C#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "D#dim",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -2668,50 +2158,20 @@
    "tonic": 4,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "E",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "B",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "F#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "G#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "A",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "C#m",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "D#dim",
-     "reason": "diatonic in E major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "E",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -2840,50 +2300,20 @@
    "tonic": 4,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Em",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Bm",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "F#dim",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "G",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Am",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "C",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "D",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -2980,50 +2410,20 @@
    "tonic": 4,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "B",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Em",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Bm",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "F#dim",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "G",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Am",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "C",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "D",
-     "reason": "diatonic in E minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -3158,50 +2558,20 @@
    "tonic": 5,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "F",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "C",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Gm",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Am",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bb",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Dm",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Edim",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -3292,50 +2662,20 @@
    "tonic": 5,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "F",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "C",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Gm",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Am",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bb",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Dm",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Edim",
-     "reason": "diatonic in F major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "F",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -3464,50 +2804,20 @@
    "tonic": 5,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Fm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Cm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Gdim",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Ab",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bbm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Db",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Eb",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -3604,50 +2914,20 @@
    "tonic": 5,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Fm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Cm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Gdim",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Ab",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bbm",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Db",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Eb",
-     "reason": "diatonic in F minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -3782,50 +3062,20 @@
    "tonic": 6,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "F#",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "C#",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "G#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "A#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "B",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "D#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Fdim",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -3916,50 +3166,20 @@
    "tonic": 6,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "F#",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "C#",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "G#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "A#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "B",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "D#m",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Fdim",
-     "reason": "diatonic in F# major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "F#",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -4088,50 +3308,20 @@
    "tonic": 6,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "F#m",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "C#m",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "G#dim",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "A",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bm",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "D",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "E",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -4228,50 +3418,20 @@
    "tonic": 6,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "C#",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "F#m",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "C#m",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "G#dim",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "A",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Bm",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "D",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "E",
-     "reason": "diatonic in F# minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -4406,50 +3566,20 @@
    "tonic": 7,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "G",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "D",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Am",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Bm",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "C",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Em",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "F#dim",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -4540,50 +3670,20 @@
    "tonic": 7,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "G",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "D",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Am",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Bm",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "C",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Em",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "F#dim",
-     "reason": "diatonic in G major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "G",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -4712,50 +3812,20 @@
    "tonic": 7,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Gm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Dm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Adim",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Bb",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Cm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Eb",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "F",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -4852,50 +3922,20 @@
    "tonic": 7,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Gm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Dm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Adim",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Bb",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Cm",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Eb",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "F",
-     "reason": "diatonic in G minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -5030,50 +4070,20 @@
    "tonic": 8,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "Ab",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "Eb",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Bbm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Cm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Db",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Fm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Gdim",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -5164,50 +4174,20 @@
    "tonic": 8,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "Ab",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "Eb",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Bbm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Cm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Db",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Fm",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Gdim",
-     "reason": "diatonic in Ab major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "Ab",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -5336,50 +4316,20 @@
    "tonic": 8,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "G#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "D#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "A#dim",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "B",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "C#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "E",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "F#",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -5476,50 +4426,20 @@
    "tonic": 8,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "D#",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "G#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "D#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "A#dim",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "B",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "C#m",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "E",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "F#",
-     "reason": "diatonic in G# minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -5654,50 +4574,20 @@
    "tonic": 9,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "A",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "E",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Bm",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "C#m",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "D",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "F#m",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "G#dim",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -5788,50 +4678,20 @@
    "tonic": 9,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "A",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "E",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Bm",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "C#m",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "D",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "F#m",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "G#dim",
-     "reason": "diatonic in A major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "A",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -5960,50 +4820,20 @@
    "tonic": 9,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Am",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Em",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Bdim",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "C",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Dm",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "F",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "G",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -6100,50 +4930,20 @@
    "tonic": 9,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "E",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Am",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Em",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Bdim",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "C",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Dm",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "F",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "G",
-     "reason": "diatonic in A minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -6278,50 +5078,20 @@
    "tonic": 10,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "Bb",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "F",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Cm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Dm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Eb",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Gm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Adim",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -6412,50 +5182,20 @@
    "tonic": 10,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "Bb",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "F",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "Cm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "Dm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Eb",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "Gm",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "Adim",
-     "reason": "diatonic in Bb major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "Bb",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -6584,50 +5324,20 @@
    "tonic": 10,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Bbm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Fm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Cdim",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Db",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Ebm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Gb",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Ab",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -6724,50 +5434,20 @@
    "tonic": 10,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Bbm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "Fm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "Cdim",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "Db",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Ebm",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "Gb",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "Ab",
-     "reason": "diatonic in Bb minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -6902,50 +5582,20 @@
    "tonic": 11,
    "mode": "major",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
     {
      "degree": 0,
      "symbol": "B",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 3
+     "reason": "bII7 to I — the tritone substitution",
+     "weight": 8
     },
     {
      "degree": 7,
      "symbol": "F#",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "C#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "D#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "E",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "G#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "A#dim",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
+     "reason": "bII to V — the Neapolitan",
+     "weight": 6
     }
    ]
   },
@@ -7036,50 +5686,20 @@
    "tonic": 11,
    "mode": "major",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
-    {
-     "degree": 0,
-     "symbol": "B",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 3
-    },
     {
      "degree": 7,
      "symbol": "F#",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 3
+     "reason": "#iv° to V",
+     "weight": 6
     },
     {
-     "degree": 2,
-     "symbol": "C#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 4,
-     "symbol": "D#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "E",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 9,
-     "symbol": "G#m",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 11,
-     "symbol": "A#dim",
-     "reason": "diatonic in B major — no rule covers this move",
-     "weight": 2
+     "degree": 0,
+     "symbol": "B",
+     "reason": "#iv°7 to I — the passing diminished",
+     "weight": 4
     }
    ]
   },
@@ -7208,50 +5828,20 @@
    "tonic": 11,
    "mode": "minor",
    "from": 1,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "bII to V — the Neapolitan",
+     "weight": 8
+    },
     {
      "degree": 0,
      "symbol": "Bm",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "F#m",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "C#dim",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "D",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Em",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "G",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "A",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
+     "reason": "bII7 to i",
+     "weight": 6
     }
    ]
   },
@@ -7348,50 +5938,20 @@
    "tonic": 11,
    "mode": "minor",
    "from": 6,
-   "fallback": true,
-   "topIsTied": true,
+   "fallback": false,
+   "topIsTied": false,
    "candidates": [
+    {
+     "degree": 7,
+     "symbol": "F#",
+     "reason": "#iv° to V",
+     "weight": 6
+    },
     {
      "degree": 0,
      "symbol": "Bm",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 7,
-     "symbol": "F#m",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 3
-    },
-    {
-     "degree": 2,
-     "symbol": "C#dim",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 3,
-     "symbol": "D",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 5,
-     "symbol": "Em",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 8,
-     "symbol": "G",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
-    },
-    {
-     "degree": 10,
-     "symbol": "A",
-     "reason": "diatonic in B minor — no rule covers this move",
-     "weight": 2
+     "reason": "#iv°7 to i — the passing diminished",
+     "weight": 4
     }
    ]
   },
