@@ -1,14 +1,16 @@
 /**
  * Two thresholds, and they are never the same question.
  *
- * **Ambiguity** is the top two readings sitting close together. `Am F C G` is
- * ambiguous: C major and A minor are both genuinely right, and a page that
- * picks one and hides the other is not more confident, it is less honest.
- * Ambiguity is a property of the music.
+ * **Ambiguity** is the top two readings sitting close together. `Dm7 G7 Cmaj7`
+ * comes out ambiguous, with C major at 0.739 and G major at 0.719, and a page
+ * that picks one and hides the other is not more confident, it is less honest.
+ * Ambiguity is meant to be a property of the music. `Am F C G`, the textbook
+ * case, comes out clear here; test/confidence.test.ts keeps that claim as an
+ * `it.fails` rather than adjusting a number until it passes.
  *
  * **Uncertainty** is the top reading scoring low in absolute terms. Nothing
- * fits. `C F# Bb E` is uncertain: there is a best key, but "best" here means
- * least bad. Uncertainty is a property of the model.
+ * fits. `G7 C# E7 F9` is uncertain, at 0.488: there is a best key, but "best"
+ * here means least bad. Uncertainty is a property of the model.
  *
  * Conflating them is the failure this file exists to prevent. A single
  * "confidence: 62%" number cannot tell you whether the answer is *two right
