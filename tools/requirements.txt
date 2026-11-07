@@ -11,8 +11,9 @@
 # deliberately, regenerate, and read the diff.
 music21==10.5.0
 
-# The harness, for `python -m harness init` and, later, for gating the
-# 'model' source in src/readings.ts. Floored, not pinned, because this one is
-# a tool rather than an oracle and its gate arithmetic getting stricter is
-# something to find out about.
+# The harness, for `python -m harness init` and `spikes` and, later, for
+# gating the planned next-chord model against the rule table in
+# src/suggest.ts. Unpinned for now; floor it at the first tiny-model-lab tag.
+# A floor rather than a pin, because this one is a tool rather than an oracle
+# and its gate arithmetic getting stricter is something to find out about.
 tiny-model-lab @ git+https://github.com/melissa-pereira-deel/tiny-model-lab

@@ -43,8 +43,8 @@ jobs:
   baseline:
     # The baseline as a flat file. `fixtures/suggest-baseline.json` is all 288
     # contexts suggest() can be asked about, and the next-chord experiment
-    # scores it by reading that file rather than re-implementing seventeen
-    # rules in Python. This job is what makes the file trustworthy: touch
+    # scores it by reading that file rather than re-implementing the rule
+    # tables in Python. This job is what makes the file trustworthy: touch
     # suggest.ts without regenerating, or hand-edit the fixture, and the build
     # fails. No Python and no install -- Node 22 strips the types natively.
     runs-on: ubuntu-latest

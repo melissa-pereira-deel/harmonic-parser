@@ -28,10 +28,11 @@
 export type PitchClass = number;
 
 /**
- * The quality vocabulary. Every member is checked against
- * `music21.harmony.ChordSymbol` by `tools/generate-fixtures.py`, which will
- * not build a fixture for a quality music21 spells differently. Adding one
- * here without adding it there is how the oracle silently stops covering it.
+ * The quality vocabulary. Nothing keeps it in step with the oracle's.
+ * `tools/generate-fixtures.py` builds its progressions only from its own
+ * `QUALITIES` dict, so a quality added here and not there is simply never
+ * exercised by the parity fixture, and nothing fails to say so. Add it in
+ * both places.
  */
 export type Quality =
   | 'maj'
@@ -102,10 +103,11 @@ export const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
  * arithmetic on `INTERVALS` will not do.
  *
  * Read out of music21 rather than derived by hand, and verified stable across
- * all twelve roots for every quality here. `tools/generate-fixtures.py`
- * already refuses to build a fixture for a quality music21 spells
- * differently; this table is the same contract one level down, and
- * `test/chords.test.ts` pins that it stays the same length as `INTERVALS`.
+ * all twelve roots for every quality here. No test pins this table to
+ * `INTERVALS`. A row of the wrong length would break the bass comparison in
+ * `pitchClasses` for that quality, and only a test or fixture case with a
+ * slash bass on that quality would notice. Keep each row the same length as
+ * its `INTERVALS` row by hand.
  */
 const LETTER_OFFSETS: Readonly<Record<Quality, readonly number[]>> = {
   maj: [0, 2, 4],

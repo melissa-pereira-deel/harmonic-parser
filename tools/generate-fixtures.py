@@ -58,9 +58,11 @@ SHARP_NAMES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 FLAT_NAMES = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 FLAT_KEY_TONICS = {1, 3, 5, 8, 10}
 
-# Display suffix -> the pitch classes src/chords.ts builds for it. Kept here so
-# a quality added to one side and not the other fails loudly at generation
-# time rather than quietly narrowing what the oracle covers.
+# Display suffix -> the pitch classes src/chords.ts builds for it. Every
+# suffix this script writes is one of these keys, and nothing compares them
+# with src/chords.ts: a quality added there and not here is simply never
+# exercised by the oracle, and no check fails to say so. Only the suffixes are
+# read; the pitch classes are for the reader.
 QUALITIES = {
     "": (0, 4, 7),
     "m": (0, 3, 7),
