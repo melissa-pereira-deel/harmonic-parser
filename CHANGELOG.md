@@ -133,6 +133,14 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- **Changing a pin keeps keyboard focus on it** (#38). The panel is rebuilt
+  on every render, so the select that had just changed was destroyed and
+  focus fell to `<body>`. Keyboard and screen-reader users lost their place
+  on every pin, and where ArrowDown fires `change` on each press (Windows and
+  Linux Chrome) they could only move one option per Tab cycle. Focus now
+  returns to the same chord's select. When the pins contradict, the selects
+  are gone, so focus goes to "Clear pins" on the conflict notice instead.
+
 - `LICENSE` names the author the same way the README footer does —
   *Melissa de Britto*. It had said *Melissa Pereira*, inherited when the file
   was copied from tiny-model-lab, so the two spellings sat in one repo with
