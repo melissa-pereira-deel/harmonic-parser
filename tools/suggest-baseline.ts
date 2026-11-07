@@ -32,10 +32,11 @@ import { suggest } from '../src/suggest.ts';
 /**
  * Explicit, not the `suggest()` default of 4.
  *
- * The rule path can offer at most 3 (degrees 0 and 5); the fallback can offer
- * 7 before truncation. Pinning the limit here means the fixture records the
- * full fallback rather than a 4-item slice of it, so a later scorer can match
- * k per row instead of guessing what was cut.
+ * The rule path can offer at most 3 (degrees 0 and 5). Since #13 every degree
+ * has a rule in both modes, so no row reaches the fallback, which could offer 7
+ * before truncation. The limit stays above both so that if a rule is ever
+ * removed, the fixture records the full fallback rather than a 4-item slice of
+ * it, and a later scorer can still match k per row instead of guessing.
  */
 const LIMIT = 8;
 
