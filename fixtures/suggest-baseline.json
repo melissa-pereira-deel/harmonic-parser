@@ -1785,7 +1785,7 @@
     },
     {
      "degree": 8,
-     "symbol": "B",
+     "symbol": "Cb",
      "reason": "i to bVI — the soft turn",
      "weight": 6
     }
@@ -1845,7 +1845,7 @@
    "candidates": [
     {
      "degree": 8,
-     "symbol": "B",
+     "symbol": "Cb",
      "reason": "bIII to bVI — down the circle",
      "weight": 6
     },
@@ -1895,7 +1895,7 @@
     },
     {
      "degree": 8,
-     "symbol": "B",
+     "symbol": "Cb",
      "reason": "iv to bVI",
      "weight": 4
     }
@@ -1939,7 +1939,7 @@
     },
     {
      "degree": 8,
-     "symbol": "B",
+     "symbol": "Cb",
      "reason": "V to bVI — the deceptive cadence",
      "weight": 6
     }
