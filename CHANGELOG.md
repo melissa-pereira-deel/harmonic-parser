@@ -133,6 +133,16 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- **Eb minor's flat sixth is spelled `Cb`, not `B`** (#37). Suggestions were
+  spelled from two twelve-name tables, sharp and flat, picked per key. No
+  table of twelve names can produce `Cb`, so "i to bVI" in Eb minor offered
+  `B`, a note outside the key, next to `Bb`. `spell()` now takes the tonic's
+  letter plus the degree's step, and the accidental is whatever reaches the
+  pitch class. This is the only change in the 288-context fixture: 4
+  entries, all Eb minor degree 8. A new test checks that every key's in-scale
+  suggestions use seven distinct letters. That property doesn't depend on
+  the step table, and the old "never uses a sharp" test could not see this.
+
 - `LICENSE` names the author the same way the README footer does —
   *Melissa de Britto*. It had said *Melissa Pereira*, inherited when the file
   was copied from tiny-model-lab, so the two spellings sat in one repo with
