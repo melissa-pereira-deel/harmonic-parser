@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121d22" />
+    <title>Live room · Harmonic Parser</title>
+    <script type="module" src="../src/room/main.ts"></script>
+  </head>
+  <body>
+    <main id="room" aria-label="Live playing room" tabindex="-1">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div id="reflection" role="status" aria-live="polite"></div>
+      <button id="show-setup" type="button">Room setup</button>
+
+      <section id="setup" aria-labelledby="setup-title" hidden>
+        <div class="setup-panel">
+          <h1 id="setup-title">Live room</h1>
+          <p>Choose how the room meets your playing.</p>
+          <form id="room-form">
+            <label for="condition">The room</label>
+            <select id="condition">
+              <option value="A">A · Drifting on its own</option>
+              <option value="B" selected>B · Responding to gesture</option>
+              <option value="C">C · Gesture and reflection</option>
+            </select>
+
+            <label for="source">Input</label>
+            <select id="source">
+              <option value="replay">Replay a phrase</option>
+              <option value="midi">Play my keyboard</option>
+            </select>
+
+            <div id="midi-controls" hidden>
+              <button id="connect" type="button">Connect MIDI</button>
+              <label for="midi-port" id="port-label" hidden>MIDI input</label>
+              <select id="midi-port" hidden></select>
+              <p id="midi-status" role="status"></p>
+            </div>
+            <p id="source-note">The replay is silent.</p>
+            <p id="setup-notice" role="status"></p>
+
+            <div class="setup-actions">
+              <button type="submit" id="start-room">Enter room</button>
+              <button type="button" id="close-setup">Close</button>
+            </div>
+          </form>
+          <p class="setup-footnote"><kbd>Esc</kbd> returns to setup. In C, a facilitator can press <kbd>R</kbd> to offer a reflection during live playing.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

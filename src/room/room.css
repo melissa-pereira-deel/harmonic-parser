@@ -1,0 +1,75 @@
+:root {
+  color-scheme: dark;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  background: #121d22;
+  color: #eef0e3;
+}
+
+body { margin: 0; }
+
+#room:focus { outline: none; }
+#room [hidden] { display: none; }
+
+#setup {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 1rem;
+}
+
+.setup-panel {
+  box-sizing: border-box;
+  width: min(100%, 27rem);
+  padding: clamp(1.3rem, 5vw, 2.2rem);
+  background: #182427f5;
+  border: 1px solid #9aa89057;
+  border-radius: .9rem;
+  box-shadow: 0 1rem 5rem #0a12178c;
+}
+
+#setup h1 {
+  font: 400 clamp(2.25rem, 8vw, 3.2rem)/1.1 Georgia, serif;
+  margin: 0 0 .45rem;
+}
+
+#setup p { margin: 0 0 1rem; line-height: 1.5; color: #c3cec2; }
+#setup p:empty { display: none; }
+#room-form { display: grid; gap: .5rem; }
+#room label { font-size: .83rem; }
+#room select, #room button {
+  font: inherit;
+  color: #eff2e5;
+  background: #26383a;
+  border: 1px solid #809187;
+  border-radius: .35rem;
+  min-height: 2.65rem;
+  padding: .4rem .75rem;
+}
+#room button { cursor: pointer; }
+#room button:disabled { opacity: .55; cursor: default; }
+#room :is(select, button):focus-visible { outline: 2px solid #d5dca3; outline-offset: 3px; }
+#condition { margin-bottom: .6rem; }
+#midi-controls { display: grid; justify-items: start; gap: .6rem; margin-top: .3rem; }
+#room #start-room { background: #d5dca3; color: #1d2821; }
+.setup-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+#setup .setup-footnote { font-size: .8rem; margin: 1.1rem 0 0; }
+#source-note, #midi-status, #setup-notice { font-size: .85rem; }
+
+#show-setup { position: absolute; top: .75rem; left: .75rem; opacity: 0; pointer-events: none; }
+#show-setup:focus { opacity: 1; pointer-events: auto; z-index: 1; }
+
+#reflection:not(:empty) {
+  position: fixed;
+  inset: auto 1rem max(12vh, env(safe-area-inset-bottom)) 1rem;
+  width: fit-content;
+  max-width: calc(100% - 4rem);
+  margin-inline: auto;
+  padding: .65rem 1.1rem;
+  color: #f1f0e0;
+  background: #152524e6;
+  border: 1px solid #aeb69b55;
+  border-radius: .5rem;
+  text-align: center;
+  font: 400 clamp(.95rem, 3vw, 1.15rem)/1.4 Georgia, serif;
+}

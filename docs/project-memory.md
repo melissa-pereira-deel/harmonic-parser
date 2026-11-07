@@ -12,6 +12,7 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Open.** Which kind of variation actually helps in a stuck moment, how the field carries a phrase through a rest, whether cues should appear on their own or by request, how much analysis is useful for melody-first playing, and where sound and MIDI come from in a real session. The renderer, parser integration and product scope are open.
 - **Current brief.** [A room for the next variation](concepts/a-room-for-the-next-variation.md). Its listening references and study plan contain interpretations and proposals.
 - **PoC preparation.** The [technical research](concepts/live-room-technical-research.md), [backlog](superpowers/plans/2026-11-07-live-room-poc.md), and [agent harness](superpowers/plans/live-room-agent-harness.md) are the handoff for a first build. The starting stack and the two-stage parser path are recommendations to verify during that build.
+- **First implementation.** [Play the room and verify the rig](live-room-poc.md). The room has three comparable replay conditions, selected-port MIDI, and a lab-only connection to the real parser through annotated replay. The physical rig and listening comparison are open.
 
 ## Journal
 
@@ -40,6 +41,13 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **User direction.** Open a PR with the proposed backlog and discovery artifacts.
 - **Observed.** The PR base `7b9b5d6` includes the hosted chord-page PoC, mode-aware suggestions and inversion figures. Typechecking and build passed, Vitest reported 101 passes and five expected failures, and the E001 ranking probes reproduced. The current verification counts supersede E003's baseline for the build handoff.
 - **Implication.** Keep the live room as a separate experience study. The [backlog](superpowers/plans/2026-11-07-live-room-poc.md) includes a project-subpath smoke test so a future room entry can coexist with the [chord-page PoC](2026-11-05-poc-gap-analysis.md).
+
+### E005 · 2026-11-07 · Agent-built live room
+
+- **User direction.** After merging the discovery PR, proceed autonomously with an agent-led first build.
+- **Observed.** Starting from `405b62c`, agents built the shared WebGL field, MIDI and replay paths, and annotated parser diagnostics. Browser checks exercised the built routes, A/B/C parity and cue lifetime, permission denial and disconnect with a mock input, and WebGL context loss and recovery. [Run and verify](live-room-poc.md)
+- **Observed.** In the [synthetic note comparison](../experiments/live-room-note-evidence.spike.md), both methods could change keys after an unresolved phrase had stopped. The sounding-note method also named a key over the sparse melody, while the held-triad method missed the rolled harmony.
+- **Decision for this build.** Keep parser candidates in the lab and use a facilitated cue for C. The player's real MIDI and sound route, useful and quiet phrase windows, and the A/B/C playing comparison are the next evidence.
 
 ## How to continue
 

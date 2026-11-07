@@ -1,0 +1,200 @@
+import './visual/field.css';
+import './room.css';
+import type { Condition, ReplayFixture } from './contracts.ts';
+import { createMidiInput } from './input/midi.ts';
+import type { MidiStatus } from './input/midi.ts';
+import type { RoomMetrics } from './lab.ts';
+import { motifReplay } from './replay/motif.ts';
+import { createRoomSession } from './session.ts';
+import { createRoomRenderer } from './visual/renderer.ts';
+
+function element<T extends HTMLElement>(id: string): T {
+  const node = document.getElementById(id);
+  if (!node) throw new Error(`Missing room element: ${id}`);
+  return node as T;
+}
+
+const room = element('room');
+const canvas = element<HTMLCanvasElement>('field');
+const setup = element('setup');
+const showSetup = element<HTMLButtonElement>('show-setup');
+const form = element<HTMLFormElement>('room-form');
+const conditionField = element<HTMLSelectElement>('condition');
+const sourceField = element<HTMLSelectElement>('source');
+const midiControls = element('midi-controls');
+const connect = element<HTMLButtonElement>('connect');
+const port = element<HTMLSelectElement>('midi-port');
+const portLabel = element('port-label');
+const midiStatus = element('midi-status');
+const start = element<HTMLButtonElement>('start-room');
+const sourceNote = element('source-note');
+const setupNotice = element('setup-notice');
+const reflection = element('reflection');
+const params = new URLSearchParams(location.search);
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+if (import.meta.env.DEV && params.has('lab') && params.get('treatment') === 'basin') {
+  canvas.dataset.treatment = 'basin';
+}
+
+const renderer = createRoomRenderer(canvas);
+let session = createRoomSession('A', null);
+let condition: Condition = 'A';
+let source: 'midi' | 'replay' | null = null;
+let fixture: ReplayFixture | null = null;
+let startMs = performance.now();
+let frozenMs: number | null = null;
+let status: MidiStatus = { kind: 'idle', ports: [], selectedId: null };
+let metrics: RoomMetrics | undefined;
+
+const elapsed = () => performance.now() - startMs;
+
+const midi = createMidiInput({
+  now: elapsed,
+  emit(event) {
+    if (source !== 'midi' || document.hidden) return;
+    if (event.kind === 'noteOn' && condition !== 'A') metrics?.noteOn(event.tMs);
+    if (event.kind === 'reset') metrics?.clearPending();
+    session.apply(event);
+  },
+  onStatus(next) {
+    status = next;
+    updateSetup();
+    if (source === 'midi' && next.kind === 'disconnected') {
+      openSetup('The MIDI input disconnected. Reconnect it or try replay.');
+    }
+  },
+});
+
+function updateSetup(): void {
+  const usesMidi = sourceField.value === 'midi';
+  midiControls.hidden = !usesMidi;
+  connect.disabled = status.kind === 'connecting' || status.kind === 'unsupported';
+  port.hidden = status.ports.length === 0;
+  portLabel.hidden = port.hidden;
+  const choices = status.ports.map(({ id, name }) => new Option(name, id));
+  const placeholder = new Option('Choose an input', '');
+  placeholder.disabled = true;
+  port.replaceChildren(placeholder, ...choices);
+  port.value = status.selectedId ?? '';
+  if (port.selectedIndex < 0) port.selectedIndex = 0;
+
+  const messages: Record<MidiStatus['kind'], string> = {
+    idle: 'Connect to see available MIDI inputs.',
+    connecting: 'Opening MIDI access…',
+    ready: status.selectedId ? 'Keyboard ready.' : 'Choose the input you want to play.',
+    unsupported: 'MIDI is unavailable in this browser. Try desktop Chrome or use replay.',
+    denied: 'MIDI permission was denied. Check your browser settings or use replay.',
+    'no-device': 'No MIDI input found. Connect your keyboard or use replay.',
+    disconnected: 'The selected input disconnected. Reconnect it or choose another input.',
+    unavailable: 'The MIDI input could not open. Check whether your instrument is available to the browser.',
+  };
+  if (midiStatus.textContent !== messages[status.kind]) midiStatus.textContent = messages[status.kind];
+  start.disabled = usesMidi && (status.kind !== 'ready' || status.selectedId === null);
+  sourceNote.textContent = usesMidi
+    ? 'Use your usual instrument or synth for sound.'
+    : 'The replay is silent.';
+}
+
+function begin(next: Condition, mode: 'midi' | 'replay' | null, replay: ReplayFixture | null): void {
+  source = null;
+  midi.reset();
+  condition = next;
+  fixture = replay;
+  session = createRoomSession(next, replay);
+  startMs = performance.now();
+  frozenMs = null;
+  metrics?.reset();
+  reflection.textContent = '';
+  setup.hidden = true;
+  showSetup.hidden = false;
+  source = mode;
+  room.focus({ preventScroll: true });
+}
+
+function openSetup(notice = ''): void {
+  begin('A', null, null);
+  setupNotice.textContent = notice;
+  setup.hidden = false;
+  showSetup.hidden = true;
+  updateSetup();
+  conditionField.focus();
+}
+
+function draw(tMs: number) {
+  const state = session.sample(tMs, reducedMotion.matches);
+  renderer.draw(state.frame);
+  if (source && frozenMs === null) {
+    metrics?.draw(tMs, elapsed(), renderer.kind === 'webgl2');
+  }
+  const text = state.cue?.text ?? '';
+  if (reflection.textContent !== text) reflection.textContent = text;
+  return { ...state, renderer: renderer.kind };
+}
+
+sourceField.addEventListener('change', updateSetup);
+connect.addEventListener('click', () => { void midi.connect(); });
+port.addEventListener('change', () => { if (port.value) midi.select(port.value); });
+showSetup.addEventListener('click', () => openSetup());
+element('close-setup').addEventListener('click', () => begin('A', null, null));
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  if (start.disabled) return;
+  const mode = sourceField.value === 'midi' ? 'midi' : 'replay';
+  const requested = conditionField.value;
+  const next = requested === 'A' || requested === 'C' ? requested : 'B';
+  begin(next, mode, mode === 'replay' ? motifReplay : null);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && setup.hidden) {
+    event.preventDefault();
+    openSetup();
+  }
+  const plainPress = !event.repeat && !event.metaKey && !event.ctrlKey && !event.altKey;
+  if (plainPress && event.key.toLowerCase() === 'r' && setup.hidden && source === 'midi') {
+    session.reflect(elapsed());
+  }
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    midi.reset();
+    session.reset();
+    reflection.textContent = '';
+    metrics?.clearPending();
+  } else {
+    if (source === 'replay' && frozenMs === null) startMs = performance.now();
+    metrics?.resume();
+  }
+});
+
+if (params.has('setup')) openSetup();
+else updateSetup();
+
+function animate(): void {
+  draw(frozenMs ?? elapsed());
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+if (import.meta.env.DEV && params.has('lab')) {
+  void import('./lab.ts').then(({ installRoomLab, createRoomMetrics }) => {
+    metrics = createRoomMetrics();
+    installRoomLab({
+      start(next, replay) {
+        begin(next, 'replay', replay);
+        frozenMs = 0;
+        return draw(0);
+      },
+      sampleAt(tMs) {
+        if (!fixture) throw new Error('Start a replay before sampling.');
+        frozenMs = tMs;
+        session.reset();
+        return draw(tMs);
+      },
+      stats: metrics.stats,
+    });
+  });
+}

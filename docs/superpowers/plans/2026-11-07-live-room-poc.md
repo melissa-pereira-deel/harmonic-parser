@@ -10,6 +10,8 @@
 
 **Basis.** [Experience brief](../../concepts/a-room-for-the-next-variation.md) · [Technical research and draft functional contract](../../concepts/live-room-technical-research.md) · [Project memory](../../project-memory.md)
 
+[First build and playing checklist](../../live-room-poc.md)
+
 ## PoC boundary
 
 - Three conditions share one field and one sound setup. A drifts, B adds gesture response, and C adds occasional reflection with B's gesture response. The field takes the full screen in playing mode, with setup recoverable by keyboard.
