@@ -120,24 +120,33 @@ const MOVES: Readonly<Record<Mode, readonly Move[]>> = {
   minor: MINOR_MOVES,
 };
 
-const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+/**
+ * Letter steps above the tonic's letter for each degree, in semitones.
+ *
+ * Chromatic degrees take the letter of the numeral the rules call them by:
+ * bII, bIII, #iv, bVI, bVII. So the chord a reason names is the chord that
+ * gets spelled.
+ */
+const LETTER_STEPS = [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6] as const;
+const LETTERS = 'CDEFGAB';
+const NATURALS = [0, 2, 4, 5, 7, 9, 11] as const;
 
 /**
- * Keys whose signature is flats, so a suggestion is spelled with flats.
+ * The root of a chord `degree` semitones above the tonic, spelled from the
+ * key's letters rather than picked from a sharp or a flat name table.
  *
- * By mode, because the same tonic can sit on either side: D major has sharps
- * and D minor has a flat. Tonics are spelled as `tonicName` spells them, and it
- * names C# and F# major with sharps, so those stay out of this table.
+ * A key uses each letter once, so the letter is the tonic's plus the degree's
+ * step, and the accidental is whatever reaches the pitch class. Eb minor's
+ * flat sixth is therefore Cb, which no twelve-name table can produce: one
+ * used to spell it B, a note outside the key (#37).
  */
-const FLAT_TONICS: Readonly<Record<Mode, ReadonlySet<string>>> = {
-  major: new Set(['F', 'Bb', 'Eb', 'Ab']),
-  minor: new Set(['D', 'G', 'C', 'F', 'Bb', 'Eb']),
-};
-
-function spell(pc: PitchClass, key: Key): string {
-  const names = FLAT_TONICS[key.mode].has(tonicName(key)) ? FLAT_NAMES : SHARP_NAMES;
-  return names[pc];
+function spell(degree: number, key: Key): string {
+  const tonicLetter = LETTERS.indexOf(tonicName(key)[0]);
+  const letter = (tonicLetter + LETTER_STEPS[degree]) % 7;
+  const pc = (key.tonic + degree) % 12;
+  let shift = (pc - NATURALS[letter] + 12) % 12;
+  if (shift > 6) shift -= 12;
+  return LETTERS[letter] + (shift > 0 ? '#'.repeat(shift) : 'b'.repeat(-shift));
 }
 
 /**
@@ -187,7 +196,7 @@ export function diatonicFallback(lastRoot: PitchClass, key: Key): Suggestion[] {
     const semitones = (pc - key.tonic + 12) % 12;
     ranked.push({
       suggestion: {
-        symbol: spell(pc, key) + triadQuality(semitones, key),
+        symbol: spell(semitones, key) + triadQuality(semitones, key),
         reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
         weight: semitones === 0 || semitones === 7 ? 3 : 2,
       },
@@ -220,7 +229,7 @@ export function suggest(
     if (existing !== undefined && existing.suggestion.weight >= move.weight) return;
     scored.set(pc, {
       suggestion: {
-        symbol: spell(pc, key) + (move.quality ?? triadQuality(move.to, key)),
+        symbol: spell(move.to, key) + (move.quality ?? triadQuality(move.to, key)),
         reason: move.reason,
         weight: move.weight,
       },

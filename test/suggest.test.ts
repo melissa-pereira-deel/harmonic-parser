@@ -216,6 +216,33 @@ describe('suggestions are spelled by key signature', () => {
     expect(symbols).toEqual(expect.arrayContaining(['Eb', 'Ab', 'Bb']));
   });
 
+  // A key uses each letter once. Checked over every in-scale candidate in the
+  // fixture, without the step table `suggest.ts` spells with, so this is not
+  // the implementation asserting itself. "Never uses a sharp" passed while Eb
+  // minor offered both `Bb` and `B`, two chords on one letter (#37).
+  it.each([...new Set(committed.rows.map((r) => r.key))])(
+    'uses each letter once across the scale of %s',
+    (key) => {
+      const rows = committed.rows.filter((r) => r.key === key);
+      const scale = rows[0].mode === 'major' ? [0, 2, 4, 5, 7, 9, 11] : [0, 2, 3, 5, 7, 8, 10];
+      const letterOf = new Map<number, Set<string>>();
+      for (const c of rows.flatMap((r) => r.candidates)) {
+        if (!scale.includes(c.degree)) continue;
+        const letters = letterOf.get(c.degree) ?? new Set<string>();
+        letters.add(c.symbol[0]);
+        letterOf.set(c.degree, letters);
+      }
+      const used = [...letterOf.values()];
+      expect(used.every((s) => s.size === 1)).toBe(true);
+      expect(new Set(used.map((s) => [...s][0])).size).toBe(used.length);
+    },
+  );
+
+  it('spells the flat sixth of Eb minor as Cb', () => {
+    const tonic = committed.rows.find((r) => r.key === 'Eb minor' && r.from === 0);
+    expect(tonic?.candidates.map((c) => c.symbol)).toContain('Cb');
+  });
+
   it('keeps sharps in the sharp keys', () => {
     const symbols = committed.rows
       .filter((r) => r.key === 'E major')
