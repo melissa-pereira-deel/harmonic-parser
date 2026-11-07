@@ -175,6 +175,18 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   Going home after IV rather than to the dominant is the table's own order,
   not a new judgement — but it is a judgement, and it is now the one that
   ships everywhere instead of in half the keys.
+- Suggestions in C, D and G minor use flats. They picked their spelling from a
+  table that ignored mode, so C minor suggested `D#`, `G#` and `A#`. Twelve
+  candidates change their spelling; no suggestion changes its pitch or order,
+  so the baseline's choices are the same. The table's `Db`, `Gb` and `D` entries
+  are gone: `tonicName` never produced the first two, and the third did nothing.
+- **Minor keys have their own suggestion rules.** The table was major-only and
+  applied unchanged in minor, so every minor key was offered a chord on a degree
+  outside its scale: `F#` in A minor. 48 such suggestions go to 0, and 12 of
+  those were the top pick. No major row changes. The dominant is suggested as a
+  major chord in minor (`E` in A minor), since that is what the cadence needs.
+  This moves the baseline: 84 of 288 top suggestions change, recorded in
+  `experiments/suggest-baseline-shape.spike.md`.
 
 ### Changed
 
