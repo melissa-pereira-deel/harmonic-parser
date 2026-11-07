@@ -4,11 +4,11 @@
  * `suggest()` reads exactly two things: the last chord's root and the key. So
  * its whole input domain is **12 tonics x 2 modes x 12 last degrees = 288
  * contexts**, and the baseline is a 288-row table that happens to be written
- * as seventeen rules.
+ * as a rule table per mode.
  *
  * That matters because the next-chord experiment
  * (tiny-model-lab#18) has to score this baseline from Python, and the
- * alternative to a fixture is re-implementing the rule table, two spelling
+ * alternative to a fixture is re-implementing the rule tables, two spelling
  * tables, a quality table, the fallback and the tie-break in a second
  * language. Every transcription slip there would be invisible and would
  * favour the model -- which is precisely the failure #18 exists to prevent,

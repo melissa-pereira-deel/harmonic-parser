@@ -60,11 +60,11 @@ and a floor set here would say more about the generator than about music.
 
 `if_not` fires as written. Both constants stay marked unmeasured in
 `src/confidence.ts`, the UI must not present either flag as a calibrated
-number, and the two falsified tests stay red until there is real material to
-set them against. What is needed is a few hundred progressions somebody
-actually typed, with a human saying which felt ambiguous — which is a
-different and more expensive piece of work than this spike, and should be
-scoped as one.
+number, and the falsified tests in `test/confidence.test.ts` stay as written,
+marked `it.fails`, until there is real material to set them against. What is
+needed is a few hundred progressions somebody actually typed, with a human
+saying which felt ambiguous — which is a different and more expensive piece
+of work than this spike, and should be scoped as one.
 
 The *distinction* survives intact. Ambiguity as a margin and uncertainty as an
 absolute are still two different questions, and `assess()` still computes them

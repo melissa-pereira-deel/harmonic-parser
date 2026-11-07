@@ -11,17 +11,17 @@
  *
  * The first job is **anti-tampering**. `fixtures/suggest-baseline.json` is the
  * whole baseline as a flat file, and the next-chord experiment will score it
- * from Python by reading that file rather than by re-implementing seventeen
- * rules in a second language. The re-derivation test is what makes the file
+ * from Python by reading that file rather than by re-implementing the rule
+ * tables in a second language. The re-derivation test is what makes the file
  * trustworthy: edit `suggest.ts` and it fails; edit the fixture by hand and it
  * fails.
  *
  * The second job is **describing behaviour, including behaviour that is
- * wrong.** The mode-blindness tests below do not endorse what they assert.
- * They exist because the alternative — leaving it latent — is how a
- * measurement gets attributed to the wrong cause. The tie-break used to be
- * described the same way, as a bug; it is fixed now, and its tests pin the
- * fix.
+ * wrong.** The mode-blindness tests that used to be here did not endorse what
+ * they asserted. They existed because the alternative — leaving it latent — is
+ * how a measurement gets attributed to the wrong cause. The tie-break was
+ * described the same way, as a bug. Both are fixed now, and their tests pin
+ * the fixes.
  */
 
 import { describe, expect, it } from 'vitest';

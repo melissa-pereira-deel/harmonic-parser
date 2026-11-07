@@ -3,16 +3,17 @@
  * doing in that key, and how well the key fits.
  *
  * `source` names which producer made the reading, and it exists on day one
- * though there is exactly one producer. That is deliberate. A grammar and an
- * n-gram model are both plausible second and third producers, and when either
- * arrives the UI must not learn that anything changed — it already renders a
- * list of `Reading`, already sorts by `score`, and already has somewhere to
- * put "this came from the key profiles, that one came from the model". Adding
- * the field later would mean touching every consumer at the moment you are
- * least able to afford it.
+ * though there is exactly one producer. That is deliberate. A grammar is the
+ * plausible second producer, and when it arrives the UI must not learn that
+ * anything changed — it already renders a list of `Reading`, already sorts by
+ * `score`, and already has somewhere to put "this came from the key profiles,
+ * that one came from the grammar". Adding the field later would mean touching
+ * every consumer at the moment you are least able to afford it.
  *
  * `'grammar'` and `'model'` are not implemented and nothing in this repo
  * produces them. Do not read the union as a roadmap that has been costed.
+ * `'model'` has no plan behind it at all: the one planned learned model
+ * predicts the next chord, and would feed `suggest.ts`, not this file.
  */
 
 import type { Chord, PitchClass } from './chords.ts';

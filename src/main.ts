@@ -1,7 +1,7 @@
 /**
  * Wiring. Find the input, find the panel, re-render on every keystroke.
  *
- * Everything that decides anything lives in the four modules under this one.
+ * Everything that decides anything lives in the modules under this one.
  * If a change belongs in this file it is a change to the page, not to the
  * parser.
  */

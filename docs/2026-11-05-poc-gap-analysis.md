@@ -79,6 +79,10 @@ No success criteria for the page were written anywhere. These are proposed:
 
 ## 5. Contradictions to fix
 
+**Status, 2026-11-07:** every row is fixed. PR #22 fixed the `confidence.ts`
+row, and PR #35 fixed the rest. The *Claim* column is the before-state at
+`c37a8d5`, kept as quoted.
+
 | Where | Claim | Fact |
 |---|---|---|
 | `README.md:27,31,81` | Tests are red, five fail | Five are `it.fails`; `npm test` is green |

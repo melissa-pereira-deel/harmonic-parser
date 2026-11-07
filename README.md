@@ -26,15 +26,18 @@ download, no warm-up, and nothing to opt out of — which is worth saying out
 loud, because it is the strongest thing local inference buys and it is
 completely invisible unless somebody shows you.
 
-> **⚠️ Status: skeleton, and the tests are red on purpose.**
+> **⚠️ Status: early proof of concept, with five tests that pin claims known
+> to be false.**
 >
-> The four layers, the key ranking and the parity harness all run. The port
+> The page, the key ranking and the parity harness all run. The port
 > agrees with music21 on every top reading and every score across 200
-> progressions. **Five tests fail, and none should be made to pass by
-> adjusting a number.** An answered spike record in
-> [`experiments/`](experiments/) says why: the two confidence thresholds
-> cannot be calibrated from the data that exists, so the page's claims about
-> its own confidence are placeholders.
+> progressions. `npm test` is green. **Five tests are marked `it.fails`, and
+> none should be made to pass by adjusting a number:** each asserts that its
+> claim does *not* hold today, so it goes red if somebody fixes it and if
+> somebody breaks it further. An answered spike record in
+> [`experiments/`](experiments/) says why the claims fail: the two confidence
+> thresholds cannot be calibrated from the data that exists, so the page's
+> claims about its own confidence are placeholders.
 >
 > There is no grammar, no trained model, no Roman-numeral *analysis* beyond a
 > lookup from the inferred key, and no audio. The `'model'` source in
@@ -47,7 +50,7 @@ Testing it? Start with the [tester guide](docs/tester-guide.md).
 
 ## How it fits together
 
-Four layers, and the seam between them is the point.
+Small modules, one job each, and the seams between them are the point.
 
 ```
 chords.ts      "F#m7b5" -> { root, quality, bass }        pure string work
@@ -55,14 +58,17 @@ keyprofiles.ts 24 profiles x 12 numbers                   the whole "model"
 readings.ts    rank() -> Reading[]                        ranked, with a source
 confidence.ts  ambiguity (a margin) vs uncertainty (an absolute)
 suggest.ts     what could come next                       a rule table, for now
-ui.ts          knows about Reading. Nothing else.
+pins.ts        a pinned numeral is a filter over readings
+announce.ts    one spoken sentence once typing stops
+ui.ts          renders readings; shows their source, never branches on it
+main.ts        wiring: the box, the panel, the events
 ```
 
 `Reading` carries a `source` field — `'key-profile' | 'grammar' | 'model'` —
 even though only the first producer exists. That is deliberate. A hand-written
-harmonic grammar and a trained scorer are both meant to land here later as
-further producers, and when they do, the interface should not have to learn
-that anything changed.
+harmonic grammar is meant to land here later as a second producer, and when
+it does, the interface should not have to learn that anything changed.
+`'model'` has no plan behind it; see [Models](#models).
 
 ## The oracle
 
@@ -82,14 +88,28 @@ from the sibling repo's policy. A floor says "at least this new"; here music21
 
 ```bash
 npm install
-npm test          # 5 failing, on purpose. Read experiments/ first.
+npm test          # green. 5 are it.fails on purpose; read experiments/ first.
 npm run dev
 ```
 
-## Measuring the model source
+## Models
 
-When `readings.ts` grows a real `'model'` producer, the claim that it beats the
-key profiles has to survive a gate rather than a demo. That is what
+**The shipped model is the 24 Krumhansl-Schmuckler key profiles in
+`keyprofiles.ts`, and nothing in it is learned.** They are published numbers,
+ported from music21 and checked against it by the parity test.
+
+**Next-chord prediction is the one planned learned model**
+([#17](https://github.com/melissa-pereira-deel/harmonic-parser/issues/17)).
+Its contract is `experiments/next-chord.yaml`
+([#28](https://github.com/melissa-pereira-deel/harmonic-parser/issues/28)),
+which is not written yet. It would become a second source of suggestions in
+`suggest.ts`, beside the rule table, and not a producer of readings. If it
+ships, it loads after first paint:
+[`experiments/next-chord-size.spike.md`](experiments/next-chord-size.spike.md)
+found that a bundled table will not fit the page's first round trip.
+
+The rule table is the baseline it has to beat, and the claim that it beats it
+has to survive tiny-model-lab's gates rather than a demo. That is what
 [tiny-model-lab](https://github.com/melissa-pereira-deel/tiny-model-lab) is
 for, and this repo is set up to be measured by it from outside:
 
@@ -99,13 +119,24 @@ python -m harness init          # see experiments/README.md
 python -m harness spikes
 ```
 
+Nothing else is a planned model:
+
+- `Reading.source: 'model'` is a type with no plan behind it. Nothing
+  produces it, and no issue proposes a producer.
+- Ranking modes (Dorian, Mixolydian…), not only major and minor, is a
+  proposed track waiting on a scoping spike
+  ([#29](https://github.com/melissa-pereira-deel/harmonic-parser/issues/29)).
+- A harmonic grammar, the `'grammar'` source, is
+  [#16](https://github.com/melissa-pereira-deel/harmonic-parser/issues/16).
+  It would be hand-written, not learned.
+
 ## Sibling project
 
 [tiny-model-lab](https://github.com/melissa-pereira-deel/tiny-model-lab) — a
 harness for deciding whether a narrow task should be a model at all, and for
 proving it beat the simpler thing it replaced. Two seams meet this repo. The
 [spike record](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/templates/spike.md)
-is where the four answered questions in `experiments/` came from — this repo
+is where the answered questions in `experiments/` came from — this repo
 is the first thing to use it. And `LATENCY_BANDS_MS` in
 [`harness/experiment.py`](https://github.com/melissa-pereira-deel/tiny-model-lab/blob/main/harness/experiment.py)
 puts the instant boundary at 100 ms and the flow boundary at 1 s.
