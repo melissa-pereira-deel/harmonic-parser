@@ -31,6 +31,7 @@ import { parseChord } from '../src/chords.ts';
 import type { Key } from '../src/keyprofiles.ts';
 import type { Suggestion } from '../src/suggest.ts';
 import { diatonicFallback, suggest } from '../src/suggest.ts';
+import { romanNumeral } from '../src/readings.ts';
 import type { Fixture } from '../tools/suggest-baseline.ts';
 import { buildFixture } from '../tools/suggest-baseline.ts';
 import committedJson from '../fixtures/suggest-baseline.json' with { type: 'json' };
@@ -286,9 +287,32 @@ describe('minor keys have their own rules', () => {
     expect(afterTwo?.candidates[0].symbol).toBe('E');
   });
 
-  it('names the deceptive cadence on the flat sixth', () => {
+  it('names the deceptive cadence on the sixth', () => {
     const afterFive = minorRows.find((r) => r.key === 'A minor' && r.from === 7);
     expect(afterFive?.candidates[1].symbol).toBe('F');
+  });
+
+  it('names chords in its reasons the way the chord cards do', () => {
+    // The minor reasons used to say bIII, bVI and bVII, so in A minor a G
+    // card read VII while its suggestion said "bVII". Both numerals in each
+    // reason should be what `romanNumeral` puts on the card for that chord.
+    // bII and the raised fourth are left out: their rules key on the degree
+    // alone and name the seventh chord (bII7, #iv°7) after a plain triad.
+    //
+    // The target side skips G#dim. Its rule's `quality: 'dim'` lands on the
+    // target, so it suggests Adim where the reason says i. That is a symbol
+    // bug, not a wording one, and is left for its own change.
+    const lasts = ['Am', 'Bdim', 'C', 'C#', 'Dm', 'E', 'F', 'F#', 'G', 'G#dim'];
+    for (const symbol of lasts) {
+      const last = chord(symbol);
+      for (const s of suggest([last], A_MINOR)) {
+        const named = /^(\S+) (?:back )?to (\S+)/.exec(s.reason);
+        expect(named, s.reason).not.toBeNull();
+        expect(named?.[1], s.reason).toBe(romanNumeral(last, A_MINOR).numeral);
+        if (symbol === 'G#dim') continue;
+        expect(named?.[2], s.reason).toBe(romanNumeral(chord(s.symbol), A_MINOR).numeral);
+      }
+    }
   });
 
   it('does not flip an answer on how the tonic is spelled', () => {

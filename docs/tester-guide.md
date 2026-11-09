@@ -51,3 +51,6 @@ You need a GitHub account, and what you submit is public.
 Your reports do a second job. The page's thresholds are guesses until they can be
 compared with what people actually hear, so each one becomes a labelled example
 for calibrating them ([#15](https://github.com/melissa-pereira-deel/harmonic-parser/issues/15)).
+The feedback form asks you to release your submission under CC0 1.0, because
+submissions may become part of a public labelled corpus
+([#15](https://github.com/melissa-pereira-deel/harmonic-parser/issues/15)).

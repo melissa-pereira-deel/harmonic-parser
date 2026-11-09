@@ -222,6 +222,22 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Changed
 
+- **The page's wording now matches what it shows.** A live QA pass found
+  three places where the text described a different page. The uncertain
+  banner said "the reading below is the least bad one", but up to three
+  reading cards sit below it; it now says the top reading is the least bad
+  and none of them is a confident answer, and the withheld-suggestions note
+  and the screen-reader announcement say the same. The conflict notice and
+  its announcement said "clear a pin", but the only button clears all of
+  them and is labelled **Clear pins**, so both now name that button. And
+  the minor-key suggestion reasons spelled the scale's own third, sixth and
+  seventh with a flat — in A minor a `G` card read `VII` while its
+  suggestion said "bVII". `MINOR_MOVES` now uses the numerals
+  `DEGREES.minor` puts on the cards: `III`, `VI`, `VII`, and `#III`, `#VI`,
+  `#vii°` for the raised degrees. `fixtures/suggest-baseline.json` is
+  regenerated, and only its `reason` fields changed: 144 of them, twelve
+  rules in twelve minor keys. No symbol, degree or weight moved.
+
 - Setup no longer needs `rm experiments/experiment.yaml`, because the reason
   for it is gone. `harness init` used to copy a blank contract in under that
   name, and tiny-model-lab's training guard only checks that *some*
