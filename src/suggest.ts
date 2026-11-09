@@ -88,27 +88,32 @@ const MAJOR_MOVES: readonly Move[] = [
  * has a rule, the ones outside the scale included, so this table covers all
  * twelve contexts, the same as the major one. From bII the Neapolitan ranks
  * first here, where major ranks the tritone substitution first.
+ *
+ * The numerals in the reasons are the ones `DEGREES.minor` in `readings.ts`
+ * puts on the chord cards: the minor key's own third, sixth and seventh have
+ * no flat, and the raised ones are #III, #VI and #vii. A reason that said
+ * bVII under a card that says VII was naming the same chord two ways.
  */
 const MINOR_MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to i — the cadence', weight: 10 },
-  { from: 7, to: 8, reason: 'V to bVI — the deceptive cadence', weight: 6 },
+  { from: 7, to: 8, reason: 'V to VI — the deceptive cadence', weight: 6 },
   { from: 5, to: 0, reason: 'iv to i — the plagal cadence', weight: 8 },
   { from: 5, to: 7, reason: 'iv to V — builds the cadence', weight: 8, quality: '' },
-  { from: 5, to: 8, reason: 'iv to bVI', weight: 4 },
+  { from: 5, to: 8, reason: 'iv to VI', weight: 4 },
   { from: 2, to: 7, reason: 'ii° to V — the other half of ii°-V-i', weight: 10, quality: '' },
   { from: 2, to: 0, reason: 'ii° back to i', weight: 4 },
   { from: 0, to: 5, reason: 'i to iv — leaves home', weight: 8 },
   { from: 0, to: 7, reason: 'i to V — opens the cadence', weight: 8, quality: '' },
-  { from: 0, to: 8, reason: 'i to bVI — the soft turn', weight: 6 },
-  { from: 8, to: 7, reason: 'bVI to V — the half-step approach', weight: 8, quality: '' },
-  { from: 8, to: 10, reason: 'bVI to bVII — the climb', weight: 6 },
-  { from: 10, to: 3, reason: 'bVII to bIII — the relative cadence', weight: 8 },
-  { from: 10, to: 0, reason: 'bVII to i — the Aeolian cadence', weight: 6 },
-  { from: 3, to: 8, reason: 'bIII to bVI — down the circle', weight: 6 },
-  { from: 3, to: 5, reason: 'bIII to iv', weight: 4 },
-  { from: 11, to: 0, reason: 'vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
-  { from: 4, to: 5, reason: 'III to iv — a borrowed secondary dominant', weight: 4 },
-  { from: 9, to: 7, reason: 'raised sixth to V — the chromatic approach', weight: 4, quality: '' },
+  { from: 0, to: 8, reason: 'i to VI — the soft turn', weight: 6 },
+  { from: 8, to: 7, reason: 'VI to V — the half-step approach', weight: 8, quality: '' },
+  { from: 8, to: 10, reason: 'VI to VII — the climb', weight: 6 },
+  { from: 10, to: 3, reason: 'VII to III — the relative cadence', weight: 8 },
+  { from: 10, to: 0, reason: 'VII to i — the Aeolian cadence', weight: 6 },
+  { from: 3, to: 8, reason: 'III to VI — down the circle', weight: 6 },
+  { from: 3, to: 5, reason: 'III to iv', weight: 4 },
+  { from: 11, to: 0, reason: '#vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
+  { from: 4, to: 5, reason: '#III to iv — a borrowed secondary dominant', weight: 4 },
+  { from: 9, to: 7, reason: '#VI to V — the chromatic approach', weight: 4, quality: '' },
   { from: 1, to: 7, reason: 'bII to V — the Neapolitan', weight: 8, quality: '' },
   { from: 1, to: 0, reason: 'bII7 to i', weight: 6 },
   { from: 6, to: 7, reason: '#iv° to V', weight: 6, quality: '' },
@@ -124,8 +129,8 @@ const MOVES: Readonly<Record<Mode, readonly Move[]>> = {
  * Letter steps above the tonic's letter for each degree, in semitones.
  *
  * Chromatic degrees take the letter of the numeral the rules call them by:
- * bII, bIII, #iv, bVI, bVII. So the chord a reason names is the chord that
- * gets spelled.
+ * bII, bIII, #iv, bVI, bVII in major, and bII, #III, #iv, #VI, #vii in minor.
+ * So the chord a reason names is the chord that gets spelled.
  */
 const LETTER_STEPS = [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6] as const;
 const LETTERS = 'CDEFGAB';

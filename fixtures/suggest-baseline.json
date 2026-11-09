@@ -274,7 +274,7 @@
     {
      "degree": 8,
      "symbol": "Ab",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -334,13 +334,13 @@
     {
      "degree": 8,
      "symbol": "Ab",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Fm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -356,7 +356,7 @@
     {
      "degree": 5,
      "symbol": "Fm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -384,7 +384,7 @@
     {
      "degree": 8,
      "symbol": "Ab",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -428,7 +428,7 @@
     {
      "degree": 8,
      "symbol": "Ab",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -444,13 +444,13 @@
     {
      "degree": 7,
      "symbol": "G",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "Bb",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -466,7 +466,7 @@
     {
      "degree": 7,
      "symbol": "G",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -482,13 +482,13 @@
     {
      "degree": 3,
      "symbol": "Eb",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Cm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -504,7 +504,7 @@
     {
      "degree": 0,
      "symbol": "Cdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -778,7 +778,7 @@
     {
      "degree": 8,
      "symbol": "A",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -838,13 +838,13 @@
     {
      "degree": 8,
      "symbol": "A",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "F#m",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -860,7 +860,7 @@
     {
      "degree": 5,
      "symbol": "F#m",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -888,7 +888,7 @@
     {
      "degree": 8,
      "symbol": "A",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -932,7 +932,7 @@
     {
      "degree": 8,
      "symbol": "A",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -948,13 +948,13 @@
     {
      "degree": 7,
      "symbol": "G#",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "B",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -970,7 +970,7 @@
     {
      "degree": 7,
      "symbol": "G#",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -986,13 +986,13 @@
     {
      "degree": 3,
      "symbol": "E",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "C#m",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -1008,7 +1008,7 @@
     {
      "degree": 0,
      "symbol": "C#dim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -1282,7 +1282,7 @@
     {
      "degree": 8,
      "symbol": "Bb",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -1342,13 +1342,13 @@
     {
      "degree": 8,
      "symbol": "Bb",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Gm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -1364,7 +1364,7 @@
     {
      "degree": 5,
      "symbol": "Gm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -1392,7 +1392,7 @@
     {
      "degree": 8,
      "symbol": "Bb",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -1436,7 +1436,7 @@
     {
      "degree": 8,
      "symbol": "Bb",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -1452,13 +1452,13 @@
     {
      "degree": 7,
      "symbol": "A",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "C",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -1474,7 +1474,7 @@
     {
      "degree": 7,
      "symbol": "A",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -1490,13 +1490,13 @@
     {
      "degree": 3,
      "symbol": "F",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Dm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -1512,7 +1512,7 @@
     {
      "degree": 0,
      "symbol": "Ddim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -1786,7 +1786,7 @@
     {
      "degree": 8,
      "symbol": "Cb",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -1846,13 +1846,13 @@
     {
      "degree": 8,
      "symbol": "Cb",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Abm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -1868,7 +1868,7 @@
     {
      "degree": 5,
      "symbol": "Abm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -1896,7 +1896,7 @@
     {
      "degree": 8,
      "symbol": "Cb",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -1940,7 +1940,7 @@
     {
      "degree": 8,
      "symbol": "Cb",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -1956,13 +1956,13 @@
     {
      "degree": 7,
      "symbol": "Bb",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "Db",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -1978,7 +1978,7 @@
     {
      "degree": 7,
      "symbol": "Bb",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -1994,13 +1994,13 @@
     {
      "degree": 3,
      "symbol": "Gb",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Ebm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -2016,7 +2016,7 @@
     {
      "degree": 0,
      "symbol": "Ebdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -2290,7 +2290,7 @@
     {
      "degree": 8,
      "symbol": "C",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -2350,13 +2350,13 @@
     {
      "degree": 8,
      "symbol": "C",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Am",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -2372,7 +2372,7 @@
     {
      "degree": 5,
      "symbol": "Am",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -2400,7 +2400,7 @@
     {
      "degree": 8,
      "symbol": "C",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -2444,7 +2444,7 @@
     {
      "degree": 8,
      "symbol": "C",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -2460,13 +2460,13 @@
     {
      "degree": 7,
      "symbol": "B",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "D",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -2482,7 +2482,7 @@
     {
      "degree": 7,
      "symbol": "B",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -2498,13 +2498,13 @@
     {
      "degree": 3,
      "symbol": "G",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Em",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -2520,7 +2520,7 @@
     {
      "degree": 0,
      "symbol": "Edim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -2794,7 +2794,7 @@
     {
      "degree": 8,
      "symbol": "Db",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -2854,13 +2854,13 @@
     {
      "degree": 8,
      "symbol": "Db",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Bbm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -2876,7 +2876,7 @@
     {
      "degree": 5,
      "symbol": "Bbm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -2904,7 +2904,7 @@
     {
      "degree": 8,
      "symbol": "Db",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -2948,7 +2948,7 @@
     {
      "degree": 8,
      "symbol": "Db",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -2964,13 +2964,13 @@
     {
      "degree": 7,
      "symbol": "C",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "Eb",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -2986,7 +2986,7 @@
     {
      "degree": 7,
      "symbol": "C",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -3002,13 +3002,13 @@
     {
      "degree": 3,
      "symbol": "Ab",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Fm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -3024,7 +3024,7 @@
     {
      "degree": 0,
      "symbol": "Fdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -3298,7 +3298,7 @@
     {
      "degree": 8,
      "symbol": "D",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -3358,13 +3358,13 @@
     {
      "degree": 8,
      "symbol": "D",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Bm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -3380,7 +3380,7 @@
     {
      "degree": 5,
      "symbol": "Bm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -3408,7 +3408,7 @@
     {
      "degree": 8,
      "symbol": "D",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -3452,7 +3452,7 @@
     {
      "degree": 8,
      "symbol": "D",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -3468,13 +3468,13 @@
     {
      "degree": 7,
      "symbol": "C#",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "E",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -3490,7 +3490,7 @@
     {
      "degree": 7,
      "symbol": "C#",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -3506,13 +3506,13 @@
     {
      "degree": 3,
      "symbol": "A",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "F#m",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -3528,7 +3528,7 @@
     {
      "degree": 0,
      "symbol": "F#dim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -3802,7 +3802,7 @@
     {
      "degree": 8,
      "symbol": "Eb",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -3862,13 +3862,13 @@
     {
      "degree": 8,
      "symbol": "Eb",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Cm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -3884,7 +3884,7 @@
     {
      "degree": 5,
      "symbol": "Cm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -3912,7 +3912,7 @@
     {
      "degree": 8,
      "symbol": "Eb",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -3956,7 +3956,7 @@
     {
      "degree": 8,
      "symbol": "Eb",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -3972,13 +3972,13 @@
     {
      "degree": 7,
      "symbol": "D",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "F",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -3994,7 +3994,7 @@
     {
      "degree": 7,
      "symbol": "D",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -4010,13 +4010,13 @@
     {
      "degree": 3,
      "symbol": "Bb",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Gm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -4032,7 +4032,7 @@
     {
      "degree": 0,
      "symbol": "Gdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -4306,7 +4306,7 @@
     {
      "degree": 8,
      "symbol": "E",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -4366,13 +4366,13 @@
     {
      "degree": 8,
      "symbol": "E",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "C#m",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -4388,7 +4388,7 @@
     {
      "degree": 5,
      "symbol": "C#m",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -4416,7 +4416,7 @@
     {
      "degree": 8,
      "symbol": "E",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -4460,7 +4460,7 @@
     {
      "degree": 8,
      "symbol": "E",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -4476,13 +4476,13 @@
     {
      "degree": 7,
      "symbol": "D#",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "F#",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -4498,7 +4498,7 @@
     {
      "degree": 7,
      "symbol": "D#",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -4514,13 +4514,13 @@
     {
      "degree": 3,
      "symbol": "B",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "G#m",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -4536,7 +4536,7 @@
     {
      "degree": 0,
      "symbol": "G#dim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -4810,7 +4810,7 @@
     {
      "degree": 8,
      "symbol": "F",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -4870,13 +4870,13 @@
     {
      "degree": 8,
      "symbol": "F",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Dm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -4892,7 +4892,7 @@
     {
      "degree": 5,
      "symbol": "Dm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -4920,7 +4920,7 @@
     {
      "degree": 8,
      "symbol": "F",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -4964,7 +4964,7 @@
     {
      "degree": 8,
      "symbol": "F",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -4980,13 +4980,13 @@
     {
      "degree": 7,
      "symbol": "E",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "G",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -5002,7 +5002,7 @@
     {
      "degree": 7,
      "symbol": "E",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -5018,13 +5018,13 @@
     {
      "degree": 3,
      "symbol": "C",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Am",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -5040,7 +5040,7 @@
     {
      "degree": 0,
      "symbol": "Adim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -5314,7 +5314,7 @@
     {
      "degree": 8,
      "symbol": "Gb",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -5374,13 +5374,13 @@
     {
      "degree": 8,
      "symbol": "Gb",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Ebm",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -5396,7 +5396,7 @@
     {
      "degree": 5,
      "symbol": "Ebm",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -5424,7 +5424,7 @@
     {
      "degree": 8,
      "symbol": "Gb",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -5468,7 +5468,7 @@
     {
      "degree": 8,
      "symbol": "Gb",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -5484,13 +5484,13 @@
     {
      "degree": 7,
      "symbol": "F",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "Ab",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -5506,7 +5506,7 @@
     {
      "degree": 7,
      "symbol": "F",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -5522,13 +5522,13 @@
     {
      "degree": 3,
      "symbol": "Db",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Bbm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -5544,7 +5544,7 @@
     {
      "degree": 0,
      "symbol": "Bbdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]
@@ -5818,7 +5818,7 @@
     {
      "degree": 8,
      "symbol": "G",
-     "reason": "i to bVI — the soft turn",
+     "reason": "i to VI — the soft turn",
      "weight": 6
     }
    ]
@@ -5878,13 +5878,13 @@
     {
      "degree": 8,
      "symbol": "G",
-     "reason": "bIII to bVI — down the circle",
+     "reason": "III to VI — down the circle",
      "weight": 6
     },
     {
      "degree": 5,
      "symbol": "Em",
-     "reason": "bIII to iv",
+     "reason": "III to iv",
      "weight": 4
     }
    ]
@@ -5900,7 +5900,7 @@
     {
      "degree": 5,
      "symbol": "Em",
-     "reason": "III to iv — a borrowed secondary dominant",
+     "reason": "#III to iv — a borrowed secondary dominant",
      "weight": 4
     }
    ]
@@ -5928,7 +5928,7 @@
     {
      "degree": 8,
      "symbol": "G",
-     "reason": "iv to bVI",
+     "reason": "iv to VI",
      "weight": 4
     }
    ]
@@ -5972,7 +5972,7 @@
     {
      "degree": 8,
      "symbol": "G",
-     "reason": "V to bVI — the deceptive cadence",
+     "reason": "V to VI — the deceptive cadence",
      "weight": 6
     }
    ]
@@ -5988,13 +5988,13 @@
     {
      "degree": 7,
      "symbol": "F#",
-     "reason": "bVI to V — the half-step approach",
+     "reason": "VI to V — the half-step approach",
      "weight": 8
     },
     {
      "degree": 10,
      "symbol": "A",
-     "reason": "bVI to bVII — the climb",
+     "reason": "VI to VII — the climb",
      "weight": 6
     }
    ]
@@ -6010,7 +6010,7 @@
     {
      "degree": 7,
      "symbol": "F#",
-     "reason": "raised sixth to V — the chromatic approach",
+     "reason": "#VI to V — the chromatic approach",
      "weight": 4
     }
    ]
@@ -6026,13 +6026,13 @@
     {
      "degree": 3,
      "symbol": "D",
-     "reason": "bVII to bIII — the relative cadence",
+     "reason": "VII to III — the relative cadence",
      "weight": 8
     },
     {
      "degree": 0,
      "symbol": "Bm",
-     "reason": "bVII to i — the Aeolian cadence",
+     "reason": "VII to i — the Aeolian cadence",
      "weight": 6
     }
    ]
@@ -6048,7 +6048,7 @@
     {
      "degree": 0,
      "symbol": "Bdim",
-     "reason": "vii° to i — the leading tone resolves",
+     "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
    ]

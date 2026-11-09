@@ -245,7 +245,7 @@ function renderPinConflict(pins: Pins, chords: readonly Chord[]): HTMLElement {
     el(
       'p',
       'notice-body',
-      'Nothing is wrong with the progression. Clear a pin and the readings come back.',
+      'Nothing is wrong with the progression. Choose Clear pins and the readings come back.',
     ),
   );
   const clear = document.createElement('button');
@@ -272,8 +272,8 @@ function renderNoSuggestions(): HTMLElement {
       'p',
       'caveat',
       'These follow from the key, and no key fits this well enough to follow ' +
-        'from. The readings above are the least bad ones, not an answer to ' +
-        'build on.',
+        'from. The top reading above is the least bad one, and none of the ' +
+        'readings is an answer to build on.',
     ),
   );
   return section;

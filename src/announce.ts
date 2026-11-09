@@ -53,7 +53,7 @@ export function announcement(
     // Worth saying out loud: a listener cannot see the conflict notice, and
     // silence here would be indistinguishable from the page having nothing
     // to say about a progression they just typed.
-    if (pinCount > 0) return 'No reading fits those pins. Clear a pin to see the readings again.';
+    if (pinCount > 0) return 'No reading fits those pins. Choose Clear pins to see the readings again.';
     return '';
   }
 
@@ -65,7 +65,7 @@ export function announcement(
     return `${top}, but nothing fits well and the near-misses are tied.${skipped}`;
   }
   if (confidence.uncertain) {
-    return `${top}, the least bad reading. No key fits this well.${skipped}`;
+    return `${top}, the least bad reading. No key fits this well, and none of the readings is a confident answer.${skipped}`;
   }
   if (confidence.ambiguous) {
     const names = confidence.contenders.map((r) => keyName(r.key));
