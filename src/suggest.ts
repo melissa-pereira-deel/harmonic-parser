@@ -111,7 +111,7 @@ const MINOR_MOVES: readonly Move[] = [
   { from: 10, to: 0, reason: 'VII to i — the Aeolian cadence', weight: 6 },
   { from: 3, to: 8, reason: 'III to VI — down the circle', weight: 6 },
   { from: 3, to: 5, reason: 'III to iv', weight: 4 },
-  { from: 11, to: 0, reason: '#vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
+  { from: 11, to: 0, reason: '#vii° to i — the leading tone resolves', weight: 8 },
   { from: 4, to: 5, reason: '#III to iv — a borrowed secondary dominant', weight: 4 },
   { from: 9, to: 7, reason: '#VI to V — the chromatic approach', weight: 4, quality: '' },
   { from: 1, to: 7, reason: 'bII to V — the Neapolitan', weight: 8, quality: '' },

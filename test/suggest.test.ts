@@ -292,16 +292,18 @@ describe('minor keys have their own rules', () => {
     expect(afterFive?.candidates[1].symbol).toBe('F');
   });
 
+  it('resolves the leading-tone chord to a minor tonic', () => {
+    // The rule carried `quality: 'dim'`, the quality of the chord it starts
+    // from, and applied it to the chord it goes to: G#dim suggested Adim.
+    expect(suggest([chord('G#dim')], A_MINOR)[0].symbol).toBe('Am');
+  });
+
   it('names chords in its reasons the way the chord cards do', () => {
     // The minor reasons used to say bIII, bVI and bVII, so in A minor a G
     // card read VII while its suggestion said "bVII". Both numerals in each
     // reason should be what `romanNumeral` puts on the card for that chord.
     // bII and the raised fourth are left out: their rules key on the degree
     // alone and name the seventh chord (bII7, #iv°7) after a plain triad.
-    //
-    // The target side skips G#dim. Its rule's `quality: 'dim'` lands on the
-    // target, so it suggests Adim where the reason says i. That is a symbol
-    // bug, not a wording one, and is left for its own change.
     const lasts = ['Am', 'Bdim', 'C', 'C#', 'Dm', 'E', 'F', 'F#', 'G', 'G#dim'];
     for (const symbol of lasts) {
       const last = chord(symbol);
@@ -309,7 +311,6 @@ describe('minor keys have their own rules', () => {
         const named = /^(\S+) (?:back )?to (\S+)/.exec(s.reason);
         expect(named, s.reason).not.toBeNull();
         expect(named?.[1], s.reason).toBe(romanNumeral(last, A_MINOR).numeral);
-        if (symbol === 'G#dim') continue;
         expect(named?.[2], s.reason).toBe(romanNumeral(chord(s.symbol), A_MINOR).numeral);
       }
     }
@@ -339,6 +340,21 @@ describe('minor keys have their own rules', () => {
     expect(degrees(minorFallback, C_MINOR).sort((a, b) => a - b)).toEqual(
       [0, 2, 3, 5, 7, 8, 10],
     );
+  });
+});
+
+describe('the tonic is always the tonic triad', () => {
+  // A move's `quality` is for a chord borrowed from outside the key. The tonic
+  // never is, so a suggestion to degree 0 should always be the key's own I or
+  // i. The minor leading-tone rule broke this in all 12 minor keys.
+  it.each([...new Set(committed.rows.map((r) => r.key))])('%s', (key) => {
+    const [tonic, mode] = key.split(' ');
+    const expected = tonic + (mode === 'minor' ? 'm' : '');
+    for (const row of committed.rows.filter((r) => r.key === key)) {
+      for (const candidate of row.candidates.filter((c) => c.degree === 0)) {
+        expect(candidate.symbol, `after degree ${row.from}`).toBe(expected);
+      }
+    }
   });
 });
 
