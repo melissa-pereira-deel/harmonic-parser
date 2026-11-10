@@ -133,6 +133,15 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- **The leading-tone chord in minor resolves to a minor tonic**: `G#dim` in
+  A minor now suggests `Am`, not `Adim`. The minor rule from degree 11 carried
+  `quality: 'dim'`, which belongs to the chord the move starts from but was
+  applied to the chord it goes to, so every minor key offered a diminished
+  tonic under the reason "#vii° to i". The fixture changes in 12 entries, one
+  per minor key, all after degree 11: `Xdim` becomes `Xm`, and nothing else
+  moves. A score taken against the old baseline is stale for those contexts.
+  A new test checks every key: any suggestion of degree 0 is the key's own
+  tonic triad.
 - **Changing a pin keeps keyboard focus on it** (#38). The panel is rebuilt
   on every render, so the select that had just changed was destroyed and
   focus fell to `<body>`. Keyboard and screen-reader users lost their place

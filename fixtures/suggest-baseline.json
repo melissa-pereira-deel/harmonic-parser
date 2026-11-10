@@ -503,7 +503,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Cdim",
+     "symbol": "Cm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -1007,7 +1007,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "C#dim",
+     "symbol": "C#m",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -1511,7 +1511,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Ddim",
+     "symbol": "Dm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -2015,7 +2015,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Ebdim",
+     "symbol": "Ebm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -2519,7 +2519,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Edim",
+     "symbol": "Em",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -3023,7 +3023,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Fdim",
+     "symbol": "Fm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -3527,7 +3527,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "F#dim",
+     "symbol": "F#m",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -4031,7 +4031,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Gdim",
+     "symbol": "Gm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -4535,7 +4535,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "G#dim",
+     "symbol": "G#m",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -5039,7 +5039,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Adim",
+     "symbol": "Am",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -5543,7 +5543,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Bbdim",
+     "symbol": "Bbm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
@@ -6047,7 +6047,7 @@
    "candidates": [
     {
      "degree": 0,
-     "symbol": "Bdim",
+     "symbol": "Bm",
      "reason": "#vii° to i — the leading tone resolves",
      "weight": 8
     }
