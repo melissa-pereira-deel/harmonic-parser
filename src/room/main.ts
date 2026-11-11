@@ -51,6 +51,9 @@ let source: 'midi' | 'replay' | null = null;
 let fixture: ReplayFixture | null = null;
 let startMs = performance.now();
 let frozenMs: number | null = null;
+let fieldTimeMs = 0;
+let previousFrameMs: number | null = null;
+let field = { impulse: 0, register: 0.5, envelope: 0, energy: 0, warmth: 0 };
 let status: MidiStatus = { kind: 'idle', ports: [], selectedId: null };
 let metrics: RoomMetrics | undefined;
 let displayedHarmony: LiveHarmony | null = null;
@@ -141,9 +144,25 @@ function showHarmony(reading: LiveHarmony | null): void {
   harmonyNextItem.hidden = !reading?.next;
 }
 
-function draw(tMs: number) {
+function draw(tMs: number, stepMs?: number) {
   const state = session.sample(tMs, reducedMotion.matches);
-  renderer.draw(state.frame);
+  const frame = state.frame;
+  if (stepMs === undefined) {
+    renderer.draw(frame, frame.reducedMotion ? 0 : tMs);
+  } else {
+    // The scene keeps its phase when the musical session resets.
+    if (!frame.reducedMotion) fieldTimeMs += stepMs;
+    const follow = (current: number, target: number, timeMs: number) =>
+      current + (target - current) * (1 - Math.exp(-stepMs / timeMs));
+    field = {
+      impulse: follow(field.impulse, frame.impulse, 45),
+      register: follow(field.register, frame.register, 190),
+      envelope: follow(field.envelope, frame.envelope, 220),
+      energy: follow(field.energy, frame.energy, 650),
+      warmth: follow(field.warmth, frame.warmth, 850),
+    };
+    renderer.draw({ ...frame, ...field }, fieldTimeMs);
+  }
   if (source && frozenMs === null) {
     metrics?.draw(tMs, elapsed(), renderer.kind === 'webgl2');
   }
@@ -181,6 +200,7 @@ document.addEventListener('keydown', event => {
 });
 
 document.addEventListener('visibilitychange', () => {
+  previousFrameMs = null;
   if (document.hidden) {
     midi.reset();
     session.reset();
@@ -196,8 +216,13 @@ document.addEventListener('visibilitychange', () => {
 if (params.has('setup')) openSetup();
 else updateSetup();
 
-function animate(): void {
-  draw(frozenMs ?? elapsed());
+function animate(nowMs: number): void {
+  const stepMs = previousFrameMs === null ? 0 : Math.min(nowMs - previousFrameMs, 50);
+  previousFrameMs = nowMs;
+  if (!document.hidden) {
+    if (frozenMs === null) draw(elapsed(), stepMs);
+    else draw(frozenMs);
+  }
   requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);

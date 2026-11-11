@@ -16,10 +16,22 @@ Open [room setup](http://localhost:5173/room/?setup=1) using the port Vite print
 | Condition | What happens |
 | --- | --- |
 | A · Drifting on its own | The field moves on its own while you play. |
-| B · Responding to gesture | Strike, register and held notes influence the same field. |
+| B · Responding to gesture | Strike, register and held notes shape the field. The palette also follows the pace and phrasing of the playing. |
 | C · Gesture and harmony | B's field plus a small harmony readout for live MIDI and the chord replay. The original phrase replay still offers its timed reflection. |
 
 The readout names familiar voicings, including inversions. A short run of single notes can leave the readout quiet. The key and suggestion are provisional readings of the recent progression.
+
+## Test the gradient with a KeyLab
+
+Use desktop Chrome. For the drift check, turn off your system's Reduced Motion setting and keep the room tab in the foreground. Keep your usual instrument or synth open for sound.
+
+1. **Watch the field at rest.** Select **A · Drifting on its own** and **Replay a phrase**, then click **Enter room**. Watch a fold or bright patch for 30 seconds. Press **Esc** and enter again. Look for continuous drift across the transition into and out of setup. Note when any flash, snap or apparent repeat occurs.
+2. **Connect the keyboard.** Press **Esc**, select **B · Responding to gesture**, and choose **Play my keyboard**. Click **Connect MIDI**, allow access if prompted, and select **Arturia KeyLab Essential 49 MIDI In**. Wait for **Keyboard ready**, then click **Enter room**.
+3. **Compare two versions of a motif.** Repeat three or four notes softly for a few seconds. Play the same notes with closer spacing or stronger accents for another few seconds. Watch for a gradual shift toward violet. To isolate rhythm, keep the accents similar and change only the spacing.
+4. **Leave room for release.** After several attacks, stop playing for three to five seconds. Look for amber to emerge during the pause. Wait a little longer to see it fade toward the drifting palette.
+5. **Try a resolution.** In **C · Gesture and harmony**, play **D–F–A**, then **G–B–D**, then **C–E–G**. Play each group together and hold it for about half a second. Hold the last chord and look for a warmer tint as the harmony readout reaches **C**.
+
+Note which step made the color feel connected to your playing, and whether a snap happened while idle, during a note, or around setup. [Field palette and motion](design-system.md#field-palette-and-motion)
 
 ## Physical rig and first session
 

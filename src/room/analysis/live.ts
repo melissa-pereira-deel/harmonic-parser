@@ -2,6 +2,7 @@ import { INTERVALS, parseChord } from '../../chords.ts';
 import type { Chord, Quality } from '../../chords.ts';
 import { assess, UNCERTAINTY_FLOOR } from '../../confidence.ts';
 import { keyName } from '../../keyprofiles.ts';
+import type { Key } from '../../keyprofiles.ts';
 import { rank } from '../../readings.ts';
 import { suggest } from '../../suggest.ts';
 import type { ActiveNote } from '../contracts.ts';
@@ -62,9 +63,8 @@ function difference(from: Chord, to: Chord): number {
   return (from.root - to.root + 12) % 12;
 }
 
-function possibleKey(chords: readonly Chord[]) {
-  if (new Set(chords.map(chord => chord.symbol)).size < 3) return null;
-  const readings = rank(chords);
+function cadentialKey(chords: readonly Chord[]): Key | null {
+  if (chords.length < 3) return null;
   const [approach, dominant, tonic] = chords.slice(-3);
   const mode = ['maj', 'maj7'].includes(tonic.quality) ? 'major'
     : ['min', 'min7'].includes(tonic.quality) ? 'minor' : null;
@@ -72,16 +72,22 @@ function possibleKey(chords: readonly Chord[]) {
     && ['min', 'min7', 'dim', 'min7b5'].includes(approach.quality);
   if (mode && difference(dominant, tonic) === 7
     && (dominant.quality === 'dom7' || (dominant.quality === 'maj' && twoToFive))) {
-    // The profile is order independent. Give an audible dominant resolution a vote.
-    const cadence = readings.find(({ key, score }) =>
-      key.tonic === tonic.root && key.mode === mode && score >= UNCERTAINTY_FLOOR);
-    if (cadence) return cadence.key;
+    return { tonic: tonic.root, mode };
   }
+  return null;
+}
+
+function possibleKey(chords: readonly Chord[], cadence: Key | null): Key | null {
+  if (new Set(chords.map(chord => chord.symbol)).size < 3) return null;
+  const readings = rank(chords);
+  // The profile is order independent. Give an audible dominant resolution a vote.
+  if (cadence && readings.some(({ key, score }) =>
+    key.tonic === cadence.tonic && key.mode === cadence.mode && score >= UNCERTAINTY_FLOOR)) return cadence;
   const confidence = assess(readings);
   return confidence.uncertain || confidence.ambiguous ? null : readings[0].key;
 }
 
-export function createLiveHarmony() {
+export function createLiveHarmony(onCadence?: (tMs: number) => void) {
   let pending: Voicing | null = null;
   let since = 0;
   let settled = false;
@@ -94,11 +100,14 @@ export function createLiveHarmony() {
     const acceptedAt = since + HOLD_MS;
     const chord = pending.chord;
     history = history.filter(item => acceptedAt - item.tMs <= CONTEXT_MS);
-    if (history.at(-1)?.chord.symbol === chord.symbol) history.pop();
+    const repeated = history.at(-1)?.chord.symbol === chord.symbol;
+    if (repeated) history.pop();
     history.push({ chord, tMs: acceptedAt });
     history = history.slice(-MAX_CHORDS);
     const chords = history.map(item => item.chord);
-    const key = possibleKey(chords);
+    const cadence = cadentialKey(chords);
+    const key = possibleKey(chords, cadence);
+    if (!repeated && cadence && key === cadence) onCadence?.(acceptedAt);
     reading = {
       chord: pending.symbol,
       key: key ? keyName(key) : null,

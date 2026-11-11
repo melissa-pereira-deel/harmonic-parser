@@ -1,6 +1,6 @@
 # Harmonic Parser design system
 
-This reference describes the UI at `87f14d2), reviewed on 11 November 2026. The live room at `/room/` is a full viewport playing space. The chord parser at `/` is a reading and editing surface. Each entry point owns its stylesheet. The parser defines CSS custom properties, and the room defines its values in CSS and the field shader.
+This reference describes the live room and chord parser as of 11 November 2026. The live room at `/room/` is a full viewport playing space. The chord parser at `/` is a reading and editing surface. Each entry point owns its stylesheet. The parser defines CSS custom properties, and the room defines its values in CSS and the field shader.
 
 ## Live room
 
@@ -69,7 +69,7 @@ The setup uses native labels, selects and buttons. Room controls receive a `2px`
 
 ### Field palette and motion
 
-The field uses two scales of continuous 3D noise to move its folds and tint. The following are the normalized RGB values passed to the shader's color mix.
+The field uses two scales of continuous 3D noise to move its folds and tint. The shader mixes the following base colors in normalized RGB. The playing response blends violet and amber into these same layers.
 
 | Shader color | RGB values |
 | --- | --- |
@@ -80,14 +80,16 @@ The field uses two scales of continuous 3D noise to move its folds and tint. The
 
 | Interaction | Current value or response |
 | --- | --- |
-| Idle motion | The two noise layers advance at `0.20` and `0.29` noise units per second. |
-| Strike and held notes | Strike velocity controls the local impulse, with a `320ms` exponential decay time constant. The latest note's register positions the response. Physically held and pedal held notes contribute to the envelope, which saturates at four notes. |
-| Reduced Motion | The field's autonomous drift stops. Playing can still change the field, with less displacement. |
+| Idle motion | Two noise layers drift along separate paths through a 3D field with quintic interpolation. The drift has its own clock and keeps its phase between setup and play. |
+| Strike and held notes | Strike velocity controls the local impulse, with a `320ms` exponential decay time constant. The latest note's register positions the response. Physically held and pedal held notes contribute to the envelope, which saturates at four notes. All three values ease toward changes. |
+| Activity | Frequent or stronger attacks gradually deepen the field toward violet. Attacks within `55ms` share one onset, weighted by its strongest note. |
+| Release | After at least three onsets, a gap longer than the recent pace brings in amber. A recognized dominant resolution adds a stronger amber shift. Both fade over several seconds. |
+| Reduced Motion | The field holds its current drift phase. Playing can still change its color, with less displacement. |
 | WebGL fallback | A static CSS field uses two radial gradients and a linear gradient. It appears when the canvas is unavailable or loses its context. |
 | Chord timing | A recognizable voicing settles after `125ms`. Its readout can linger for `700ms` after the voicing changes or releases. The possible key uses up to 12 recently accepted chords in a 12 second window and requires at least three distinct chords. |
 | Reflection timing | `2100ms` for the current motif replay cue and the facilitator cue. |
 
-[Field shader](../src/room/visual/renderer.ts) · [Gesture and reflection timing](../src/room/session.ts) · [Harmony timing](../src/room/analysis/live.ts)
+[Field shader](../src/room/visual/renderer.ts) · [Palette timing](../src/room/analysis/mood.ts) · [Gesture and reflection timing](../src/room/session.ts) · [Harmony timing](../src/room/analysis/live.ts)
 
 ## Chord parser
 

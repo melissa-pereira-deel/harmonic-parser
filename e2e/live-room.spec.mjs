@@ -225,6 +225,36 @@ test('the idle field evolves smoothly and holds still with reduced motion', asyn
   expect(await measureMotion()).toEqual({ near: 0, later: 0 });
 });
 
+test('the field keeps drifting when a playing session starts or returns to setup', async ({ page }) => {
+  await page.addInitScript(() => {
+    const gl = WebGL2RenderingContext.prototype;
+    const getLocation = gl.getUniformLocation;
+    const setFloat = gl.uniform1f;
+    let clock;
+    window.fieldPhases = [];
+    gl.getUniformLocation = function (program, name) {
+      const location = getLocation.call(this, program, name);
+      if (name === 'time') clock = location;
+      return location;
+    };
+    gl.uniform1f = function (location, value) {
+      if (location === clock) window.fieldPhases.push(value);
+      return setFloat.call(this, location, value);
+    };
+  });
+  await page.goto('/room/?setup=1');
+  await page.waitForFunction(() => window.fieldPhases.at(-1) > 0.25);
+  await page.getByRole('button', { name: 'Enter room' }).click();
+  const during = await page.evaluate(() => window.fieldPhases.at(-1));
+  await page.waitForFunction(phase => window.fieldPhases.at(-1) > phase + 0.1, during);
+  await page.keyboard.press('Escape');
+  await expect(page.getByLabel('The room')).toBeFocused();
+  const setup = await page.evaluate(() => window.fieldPhases.at(-1));
+  await page.waitForFunction(phase => window.fieldPhases.at(-1) > phase + 0.1, setup);
+  const phases = await page.evaluate(() => window.fieldPhases);
+  expect(phases.every((phase, index) => index === 0 || phase >= phases[index - 1])).toBe(true);
+});
+
 test('renders WebGL, resizes and recovers from context loss', async ({ page }) => {
   await openLab(page);
   const canvas = page.locator('#field');

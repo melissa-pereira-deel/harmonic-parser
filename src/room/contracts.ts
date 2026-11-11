@@ -27,6 +27,8 @@ export interface RoomFrame {
   readonly impulse: number;
   readonly register: number;
   readonly envelope: number;
+  readonly energy: number;
+  readonly warmth: number;
   readonly reducedMotion: boolean;
 }
 

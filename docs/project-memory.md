@@ -2,7 +2,7 @@
 
 This journal tracks the live playing exploration alongside the existing chord-symbol parser. The snapshot is the place to resume. The dated entries preserve what led there so we can revisit a decision without reconstructing it from chat.
 
-## Current snapshot · 2026-11-08
+## Current snapshot · 2026-11-11
 
 - **User brief.** A private browser room for playing by ear. It opens to a fluid, slowly moving field of light, color and texture with no visible controls or copy. A connected MIDI keyboard can shape the field. Harmonic information should blend into the world when it appears. Its form and level of interaction are open.
 - **Playing practice.** Find a melody by ear, repeat it, and vary the rhythm, phrasing, or notes. The hard moment comes once a motif feels worth keeping. How can it gain tension, find release, or acquire harmonic depth without losing what made it compelling? Theory vocabulary should be optional in the playing experience.
@@ -13,7 +13,8 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Current brief.** [A room for the next variation](concepts/a-room-for-the-next-variation.md). Its listening references and study plan contain interpretations and proposals.
 - **PoC preparation.** The [technical research](concepts/live-room-technical-research.md), [backlog](superpowers/plans/2026-11-07-live-room-poc.md), and [agent harness](superpowers/plans/live-room-agent-harness.md) are the handoff for a first build. The starting stack and the two-stage parser path are recommendations to verify during that build.
 - **First implementation.** [Play the room and verify the rig](live-room-poc.md). The room has three comparable replay conditions, selected-port MIDI, and a lab-only connection to the real parser through annotated replay. The physical rig and listening comparison are open.
-- **Idle motion.** The user wants perceptible, organic variation in the field before playing, with TouchDesigner noise as the reference. The veil's shape and color now evolve through two scales of continuous noise. The pace and palette are provisional until the user tries the revised field.
+- **Field motion.** The user wants perceptible, organic variation in the field before playing, with TouchDesigner noise as the reference. Two layers of continuous noise shape the field on an independent clock. See [E009](#e009--2026-11-11--continuous-drift-and-phrase-color) for the adjustment to the snap and apparent loop.
+- **Phrase color.** In B and C, playing gradually shifts the palette toward violet with activity and toward amber at pauses and recognizable resolutions. The mapping is a proposed visual interpretation of timing and dynamics. The player's experience with a repeated motif is still open.
 - **Keyboard setup.** The player's KeyLab Essential 49 exposes two inputs. The player confirmed that **Arturia KeyLab Essential 49 MIDI In** drives the field. The sound-route check and listening comparison are still open.
 - **Live harmony exploration.** Condition C now has a small chord, possible key and next-chord readout. It uses recognizable held voicings and recent chord history. Its timing and usefulness are open for a playing test. [Try it](live-room-poc.md)
 
@@ -69,6 +70,14 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **User direction.** Explore showing the current chord, key and what could come next in an extremely minimal interface.
 - **Proposed adjustment.** Condition C shows a small readout after a recognizable voicing settles. A possible key and one rule-based next chord appear only after a short sequence supplies enough evidence. A separate chord replay exercises the same live detector without requiring a keyboard. This revises E005's lab-only decision for the local experiment.
 - **Open.** Test which voicings the player uses and whether the readout helps them vary a motif. Key suggestions are provisional. A melody without overlapping chord tones can leave the readout quiet.
+
+### E009 · 2026-11-11 · Continuous drift and phrase color
+
+- **User direction.** The field sometimes flicks or seems to reach the end of a short loop. Make it fluid and let the colors change gradually with the feeling of the playing, including rhythm and cadence.
+- **Observed.** The field used the session clock, which resets on entering the room, opening setup and resuming a replay. A repeating sweep also drove the whole fold, and raw gesture values could step between frames. This revises the motion treatment in [E006](#e006--2026-11-08--perceptible-motion-at-rest).
+- **Proposed adjustment.** Use separate, continuous paths through the noise volume and give the field its own clock. Let nearby note attacks count as one onset. Map stronger or more frequent attacks toward violet, and give a break in a phrase or a supported harmonic resolution a slower amber response. B and C share this mapping. [Renderer](../src/room/visual/renderer.ts) · [Design system](design-system.md#field-palette-and-motion)
+- **Verified.** Chrome's field clock continued across entering the room and returning to setup. At matching replay times and noise positions, rendered B frames shifted toward violet during the phrase and became warmer after the pause. This used the chord replay. [Browser checks](../e2e/live-room.spec.mjs)
+- **Open.** Play a familiar motif on the KeyLab at different speeds and dynamics, then leave a pause. Check whether the transition feels like it follows the phrase and whether the field still seems to return to the same shape.
 
 ## How to continue
 
