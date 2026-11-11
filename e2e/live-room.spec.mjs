@@ -21,6 +21,7 @@ test('serves both built entries under a project subpath without the lab', async 
   await expect(page.getByLabel('The room')).toBeFocused();
   await page.getByRole('button', { name: 'Enter room' }).click();
   await expect(page.getByRole('heading', { name: 'Live room' })).toBeHidden();
+  await expect(page.locator('.motion-panel')).toHaveCount(0);
   expect(await page.evaluate(() => window.__roomLab)).toBeUndefined();
   expect(errors).toEqual([]);
 });
@@ -76,7 +77,7 @@ test('exposes real annotated parser rankings while keeping the room quiet', asyn
   await expect(page.locator('#reflection')).toBeEmpty();
 });
 
-test('requests MIDI from setup and recovers when the selected keyboard disconnects', async ({ page }) => {
+test('keeps MIDI playing through live motion changes and recovers on disconnect', async ({ page }) => {
   await page.addInitScript(() => {
     const input = {
       id: 'keyboard',
@@ -123,6 +124,44 @@ test('requests MIDI from setup and recovers when the selected keyboard disconnec
   await page.evaluate(() => window.playMockChord([60, 64, 67]));
   await expect(page.locator('#harmony-chord')).toHaveText('C');
   await expect(page.locator('#harmony-key-item')).toBeHidden();
+
+  const readUniform = name => page.evaluate(name => {
+    const gl = document.querySelector('#field').getContext('webgl2');
+    const program = gl.getParameter(gl.CURRENT_PROGRAM);
+    return gl.getUniform(program, gl.getUniformLocation(program, name));
+  }, name);
+  const phaseBefore = await readUniform('time');
+  await page.getByText('Motion', { exact: true }).click();
+  const current = page.getByRole('button', { name: 'Current' });
+  const gentle = page.getByRole('button', { name: 'Gentle' });
+  await expect(current).toHaveAttribute('aria-pressed', 'true');
+  await gentle.click();
+  await expect(gentle).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByRole('slider', { name: 'Strike attack' })).toHaveValue('110');
+  await expect.poll(() => readUniform('strike')).toBe(0.5);
+  expect(await readUniform('time')).toBeGreaterThan(phaseBefore);
+  await expect(page.locator('#harmony-chord')).toHaveText('C');
+
+  await page.getByRole('slider', { name: 'Warp' }).press('Home');
+  await expect.poll(() => readUniform('warp')).toBe(0);
+  await page.getByRole('slider', { name: 'Detail' }).press('End');
+  await expect.poll(() => readUniform('detail')).toBe(1);
+  await page.getByRole('slider', { name: 'Strike strength' }).press('Home');
+  await expect.poll(() => readUniform('strike')).toBe(0);
+  await page.getByRole('slider', { name: 'Speed' }).press('Home');
+  await expect.poll(async () => {
+    const before = await readUniform('time');
+    await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    return await readUniform('time') - before;
+  }).toBe(0);
+  await expect(gentle).toHaveAttribute('aria-pressed', 'false');
+  const pausedPhase = await readUniform('time');
+  await current.click();
+  await expect.poll(() => readUniform('time')).toBeGreaterThan(pausedPhase);
+  await expect.poll(() => readUniform('strike')).toBe(1);
+  expect(await page.evaluate(() => window.mockRequests)).toBe(1);
+  expect(await page.evaluate(() => window.__roomLab.stats().strikes)).toBe(4);
+
   await page.evaluate(() => window.playMockChord([53, 57, 60]));
   await expect(page.locator('#harmony-chord')).toHaveText('F');
   await page.evaluate(() => window.playMockChord([55, 59, 62]));
@@ -253,6 +292,22 @@ test('the field keeps drifting when a playing session starts or returns to setup
   await page.waitForFunction(phase => window.fieldPhases.at(-1) > phase + 0.1, setup);
   const phases = await page.evaluate(() => window.fieldPhases);
   expect(phases.every((phase, index) => index === 0 || phase >= phases[index - 1])).toBe(true);
+});
+
+test('the motion lab applies the preset and independent overrides', async ({ page }) => {
+  await openLab(page, '&motion=gentle&speed=0&detail=0.6');
+  const tuning = await page.evaluate(() => {
+    window.__roomLab.start('A');
+    window.__roomLab.sampleAt(5100);
+    const gl = document.querySelector('#field').getContext('webgl2');
+    const program = gl.getParameter(gl.CURRENT_PROGRAM);
+    const uniform = name => gl.getUniform(program, gl.getUniformLocation(program, name));
+    return { time: uniform('time'), warp: uniform('warp'), strike: uniform('strike'), detail: uniform('detail') };
+  });
+  expect(tuning.time).toBe(0);
+  expect(tuning.warp).toBeCloseTo(0.425);
+  expect(tuning.strike).toBe(0.5);
+  expect(tuning.detail).toBeCloseTo(0.6);
 });
 
 test('renders WebGL, resizes and recovers from context loss', async ({ page }) => {

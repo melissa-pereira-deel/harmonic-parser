@@ -42,16 +42,18 @@ Controls have a `.35rem` radius, a `2.65rem` minimum height and `.4rem .75rem` p
 
 ### Typography
 
+The room uses a locally served [Rubik](https://fonts.google.com/specimen/Rubik) variable font. Its fallback stack is Helvetica Neue, Helvetica, Arial and generic sans serif.
+
 | Role | Family and size |
 | --- | --- |
-| Setup title | Georgia, weight 400, `clamp(2.25rem, 8vw, 3.2rem)` at `1.1` line height |
-| Setup body and controls | System sans serif. Body paragraphs use `1.5` line height. Controls inherit the base size. |
-| Setup labels | System sans serif, `.83rem` |
-| Input note and MIDI status | System sans serif, `.85rem` |
-| Setup footnote | System sans serif, `.8rem` |
-| Harmony labels | System sans serif, `.72rem` |
-| Harmony values | Georgia, weight 400, `1rem` at `1.2` line height. The current chord is `1.35rem`. |
-| Reflection | Georgia, weight 400, `clamp(.95rem, 3vw, 1.15rem)` at `1.4` line height |
+| Setup title | Rubik 500, `clamp(2.25rem, 8vw, 3.2rem)` at `1.1` line height |
+| Setup body and controls | Rubik 400. Body paragraphs use `1.5` line height. Controls inherit the base size. |
+| Setup labels | Rubik 400, `.83rem` |
+| Input note and MIDI status | Rubik 400, `.85rem` |
+| Setup footnote | Rubik 400, `.8rem` |
+| Harmony labels | Rubik 400, `.72rem` |
+| Harmony values | Rubik 400, `1rem` at `1.2` line height. The current chord uses weight 500 at `1.35rem`. |
+| Reflection | Rubik 400, `clamp(.95rem, 3vw, 1.15rem)` at `1.4` line height |
 
 ### Components and states
 
@@ -89,7 +91,7 @@ The field uses two scales of continuous 3D noise to move its folds and tint. The
 | Chord timing | A recognizable voicing settles after `125ms`. Its readout can linger for `700ms` after the voicing changes or releases. The possible key uses up to 12 recently accepted chords in a 12 second window and requires at least three distinct chords. |
 | Reflection timing | `2100ms` for the current motif replay cue and the facilitator cue. |
 
-[Field shader](../src/room/visual/renderer.ts) · [Palette timing](../src/room/analysis/mood.ts) · [Gesture and reflection timing](../src/room/session.ts) · [Harmony timing](../src/room/analysis/live.ts)
+[Motion controls and investigation](field-motion.md) · [Field shader](../src/room/visual/renderer.ts) · [Palette timing](../src/room/analysis/mood.ts) · [Gesture and reflection timing](../src/room/session.ts) · [Harmony timing](../src/room/analysis/live.ts)
 
 ## Chord parser
 

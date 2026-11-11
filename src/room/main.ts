@@ -8,6 +8,8 @@ import type { RoomMetrics } from './lab.ts';
 import { chordReplay, motifReplay } from './replay/motif.ts';
 import { createRoomSession } from './session.ts';
 import { createRoomRenderer } from './visual/renderer.ts';
+import { defaultFieldTuning, interpolateFieldTuning, readFieldTuning } from './visual/tuning.ts';
+import type { FieldTuning } from './visual/tuning.ts';
 
 function element<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -39,8 +41,12 @@ const harmonyNext = element('harmony-next');
 const harmonyNextItem = element('harmony-next-item');
 const params = new URLSearchParams(location.search);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const labEnabled = import.meta.env.DEV && params.has('lab');
+let tuning = labEnabled ? readFieldTuning(params) : defaultFieldTuning;
+let motionTransition: { from: FieldTuning; to: FieldTuning; elapsedMs: number } | null = null;
+const motionTransitionMs = 150;
 
-if (import.meta.env.DEV && params.has('lab') && params.get('treatment') === 'basin') {
+if (labEnabled && params.get('treatment') === 'basin') {
   canvas.dataset.treatment = 'basin';
 }
 
@@ -147,21 +153,27 @@ function showHarmony(reading: LiveHarmony | null): void {
 function draw(tMs: number, stepMs?: number) {
   const state = session.sample(tMs, reducedMotion.matches);
   const frame = state.frame;
+  if (motionTransition) {
+    motionTransition.elapsedMs += frame.reducedMotion ? motionTransitionMs : stepMs ?? motionTransitionMs;
+    tuning = interpolateFieldTuning(motionTransition.from, motionTransition.to,
+      motionTransition.elapsedMs / motionTransitionMs);
+    if (tuning === motionTransition.to) motionTransition = null;
+  }
   if (stepMs === undefined) {
-    renderer.draw(frame, frame.reducedMotion ? 0 : tMs);
+    renderer.draw(frame, frame.reducedMotion ? 0 : tMs * tuning.speed, tuning);
   } else {
     // The scene keeps its phase when the musical session resets.
-    if (!frame.reducedMotion) fieldTimeMs += stepMs;
+    if (!frame.reducedMotion) fieldTimeMs += stepMs * tuning.speed;
     const follow = (current: number, target: number, timeMs: number) =>
       current + (target - current) * (1 - Math.exp(-stepMs / timeMs));
     field = {
-      impulse: follow(field.impulse, frame.impulse, 45),
+      impulse: follow(field.impulse, frame.impulse, tuning.attack),
       register: follow(field.register, frame.register, 190),
       envelope: follow(field.envelope, frame.envelope, 220),
       energy: follow(field.energy, frame.energy, 650),
       warmth: follow(field.warmth, frame.warmth, 850),
     };
-    renderer.draw({ ...frame, ...field }, fieldTimeMs);
+    renderer.draw({ ...frame, ...field }, fieldTimeMs, tuning);
   }
   if (source && frozenMs === null) {
     metrics?.draw(tMs, elapsed(), renderer.kind === 'webgl2');
@@ -227,7 +239,12 @@ function animate(nowMs: number): void {
 }
 requestAnimationFrame(animate);
 
-if (import.meta.env.DEV && params.has('lab')) {
+if (labEnabled) {
+  void import('./motion-panel.ts').then(({ mountMotionPanel }) => {
+    mountMotionPanel(room, tuning, next => {
+      motionTransition = { from: tuning, to: next, elapsedMs: 0 };
+    });
+  });
   void import('./lab.ts').then(({ installRoomLab, createRoomMetrics }) => {
     metrics = createRoomMetrics();
     installRoomLab({

@@ -1,4 +1,5 @@
 import type { RoomFrame } from '../contracts.ts';
+import type { FieldTuning } from './tuning.ts';
 
 const vertex = `#version 300 es
 void main() {
@@ -10,6 +11,7 @@ const fragment = `#version 300 es
 precision highp float;
 uniform vec2 resolution;
 uniform float time, impulse, registerPosition, envelope, energy, warmth, motion, treatment;
+uniform float warp, detail, edgeWidth, strike, light;
 out vec4 color;
 float square(float x) { return x*x; }
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
@@ -40,14 +42,14 @@ void main() {
   // The two layers travel along different paths through the noise volume.
   float current = noise(vec3(p*vec2(1.5,1.7), 0.0) + vec3(4.8,2.6,1.37) + time*vec3(0.041,-0.027,0.16));
   float eddies = noise(vec3(p*3.6, 0.0) + vec3(8.2,3.1,5.72) + time*vec3(-0.065,0.037,0.24));
-  float n = mix(current, eddies, 0.28);
+  float n = mix(current, eddies, detail);
   vec2 contact = vec2((registerPosition-0.5)*0.95, -0.08);
   float local = exp(-dot(p-contact,p-contact)*4.5);
-  float pressure = local*(impulse*0.22 + envelope*0.08);
-  float fold = p.y + 0.15*sin(p.x*1.9) + (n-0.5)*0.85;
+  float pressure = local*(impulse*0.22 + envelope*0.08)*strike;
+  float fold = p.y + 0.15*sin(p.x*1.9) + (n-0.5)*warp;
   fold += pressure * (0.35 + 0.65*motion);
   float veil = exp(-square(fold*4.4));
-  float lip = exp(-square((fold-0.085)*14.0));
+  float lip = exp(-square((fold-0.085)*14.0/edgeWidth));
   float basin = exp(-dot(p-vec2(-0.18,0.08),p-vec2(-0.18,0.08))*1.35);
   float body = mix(basin*(0.5+n*0.5), veil*(0.55+n*0.45), treatment);
   float tint = smoothstep(0.16,0.84,n);
@@ -64,7 +66,7 @@ void main() {
   vec3 c = mix(ink, mineral, body*0.8);
   c = mix(c, pearl, lip*treatment*(0.27+envelope*0.12));
   c += rust * exp(-square((fold+0.13)*9.0))*0.20*treatment;
-  c += vec3(0.30,0.32,0.22)*local*(impulse*0.29+envelope*0.12);
+  c += vec3(0.30,0.32,0.22)*local*(impulse*0.29+envelope*0.12)*light;
   float vignette = 1.0-smoothstep(0.25,1.05,length((uv-0.5)*vec2(1.0,0.8)));
   c *= 0.72+0.28*vignette;
   c += (hash(gl_FragCoord.xy)-0.5)*0.018;
@@ -84,6 +86,7 @@ export function createRoomRenderer(canvas: HTMLCanvasElement) {
   let disposed = false;
   let active = false;
   let uniforms: Record<string, WebGLUniformLocation | null> = {};
+  let uploadedTuning: FieldTuning | null = null;
   const treatment = canvas.dataset.treatment === 'basin' ? 0 : 1;
   const fallback = () => { active = false; canvas.dataset.renderer = 'css'; };
   const release = () => {
@@ -115,7 +118,11 @@ export function createRoomRenderer(canvas: HTMLCanvasElement) {
       if (!vao) throw new Error('Vertex array allocation failed');
       uniforms = Object.fromEntries([
         'resolution', 'time', 'impulse', 'registerPosition', 'envelope', 'energy', 'warmth', 'motion', 'treatment',
+        'warp', 'detail', 'edgeWidth', 'strike', 'light',
       ].map(name => [name, gl!.getUniformLocation(program!, name)]));
+      gl.useProgram(program);
+      gl.uniform1f(uniforms.treatment, treatment);
+      uploadedTuning = null;
       active = true;
       // Reveal only after a completed draw; the CSS field covers initialization.
     } catch { release(); fallback(); }
@@ -130,7 +137,7 @@ export function createRoomRenderer(canvas: HTMLCanvasElement) {
   initialize();
   return {
     get kind(): 'webgl2' | 'css' { return active ? 'webgl2' : 'css'; },
-    draw(frame: RoomFrame, fieldTimeMs: number): void {
+    draw(frame: RoomFrame, fieldTimeMs: number, tuning: FieldTuning): void {
       if (disposed || !active || !gl || !program || gl.isContextLost()) return;
       const bounds = canvas.getBoundingClientRect();
       if (bounds.width <= 0 || bounds.height <= 0) return;
@@ -140,6 +147,14 @@ export function createRoomRenderer(canvas: HTMLCanvasElement) {
       try {
         if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
         gl.viewport(0,0,width,height); gl.useProgram(program); gl.bindVertexArray(vao);
+        if (uploadedTuning !== tuning) {
+          gl.uniform1f(uniforms.warp, tuning.warp);
+          gl.uniform1f(uniforms.detail, tuning.detail);
+          gl.uniform1f(uniforms.edgeWidth, tuning.edgeWidth);
+          gl.uniform1f(uniforms.strike, tuning.strike);
+          gl.uniform1f(uniforms.light, tuning.light);
+          uploadedTuning = tuning;
+        }
         gl.uniform2f(uniforms.resolution,width,height);
         gl.uniform1f(uniforms.time, fieldTimeMs / 1000);
         gl.uniform1f(uniforms.impulse,unit(frame.impulse));
@@ -149,7 +164,6 @@ export function createRoomRenderer(canvas: HTMLCanvasElement) {
         gl.uniform1f(uniforms.energy, unit(frame.energy));
         gl.uniform1f(uniforms.warmth, unit(frame.warmth));
         gl.uniform1f(uniforms.motion,frame.reducedMotion ? 0 : 1);
-        gl.uniform1f(uniforms.treatment,treatment);
         gl.drawArrays(gl.TRIANGLES,0,3);
         if (canvas.dataset.renderer !== 'webgl2') canvas.dataset.renderer = 'webgl2';
       } catch { release(); fallback(); }

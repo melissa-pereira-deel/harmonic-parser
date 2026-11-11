@@ -1,6 +1,14 @@
+@font-face {
+  font-family: Rubik;
+  src: url('./fonts/rubik-latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: Rubik, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #121d22;
   color: #eef0e3;
 }
@@ -29,7 +37,9 @@ body { margin: 0; }
 }
 
 #setup h1 {
-  font: 400 clamp(2.25rem, 8vw, 3.2rem)/1.1 Georgia, serif;
+  font-size: clamp(2.25rem, 8vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1.1;
   margin: 0 0 .45rem;
 }
 
@@ -54,6 +64,7 @@ body { margin: 0; }
 #room #start-room { background: #d5dca3; color: #1d2821; }
 .setup-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
 #setup .setup-footnote { font-size: .8rem; margin: 1.1rem 0 0; }
+#setup kbd { font-family: inherit; }
 #source-note, #midi-status, #setup-notice { font-size: .85rem; }
 
 #show-setup { position: absolute; top: .75rem; left: .75rem; opacity: 0; pointer-events: none; }
@@ -71,7 +82,8 @@ body { margin: 0; }
   border: 1px solid #aeb69b55;
   border-radius: .5rem;
   text-align: center;
-  font: 400 clamp(.95rem, 3vw, 1.15rem)/1.4 Georgia, serif;
+  font-size: clamp(.95rem, 3vw, 1.15rem);
+  line-height: 1.4;
 }
 
 #harmony {
@@ -95,6 +107,6 @@ body { margin: 0; }
 }
 
 #harmony dt { color: #c3cec2; font-size: .72rem; }
-#harmony dd { margin: .15rem 0 0; font: 400 1rem/1.2 Georgia, serif; }
-#harmony-chord { font-size: 1.35rem; }
+#harmony dd { margin: .15rem 0 0; font-size: 1rem; line-height: 1.2; }
+#harmony-chord { font-size: 1.35rem; font-weight: 500; }
 #harmony-next { color: #d5dca3; }

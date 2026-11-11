@@ -13,10 +13,11 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Current brief.** [A room for the next variation](concepts/a-room-for-the-next-variation.md). Its listening references and study plan contain interpretations and proposals.
 - **PoC preparation.** The [technical research](concepts/live-room-technical-research.md), [backlog](superpowers/plans/2026-11-07-live-room-poc.md), and [agent harness](superpowers/plans/live-room-agent-harness.md) are the handoff for a first build. The starting stack and the two-stage parser path are recommendations to verify during that build.
 - **First implementation.** [Play the room and verify the rig](live-room-poc.md). The room has three comparable replay conditions, selected-port MIDI, and a lab-only connection to the real parser through annotated replay. The physical rig and listening comparison are open.
-- **Field motion.** The user wants perceptible, organic variation in the field before playing, with TouchDesigner noise as the reference. Two layers of continuous noise shape the field on an independent clock. See [E009](#e009--2026-11-11--continuous-drift-and-phrase-color) for the adjustment to the snap and apparent loop.
+- **Field motion.** The user wants perceptible, organic variation in the field before playing, with TouchDesigner noise as the reference. Two layers of continuous noise shape the field on an independent clock. The user still sees an occasional flick. The lab's **Motion** panel lets the player compare Current and Gentle and adjust drift and strike response during a MIDI session. [Motion map](field-motion.md) · [E011](#e011--2026-11-11--gradient-motion-investigation) · [E012](#e012--2026-11-11--live-motion-comparison)
 - **Phrase color.** In B and C, playing gradually shifts the palette toward violet with activity and toward amber at pauses and recognizable resolutions. The mapping is a proposed visual interpretation of timing and dynamics. The player's experience with a repeated motif is still open.
 - **Keyboard setup.** The player's KeyLab Essential 49 exposes two inputs. The player confirmed that **Arturia KeyLab Essential 49 MIDI In** drives the field. The sound-route check and listening comparison are still open.
 - **Live harmony exploration.** Condition C now has a small chord, possible key and next-chord readout. It uses recognizable held voicings and recent chord history. Its timing and usefulness are open for a playing test. [Try it](live-room-poc.md)
+- **Typography.** The user chose Rubik for the live room's setup, controls, harmony readout and reflection. [Design system](design-system.md#typography)
 
 ## Journal
 
@@ -78,6 +79,24 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Proposed adjustment.** Use separate, continuous paths through the noise volume and give the field its own clock. Let nearby note attacks count as one onset. Map stronger or more frequent attacks toward violet, and give a break in a phrase or a supported harmonic resolution a slower amber response. B and C share this mapping. [Renderer](../src/room/visual/renderer.ts) · [Design system](design-system.md#field-palette-and-motion)
 - **Verified.** Chrome's field clock continued across entering the room and returning to setup. At matching replay times and noise positions, rendered B frames shifted toward violet during the phrase and became warmer after the pause. This used the chord replay. [Browser checks](../e2e/live-room.spec.mjs)
 - **Open.** Play a familiar motif on the KeyLab at different speeds and dynamics, then leave a pause. Check whether the transition feels like it follows the phrase and whether the field still seems to return to the same shape.
+
+### E010 · 2026-11-11 · Live room typography
+
+- **User direction.** Give the room a more Helvetica-like feel using Rubik.
+- **Implementation.** The room serves Rubik locally. Body text and labels use regular weight, and the setup title and current chord use medium weight. [Room CSS](../src/room/room.css)
+
+### E011 · 2026-11-11 · Gradient motion investigation
+
+- **User direction.** Investigate the recurring flick from first principles and map the controls for pace, irregularity and response.
+- **Observed.** The independent clock from [E009](#e009--2026-11-11--continuous-drift-and-phrase-color) addresses setup resets. An idle Chrome probe reproduced a different effect. The bright contour can split or rejoin as the noise bends it. A controlled hard note produced a much larger pixel change in its first frame, especially when that frame was delayed.
+- **Proposed.** Compare the current field with a development-only Gentle variant. Its lower warp removed contour splits in the sampled minute. Lower strike displacement and a longer attack reduced the largest first-frame changes in the simulated MIDI probe. [Motion map and controls](field-motion.md)
+- **Open.** Identify which behavior matches the user's flick on their browser and KeyLab. Compare responsiveness and drift before choosing a production setting.
+
+### E012 · 2026-11-11 · Live motion comparison
+
+- **User direction.** Add a small lab panel to adjust speed, warp, detail and strike response with the KeyLab and compare Current and Gentle without reloading.
+- **Implementation.** A collapsible panel applies presets and slider changes in the current session. Changes ease from the values currently on screen. Speed changes advance or hold the existing phase. Strength and attack have independent controls. [Motion panel](field-motion.md#controls-to-try)
+- **Open.** Compare the two presets on the physical KeyLab and record the motion and response settings that feel best.
 
 ## How to continue
 
