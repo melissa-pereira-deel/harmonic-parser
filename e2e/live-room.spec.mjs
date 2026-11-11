@@ -95,7 +95,12 @@ test('requests MIDI from setup and recovers when the selected keyboard disconnec
         return access;
       },
     });
-    window.playMockNote = () => input.onmidimessage?.({ data: new Uint8Array([0x90, 60, 110]) });
+    let held = [];
+    window.playMockChord = notes => {
+      for (const note of held) input.onmidimessage?.({ data: new Uint8Array([0x80, note, 0]) });
+      for (const note of notes) input.onmidimessage?.({ data: new Uint8Array([0x90, note, 110]) });
+      held = notes;
+    };
     window.disconnectMockKeyboard = () => {
       input.state = 'disconnected';
       access.onstatechange?.();
@@ -112,14 +117,26 @@ test('requests MIDI from setup and recovers when the selected keyboard disconnec
   expect(await page.evaluate(() => window.mockRequests)).toBe(1);
   await page.getByRole('button', { name: 'Enter room' }).click();
 
-  await page.evaluate(() => window.playMockNote());
+  await page.evaluate(() => window.playMockChord([60]));
   await expect.poll(() => page.evaluate(() => window.__roomLab.stats().strikes)).toBe(1);
+  await expect(page.locator('#harmony')).toBeHidden();
+  await page.evaluate(() => window.playMockChord([60, 64, 67]));
+  await expect(page.locator('#harmony-chord')).toHaveText('C');
+  await expect(page.locator('#harmony-key-item')).toBeHidden();
+  await page.evaluate(() => window.playMockChord([53, 57, 60]));
+  await expect(page.locator('#harmony-chord')).toHaveText('F');
+  await page.evaluate(() => window.playMockChord([55, 59, 62]));
+  await expect(page.locator('#harmony-chord')).toHaveText('G');
+  await expect(page.locator('#harmony-key')).toHaveText('C major');
+  await expect(page.locator('#harmony-next')).toHaveText('C');
   await page.keyboard.press('r');
   await expect(page.locator('#reflection')).toHaveText('Same phrase, different bass.');
+  await expect(page.locator('#harmony')).toBeHidden();
 
   await page.evaluate(() => window.disconnectMockKeyboard());
   await expect(page.getByText('The MIDI input disconnected.', { exact: false })).toBeVisible();
   await expect(page.locator('#reflection')).toBeEmpty();
+  await expect(page.locator('#harmony')).toBeHidden();
   await page.getByLabel('Input', { exact: true }).selectOption('replay');
   await expect(page.getByRole('button', { name: 'Enter room' })).toBeEnabled();
 });
@@ -157,6 +174,55 @@ test('keeps a quiet fallback when WebGL is unavailable and respects reduced moti
   expect(sample.renderer).toBe('css');
   await expect(page.locator('#field')).toBeHidden();
   await expect(page.locator('#room')).toHaveCSS('background-image', /gradient/);
+});
+
+test('the idle field evolves smoothly and holds still with reduced motion', async ({ page }) => {
+  async function measureMotion() {
+    return page.evaluate(() => {
+      const canvas = document.querySelector('#field');
+      const gl = canvas.getContext('webgl2');
+      const { width, height } = canvas;
+
+      function sample(tMs) {
+        const state = window.__roomLab.sampleAt(tMs);
+        if (state.frame.impulse || state.frame.envelope) throw new Error('Expected the idle field');
+        const pixels = new Uint8Array(width * height * 4);
+        gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+        return pixels;
+      }
+
+      function meanChange(first, second) {
+        let total = 0;
+        let channels = 0;
+        for (let y = 8; y < height; y += 16) {
+          for (let x = 8; x < width; x += 16) {
+            const offset = (y * width + x) * 4;
+            for (let channel = 0; channel < 3; channel++) {
+              total += Math.abs(first[offset + channel] - second[offset + channel]);
+              channels++;
+            }
+          }
+        }
+        return total / channels;
+      }
+
+      window.__roomLab.start('A');
+      const initial = sample(0);
+      return {
+        near: meanChange(initial, sample(100)),
+        later: meanChange(initial, sample(2000)),
+      };
+    });
+  }
+
+  await openLab(page);
+  await expect(page.locator('#field')).toHaveAttribute('data-renderer', 'webgl2');
+  const motion = await measureMotion();
+  expect(motion.later).toBeGreaterThan(5);
+  expect(motion.near).toBeLessThan(2.5);
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  expect(await measureMotion()).toEqual({ near: 0, later: 0 });
 });
 
 test('renders WebGL, resizes and recovers from context loss', async ({ page }) => {

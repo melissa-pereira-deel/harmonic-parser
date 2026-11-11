@@ -42,3 +42,34 @@ describe('playing conditions', () => {
     expect(c.sample(0, true)).toMatchObject({ gesture: { physical: [], sustained: [] }, cue: null });
   });
 });
+
+describe('live harmony', () => {
+  function playChords(chords: number[][]) {
+    const room = createRoomSession('C', null);
+    let seq = 0;
+    for (const [index, notes] of chords.entries()) {
+      const tMs = index * 600;
+      for (const note of notes) room.apply({ kind: 'noteOn', note, velocity: 70, channel: 0, seq: seq++, tMs });
+      for (const note of notes) room.apply({ kind: 'noteOff', note, channel: 0, seq: seq++, tMs: tMs + 400 });
+    }
+    return room;
+  }
+
+  it('names a held inversion without inferring a key from one chord', () => {
+    const room = playChords([[52, 55, 60, 72]]);
+    expect(room.sample(400, false).harmony).toEqual({ chord: 'C/E', key: null, next: null });
+    expect(room.sample(1200, false).harmony).toBeNull();
+  });
+
+  it('hears a ii–V–I resolution and offers one chord to try', () => {
+    const room = playChords([[50, 53, 57], [55, 59, 62], [48, 52, 55]]);
+    expect(room.sample(1600, false).harmony).toEqual({ chord: 'C', key: 'C major', next: 'F' });
+    room.reset();
+    expect(room.sample(0, false).harmony).toBeNull();
+  });
+
+  it('withholds key and suggestions when the key profiles tie', () => {
+    const room = playChords([[48, 52, 55], [55, 59, 62], [57, 60, 64]]);
+    expect(room.sample(1600, false).harmony).toEqual({ chord: 'Am', key: null, next: null });
+  });
+});

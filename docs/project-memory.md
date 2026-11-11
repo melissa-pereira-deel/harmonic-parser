@@ -2,7 +2,7 @@
 
 This journal tracks the live playing exploration alongside the existing chord-symbol parser. The snapshot is the place to resume. The dated entries preserve what led there so we can revisit a decision without reconstructing it from chat.
 
-## Current snapshot · 2026-11-07
+## Current snapshot · 2026-11-08
 
 - **User brief.** A private browser room for playing by ear. It opens to a fluid, slowly moving field of light, color and texture with no visible controls or copy. A connected MIDI keyboard can shape the field. Harmonic information should blend into the world when it appears. Its form and level of interaction are open.
 - **Playing practice.** Find a melody by ear, repeat it, and vary the rhythm, phrasing, or notes. The hard moment comes once a motif feels worth keeping. How can it gain tension, find release, or acquire harmonic depth without losing what made it compelling? Theory vocabulary should be optional in the playing experience.
@@ -13,6 +13,9 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Current brief.** [A room for the next variation](concepts/a-room-for-the-next-variation.md). Its listening references and study plan contain interpretations and proposals.
 - **PoC preparation.** The [technical research](concepts/live-room-technical-research.md), [backlog](superpowers/plans/2026-11-07-live-room-poc.md), and [agent harness](superpowers/plans/live-room-agent-harness.md) are the handoff for a first build. The starting stack and the two-stage parser path are recommendations to verify during that build.
 - **First implementation.** [Play the room and verify the rig](live-room-poc.md). The room has three comparable replay conditions, selected-port MIDI, and a lab-only connection to the real parser through annotated replay. The physical rig and listening comparison are open.
+- **Idle motion.** The user wants perceptible, organic variation in the field before playing, with TouchDesigner noise as the reference. The veil's shape and color now evolve through two scales of continuous noise. The pace and palette are provisional until the user tries the revised field.
+- **Keyboard setup.** The player's KeyLab Essential 49 exposes two inputs. The player confirmed that **Arturia KeyLab Essential 49 MIDI In** drives the field. The sound-route check and listening comparison are still open.
+- **Live harmony exploration.** Condition C now has a small chord, possible key and next-chord readout. It uses recognizable held voicings and recent chord history. Its timing and usefulness are open for a playing test. [Try it](live-room-poc.md)
 
 ## Journal
 
@@ -48,6 +51,24 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Observed.** Starting from `405b62c`, agents built the shared WebGL field, MIDI and replay paths, and annotated parser diagnostics. Browser checks exercised the built routes, A/B/C parity and cue lifetime, permission denial and disconnect with a mock input, and WebGL context loss and recovery. [Run and verify](live-room-poc.md)
 - **Observed.** In the [synthetic note comparison](../experiments/live-room-note-evidence.spike.md), both methods could change keys after an unresolved phrase had stopped. The sounding-note method also named a key over the sparse melody, while the held-triad method missed the rolled harmony.
 - **Decision for this build.** Keep parser candidates in the lab and use a facilitated cue for C. The player's real MIDI and sound route, useful and quiet phrase windows, and the A/B/C playing comparison are the next evidence.
+
+### E006 · 2026-11-08 · Perceptible motion at rest
+
+- **User direction.** The initial veil looked static. Make its background color and shape move organically, as with noise in TouchDesigner.
+- **Observed.** The user's browser was rendering WebGL2 with Reduced Motion off. In a fixed-frame Chrome probe the original shader averaged 1.45 levels of RGB-channel change over two seconds. Its time offset was small, and its palette was fixed.
+- **Proposed adjustment.** Sample two spatial scales of 3D noise through time and use them for both fold displacement and a muted indigo-to-teal shift. In Chrome the revised field cleared the test's two-second change threshold, stayed below its short-interval change limit, and held still at idle with Reduced Motion enabled. The user still needs to judge how the pace feels in the room. [Renderer](../src/room/visual/renderer.ts) · [Browser check](../e2e/live-room.spec.mjs)
+
+### E007 · 2026-11-08 · KeyLab input discovery
+
+- **Observed.** macOS and the preview browser listed the KeyLab Essential 49's **MIDI In** and **DAW In** ports. With two inputs, room setup waits for an explicit choice. Selecting **MIDI In** opened the port and enabled **Enter room** in condition B.
+- **Open.** Verify that played notes move the field and the player's usual instrument or synth sounds at the same time.
+
+### E008 · 2026-11-08 · Minimal harmony readout
+
+- **User confirmed.** Playing the KeyLab changes the background animation.
+- **User direction.** Explore showing the current chord, key and what could come next in an extremely minimal interface.
+- **Proposed adjustment.** Condition C shows a small readout after a recognizable voicing settles. A possible key and one rule-based next chord appear only after a short sequence supplies enough evidence. A separate chord replay exercises the same live detector without requiring a keyboard. This revises E005's lab-only decision for the local experiment.
+- **Open.** Test which voicings the player uses and whether the readout helps them vary a motif. Key suggestions are provisional. A melody without overlapping chord tones can leave the readout quiet.
 
 ## How to continue
 

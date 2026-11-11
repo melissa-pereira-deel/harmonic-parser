@@ -13,30 +13,48 @@ uniform float time, impulse, registerPosition, envelope, motion, treatment;
 out vec4 color;
 float square(float x) { return x*x; }
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-float noise(vec2 p) {
-  vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
-  return mix(mix(hash(i), hash(i+vec2(1,0)),f.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);
+float hash(vec3 p) {
+  p = fract(p * 0.1031);
+  p += dot(p, p.yzx + 33.33);
+  return fract((p.x + p.y) * p.z);
 }
-float grainField(vec2 p) {
-  return noise(p)*0.57 + noise(p*2.03+7.1)*0.28 + noise(p*4.01+13.7)*0.15;
+float noise(vec3 p) {
+  vec3 i = floor(p);
+  vec3 f = fract(p);
+  f = f*f*(3.0-2.0*f);
+  float nearLayer = mix(
+    mix(hash(i), hash(i+vec3(1,0,0)), f.x),
+    mix(hash(i+vec3(0,1,0)), hash(i+vec3(1,1,0)), f.x),
+    f.y
+  );
+  float farLayer = mix(
+    mix(hash(i+vec3(0,0,1)), hash(i+vec3(1,0,1)), f.x),
+    mix(hash(i+vec3(0,1,1)), hash(i+vec3(1,1,1)), f.x),
+    f.y
+  );
+  return mix(nearLayer, farLayer, f.z);
 }
 void main() {
   vec2 uv = gl_FragCoord.xy / resolution;
   vec2 p = (gl_FragCoord.xy - resolution*0.5) / resolution.y;
-  float t = time * 0.035 * motion;
-  float n = grainField(p*1.55 + vec2(t*0.21,-t*0.16));
+  float t = time * motion;
+  // Time moves through the depth of two noise fields. Their shapes evolve in place.
+  float current = noise(vec3(p*vec2(1.5,1.7)+vec2(4.8,2.6), 1.37+t*0.20));
+  float eddies = noise(vec3(p*3.6+vec2(8.2,3.1), 5.72+t*0.29));
+  float n = mix(current, eddies, 0.28);
   vec2 contact = vec2((registerPosition-0.5)*0.95, -0.08);
   float local = exp(-dot(p-contact,p-contact)*4.5);
   float pressure = local*(impulse*0.22 + envelope*0.08);
-  float fold = p.y + 0.19*sin(p.x*1.9+t) + (n-0.5)*0.48;
+  float fold = p.y + 0.18*sin(p.x*1.9+t*0.16) + (n-0.5)*0.68;
   fold += pressure * (0.35 + 0.65*motion);
   float veil = exp(-square(fold*4.4));
   float lip = exp(-square((fold-0.085)*14.0));
   float basin = exp(-dot(p-vec2(-0.18,0.08),p-vec2(-0.18,0.08))*1.35);
   float body = mix(basin*(0.5+n*0.5), veil*(0.55+n*0.45), treatment);
-  vec3 ink = vec3(0.071,0.112,0.133);
-  vec3 mineral = vec3(0.29,0.43,0.45);
-  vec3 pearl = vec3(0.76,0.77,0.66);
+  float tint = smoothstep(0.16,0.84,n);
+  vec3 ink = mix(vec3(0.065,0.080,0.145), vec3(0.056,0.130,0.137), tint);
+  vec3 mineral = mix(vec3(0.23,0.27,0.41), vec3(0.29,0.51,0.46), tint);
+  vec3 pearl = mix(vec3(0.66,0.67,0.80), vec3(0.85,0.78,0.59), eddies);
   vec3 rust = vec3(0.42,0.25,0.20);
   vec3 c = mix(ink, mineral, body*0.8);
   c = mix(c, pearl, lip*treatment*(0.27+envelope*0.12));

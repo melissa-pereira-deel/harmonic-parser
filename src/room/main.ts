@@ -1,10 +1,11 @@
 import './visual/field.css';
 import './room.css';
+import type { LiveHarmony } from './analysis/live.ts';
 import type { Condition, ReplayFixture } from './contracts.ts';
 import { createMidiInput } from './input/midi.ts';
 import type { MidiStatus } from './input/midi.ts';
 import type { RoomMetrics } from './lab.ts';
-import { motifReplay } from './replay/motif.ts';
+import { chordReplay, motifReplay } from './replay/motif.ts';
 import { createRoomSession } from './session.ts';
 import { createRoomRenderer } from './visual/renderer.ts';
 
@@ -30,6 +31,12 @@ const start = element<HTMLButtonElement>('start-room');
 const sourceNote = element('source-note');
 const setupNotice = element('setup-notice');
 const reflection = element('reflection');
+const harmony = element('harmony');
+const harmonyChord = element('harmony-chord');
+const harmonyKey = element('harmony-key');
+const harmonyKeyItem = element('harmony-key-item');
+const harmonyNext = element('harmony-next');
+const harmonyNextItem = element('harmony-next-item');
 const params = new URLSearchParams(location.search);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -46,6 +53,7 @@ let startMs = performance.now();
 let frozenMs: number | null = null;
 let status: MidiStatus = { kind: 'idle', ports: [], selectedId: null };
 let metrics: RoomMetrics | undefined;
+let displayedHarmony: LiveHarmony | null = null;
 
 const elapsed = () => performance.now() - startMs;
 
@@ -101,11 +109,12 @@ function begin(next: Condition, mode: 'midi' | 'replay' | null, replay: ReplayFi
   midi.reset();
   condition = next;
   fixture = replay;
-  session = createRoomSession(next, replay);
+  session = createRoomSession(next, replay, mode === 'midi' || replay === chordReplay);
   startMs = performance.now();
   frozenMs = null;
   metrics?.reset();
   reflection.textContent = '';
+  showHarmony(null);
   setup.hidden = true;
   showSetup.hidden = false;
   source = mode;
@@ -121,6 +130,17 @@ function openSetup(notice = ''): void {
   conditionField.focus();
 }
 
+function showHarmony(reading: LiveHarmony | null): void {
+  if (displayedHarmony === reading) return;
+  displayedHarmony = reading;
+  harmony.hidden = !reading;
+  harmonyChord.textContent = reading?.chord ?? '';
+  harmonyKey.textContent = reading?.key ?? '';
+  harmonyKeyItem.hidden = !reading?.key;
+  harmonyNext.textContent = reading?.next ?? '';
+  harmonyNextItem.hidden = !reading?.next;
+}
+
 function draw(tMs: number) {
   const state = session.sample(tMs, reducedMotion.matches);
   renderer.draw(state.frame);
@@ -129,6 +149,7 @@ function draw(tMs: number) {
   }
   const text = state.cue?.text ?? '';
   if (reflection.textContent !== text) reflection.textContent = text;
+  showHarmony(text ? null : state.harmony);
   return { ...state, renderer: renderer.kind };
 }
 
@@ -144,7 +165,8 @@ form.addEventListener('submit', event => {
   const mode = sourceField.value === 'midi' ? 'midi' : 'replay';
   const requested = conditionField.value;
   const next = requested === 'A' || requested === 'C' ? requested : 'B';
-  begin(next, mode, mode === 'replay' ? motifReplay : null);
+  const replay = mode === 'midi' ? null : sourceField.value === 'chords' ? chordReplay : motifReplay;
+  begin(next, mode, replay);
 });
 
 document.addEventListener('keydown', event => {
@@ -163,6 +185,7 @@ document.addEventListener('visibilitychange', () => {
     midi.reset();
     session.reset();
     reflection.textContent = '';
+    showHarmony(null);
     metrics?.clearPending();
   } else {
     if (source === 'replay' && frozenMs === null) startMs = performance.now();

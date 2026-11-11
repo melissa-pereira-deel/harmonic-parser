@@ -1,4 +1,5 @@
 import type { Condition, GestureSnapshot, ReplayFixture, RoomCue, RoomEvent, RoomFrame } from './contracts.ts';
+import { createLiveHarmony } from './analysis/live.ts';
 import { createGestureState } from './input/gesture.ts';
 import { createReplay, replayCueAt } from './replay/replay.ts';
 
@@ -18,16 +19,24 @@ function frameFor(tMs: number, reducedMotion: boolean, gesture: GestureSnapshot 
   };
 }
 
-export function createRoomSession(condition: Condition, fixture: ReplayFixture | null) {
+export function createRoomSession(condition: Condition, fixture: ReplayFixture | null, showHarmony = !fixture) {
   const gesture = createGestureState();
-  const replay = fixture ? createReplay(fixture, gesture.apply) : null;
+  const harmony = condition === 'C' && showHarmony ? createLiveHarmony() : null;
   let reflection: RoomCue | null = null;
 
+  function apply(event: RoomEvent): void {
+    gesture.apply(event);
+    if (event.kind === 'reset') {
+      reflection = null;
+      harmony?.reset();
+    } else if (harmony && (event.kind === 'noteOn' || event.kind === 'noteOff')) {
+      harmony.observe(gesture.snapshot().physical, event.tMs);
+    }
+  }
+
+  const replay = fixture ? createReplay(fixture, apply) : null;
   return {
-    apply(event: RoomEvent): void {
-      if (event.kind === 'reset') reflection = null;
-      gesture.apply(event);
-    },
+    apply,
     reflect(tMs: number): void {
       if (condition !== 'C' || fixture) return;
       if (reflection && tMs < reflection.startMs + reflection.durationMs) return;
@@ -45,11 +54,12 @@ export function createRoomSession(condition: Condition, fixture: ReplayFixture |
       const frame = frameFor(tMs, reducedMotion, condition === 'A' ? null : snapshot);
       if (reflection && tMs >= reflection.startMs + reflection.durationMs) reflection = null;
       const cue = condition === 'C' ? (fixture ? replayCueAt(fixture, tMs) : reflection) : null;
-      return { frame, gesture: snapshot, cue };
+      return { frame, gesture: snapshot, cue, harmony: harmony?.sample(tMs) ?? null };
     },
     reset(): void {
       replay?.reset();
       gesture.reset();
+      harmony?.reset();
       reflection = null;
     },
   };

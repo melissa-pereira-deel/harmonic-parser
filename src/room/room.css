@@ -73,3 +73,28 @@ body { margin: 0; }
   text-align: center;
   font: 400 clamp(.95rem, 3vw, 1.15rem)/1.4 Georgia, serif;
 }
+
+#harmony {
+  position: fixed;
+  inset: auto .75rem max(10vh, env(safe-area-inset-bottom)) .75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: .55rem clamp(.8rem, 4vw, 1.6rem);
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: calc(100% - 1.5rem);
+  margin: 0 auto;
+  padding: .65rem clamp(.85rem, 4vw, 1.4rem);
+  color: #f1f0e0;
+  background: #152524eb;
+  border: 1px solid #aeb69b55;
+  border-radius: .6rem;
+  text-align: center;
+}
+
+#harmony dt { color: #c3cec2; font-size: .72rem; }
+#harmony dd { margin: .15rem 0 0; font: 400 1rem/1.2 Georgia, serif; }
+#harmony-chord { font-size: 1.35rem; }
+#harmony-next { color: #d5dca3; }

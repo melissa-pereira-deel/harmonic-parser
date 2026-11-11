@@ -11,6 +11,11 @@
     <main id="room" aria-label="Live playing room" tabindex="-1">
       <canvas id="field" aria-hidden="true"></canvas>
       <div id="reflection" role="status" aria-live="polite"></div>
+      <dl id="harmony" aria-label="Live harmony" hidden>
+        <div><dt>Chord</dt><dd id="harmony-chord"></dd></div>
+        <div id="harmony-key-item" hidden><dt>Possible key</dt><dd id="harmony-key"></dd></div>
+        <div id="harmony-next-item" hidden><dt>Try next</dt><dd id="harmony-next"></dd></div>
+      </dl>
       <button id="show-setup" type="button">Room setup</button>
 
       <section id="setup" aria-labelledby="setup-title" hidden>
@@ -22,12 +27,13 @@
             <select id="condition">
               <option value="A">A · Drifting on its own</option>
               <option value="B" selected>B · Responding to gesture</option>
-              <option value="C">C · Gesture and reflection</option>
+              <option value="C">C · Gesture and harmony</option>
             </select>
 
             <label for="source">Input</label>
             <select id="source">
               <option value="replay">Replay a phrase</option>
+              <option value="chords">Replay a chord progression</option>
               <option value="midi">Play my keyboard</option>
             </select>
 
@@ -45,7 +51,7 @@
               <button type="button" id="close-setup">Close</button>
             </div>
           </form>
-          <p class="setup-footnote"><kbd>Esc</kbd> returns to setup. In C, a facilitator can press <kbd>R</kbd> to offer a reflection during live playing.</p>
+          <p class="setup-footnote"><kbd>Esc</kbd> returns to setup. In C, hold a chord to see its name.</p>
         </div>
       </section>
     </main>
