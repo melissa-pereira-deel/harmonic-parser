@@ -56,4 +56,4 @@ The annotated fixture is distinct from the melody-first replay. The lab still ex
 - The fixed chord fixture ranks A minor first at 400 ms and C major first at 4000 ms. These readings were initially visible in the lab. The motif fixture's facilitated reflection lasts from 9000 ms up to 11100 ms.
 - Browser tests used a simulated MIDI port for permission and device behavior. The player later confirmed that the KeyLab drives the field. The harmony readout and sound route are ready for the physical playing check.
 
-[Backlog and acceptance gates](superpowers/plans/2026-11-07-live-room-poc.md) · [Project memory](project-memory.md)
+[Design system](design-system.md) · [Backlog and acceptance gates](superpowers/plans/2026-11-07-live-room-poc.md) · [Project memory](project-memory.md)
