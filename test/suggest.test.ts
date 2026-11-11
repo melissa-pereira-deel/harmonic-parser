@@ -31,6 +31,7 @@ import { parseChord } from '../src/chords.ts';
 import type { Key } from '../src/keyprofiles.ts';
 import type { Suggestion } from '../src/suggest.ts';
 import { diatonicFallback, suggest } from '../src/suggest.ts';
+import { romanNumeral } from '../src/readings.ts';
 import type { Fixture } from '../tools/suggest-baseline.ts';
 import { buildFixture } from '../tools/suggest-baseline.ts';
 import committedJson from '../fixtures/suggest-baseline.json' with { type: 'json' };
@@ -216,6 +217,33 @@ describe('suggestions are spelled by key signature', () => {
     expect(symbols).toEqual(expect.arrayContaining(['Eb', 'Ab', 'Bb']));
   });
 
+  // A key uses each letter once. Checked over every in-scale candidate in the
+  // fixture, without the step table `suggest.ts` spells with, so this is not
+  // the implementation asserting itself. "Never uses a sharp" passed while Eb
+  // minor offered both `Bb` and `B`, two chords on one letter (#37).
+  it.each([...new Set(committed.rows.map((r) => r.key))])(
+    'uses each letter once across the scale of %s',
+    (key) => {
+      const rows = committed.rows.filter((r) => r.key === key);
+      const scale = rows[0].mode === 'major' ? [0, 2, 4, 5, 7, 9, 11] : [0, 2, 3, 5, 7, 8, 10];
+      const letterOf = new Map<number, Set<string>>();
+      for (const c of rows.flatMap((r) => r.candidates)) {
+        if (!scale.includes(c.degree)) continue;
+        const letters = letterOf.get(c.degree) ?? new Set<string>();
+        letters.add(c.symbol[0]);
+        letterOf.set(c.degree, letters);
+      }
+      const used = [...letterOf.values()];
+      expect(used.every((s) => s.size === 1)).toBe(true);
+      expect(new Set(used.map((s) => [...s][0])).size).toBe(used.length);
+    },
+  );
+
+  it('spells the flat sixth of Eb minor as Cb', () => {
+    const tonic = committed.rows.find((r) => r.key === 'Eb minor' && r.from === 0);
+    expect(tonic?.candidates.map((c) => c.symbol)).toContain('Cb');
+  });
+
   it('keeps sharps in the sharp keys', () => {
     const symbols = committed.rows
       .filter((r) => r.key === 'E major')
@@ -259,9 +287,33 @@ describe('minor keys have their own rules', () => {
     expect(afterTwo?.candidates[0].symbol).toBe('E');
   });
 
-  it('names the deceptive cadence on the flat sixth', () => {
+  it('names the deceptive cadence on the sixth', () => {
     const afterFive = minorRows.find((r) => r.key === 'A minor' && r.from === 7);
     expect(afterFive?.candidates[1].symbol).toBe('F');
+  });
+
+  it('resolves the leading-tone chord to a minor tonic', () => {
+    // The rule carried `quality: 'dim'`, the quality of the chord it starts
+    // from, and applied it to the chord it goes to: G#dim suggested Adim.
+    expect(suggest([chord('G#dim')], A_MINOR)[0].symbol).toBe('Am');
+  });
+
+  it('names chords in its reasons the way the chord cards do', () => {
+    // The minor reasons used to say bIII, bVI and bVII, so in A minor a G
+    // card read VII while its suggestion said "bVII". Both numerals in each
+    // reason should be what `romanNumeral` puts on the card for that chord.
+    // bII and the raised fourth are left out: their rules key on the degree
+    // alone and name the seventh chord (bII7, #iv°7) after a plain triad.
+    const lasts = ['Am', 'Bdim', 'C', 'C#', 'Dm', 'E', 'F', 'F#', 'G', 'G#dim'];
+    for (const symbol of lasts) {
+      const last = chord(symbol);
+      for (const s of suggest([last], A_MINOR)) {
+        const named = /^(\S+) (?:back )?to (\S+)/.exec(s.reason);
+        expect(named, s.reason).not.toBeNull();
+        expect(named?.[1], s.reason).toBe(romanNumeral(last, A_MINOR).numeral);
+        expect(named?.[2], s.reason).toBe(romanNumeral(chord(s.symbol), A_MINOR).numeral);
+      }
+    }
   });
 
   it('does not flip an answer on how the tonic is spelled', () => {
@@ -288,6 +340,21 @@ describe('minor keys have their own rules', () => {
     expect(degrees(minorFallback, C_MINOR).sort((a, b) => a - b)).toEqual(
       [0, 2, 3, 5, 7, 8, 10],
     );
+  });
+});
+
+describe('the tonic is always the tonic triad', () => {
+  // A move's `quality` is for a chord borrowed from outside the key. The tonic
+  // never is, so a suggestion to degree 0 should always be the key's own I or
+  // i. The minor leading-tone rule broke this in all 12 minor keys.
+  it.each([...new Set(committed.rows.map((r) => r.key))])('%s', (key) => {
+    const [tonic, mode] = key.split(' ');
+    const expected = tonic + (mode === 'minor' ? 'm' : '');
+    for (const row of committed.rows.filter((r) => r.key === key)) {
+      for (const candidate of row.candidates.filter((c) => c.degree === 0)) {
+        expect(candidate.symbol, `after degree ${row.from}`).toBe(expected);
+      }
+    }
   });
 });
 

@@ -88,27 +88,32 @@ const MAJOR_MOVES: readonly Move[] = [
  * has a rule, the ones outside the scale included, so this table covers all
  * twelve contexts, the same as the major one. From bII the Neapolitan ranks
  * first here, where major ranks the tritone substitution first.
+ *
+ * The numerals in the reasons are the ones `DEGREES.minor` in `readings.ts`
+ * puts on the chord cards: the minor key's own third, sixth and seventh have
+ * no flat, and the raised ones are #III, #VI and #vii. A reason that said
+ * bVII under a card that says VII was naming the same chord two ways.
  */
 const MINOR_MOVES: readonly Move[] = [
   { from: 7, to: 0, reason: 'V to i — the cadence', weight: 10 },
-  { from: 7, to: 8, reason: 'V to bVI — the deceptive cadence', weight: 6 },
+  { from: 7, to: 8, reason: 'V to VI — the deceptive cadence', weight: 6 },
   { from: 5, to: 0, reason: 'iv to i — the plagal cadence', weight: 8 },
   { from: 5, to: 7, reason: 'iv to V — builds the cadence', weight: 8, quality: '' },
-  { from: 5, to: 8, reason: 'iv to bVI', weight: 4 },
+  { from: 5, to: 8, reason: 'iv to VI', weight: 4 },
   { from: 2, to: 7, reason: 'ii° to V — the other half of ii°-V-i', weight: 10, quality: '' },
   { from: 2, to: 0, reason: 'ii° back to i', weight: 4 },
   { from: 0, to: 5, reason: 'i to iv — leaves home', weight: 8 },
   { from: 0, to: 7, reason: 'i to V — opens the cadence', weight: 8, quality: '' },
-  { from: 0, to: 8, reason: 'i to bVI — the soft turn', weight: 6 },
-  { from: 8, to: 7, reason: 'bVI to V — the half-step approach', weight: 8, quality: '' },
-  { from: 8, to: 10, reason: 'bVI to bVII — the climb', weight: 6 },
-  { from: 10, to: 3, reason: 'bVII to bIII — the relative cadence', weight: 8 },
-  { from: 10, to: 0, reason: 'bVII to i — the Aeolian cadence', weight: 6 },
-  { from: 3, to: 8, reason: 'bIII to bVI — down the circle', weight: 6 },
-  { from: 3, to: 5, reason: 'bIII to iv', weight: 4 },
-  { from: 11, to: 0, reason: 'vii° to i — the leading tone resolves', weight: 8, quality: 'dim' },
-  { from: 4, to: 5, reason: 'III to iv — a borrowed secondary dominant', weight: 4 },
-  { from: 9, to: 7, reason: 'raised sixth to V — the chromatic approach', weight: 4, quality: '' },
+  { from: 0, to: 8, reason: 'i to VI — the soft turn', weight: 6 },
+  { from: 8, to: 7, reason: 'VI to V — the half-step approach', weight: 8, quality: '' },
+  { from: 8, to: 10, reason: 'VI to VII — the climb', weight: 6 },
+  { from: 10, to: 3, reason: 'VII to III — the relative cadence', weight: 8 },
+  { from: 10, to: 0, reason: 'VII to i — the Aeolian cadence', weight: 6 },
+  { from: 3, to: 8, reason: 'III to VI — down the circle', weight: 6 },
+  { from: 3, to: 5, reason: 'III to iv', weight: 4 },
+  { from: 11, to: 0, reason: '#vii° to i — the leading tone resolves', weight: 8 },
+  { from: 4, to: 5, reason: '#III to iv — a borrowed secondary dominant', weight: 4 },
+  { from: 9, to: 7, reason: '#VI to V — the chromatic approach', weight: 4, quality: '' },
   { from: 1, to: 7, reason: 'bII to V — the Neapolitan', weight: 8, quality: '' },
   { from: 1, to: 0, reason: 'bII7 to i', weight: 6 },
   { from: 6, to: 7, reason: '#iv° to V', weight: 6, quality: '' },
@@ -120,24 +125,33 @@ const MOVES: Readonly<Record<Mode, readonly Move[]>> = {
   minor: MINOR_MOVES,
 };
 
-const SHARP_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const FLAT_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+/**
+ * Letter steps above the tonic's letter for each degree, in semitones.
+ *
+ * Chromatic degrees take the letter of the numeral the rules call them by:
+ * bII, bIII, #iv, bVI, bVII in major, and bII, #III, #iv, #VI, #vii in minor.
+ * So the chord a reason names is the chord that gets spelled.
+ */
+const LETTER_STEPS = [0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6] as const;
+const LETTERS = 'CDEFGAB';
+const NATURALS = [0, 2, 4, 5, 7, 9, 11] as const;
 
 /**
- * Keys whose signature is flats, so a suggestion is spelled with flats.
+ * The root of a chord `degree` semitones above the tonic, spelled from the
+ * key's letters rather than picked from a sharp or a flat name table.
  *
- * By mode, because the same tonic can sit on either side: D major has sharps
- * and D minor has a flat. Tonics are spelled as `tonicName` spells them, and it
- * names C# and F# major with sharps, so those stay out of this table.
+ * A key uses each letter once, so the letter is the tonic's plus the degree's
+ * step, and the accidental is whatever reaches the pitch class. Eb minor's
+ * flat sixth is therefore Cb, which no twelve-name table can produce: one
+ * used to spell it B, a note outside the key (#37).
  */
-const FLAT_TONICS: Readonly<Record<Mode, ReadonlySet<string>>> = {
-  major: new Set(['F', 'Bb', 'Eb', 'Ab']),
-  minor: new Set(['D', 'G', 'C', 'F', 'Bb', 'Eb']),
-};
-
-function spell(pc: PitchClass, key: Key): string {
-  const names = FLAT_TONICS[key.mode].has(tonicName(key)) ? FLAT_NAMES : SHARP_NAMES;
-  return names[pc];
+function spell(degree: number, key: Key): string {
+  const tonicLetter = LETTERS.indexOf(tonicName(key)[0]);
+  const letter = (tonicLetter + LETTER_STEPS[degree]) % 7;
+  const pc = (key.tonic + degree) % 12;
+  let shift = (pc - NATURALS[letter] + 12) % 12;
+  if (shift > 6) shift -= 12;
+  return LETTERS[letter] + (shift > 0 ? '#'.repeat(shift) : 'b'.repeat(-shift));
 }
 
 /**
@@ -187,7 +201,7 @@ export function diatonicFallback(lastRoot: PitchClass, key: Key): Suggestion[] {
     const semitones = (pc - key.tonic + 12) % 12;
     ranked.push({
       suggestion: {
-        symbol: spell(pc, key) + triadQuality(semitones, key),
+        symbol: spell(semitones, key) + triadQuality(semitones, key),
         reason: `diatonic in ${tonicName(key)} ${key.mode} — no rule covers this move`,
         weight: semitones === 0 || semitones === 7 ? 3 : 2,
       },
@@ -220,7 +234,7 @@ export function suggest(
     if (existing !== undefined && existing.suggestion.weight >= move.weight) return;
     scored.set(pc, {
       suggestion: {
-        symbol: spell(pc, key) + (move.quality ?? triadQuality(move.to, key)),
+        symbol: spell(move.to, key) + (move.quality ?? triadQuality(move.to, key)),
         reason: move.reason,
         weight: move.weight,
       },

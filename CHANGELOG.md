@@ -133,6 +133,32 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Fixed
 
+- **The leading-tone chord in minor resolves to a minor tonic**: `G#dim` in
+  A minor now suggests `Am`, not `Adim`. The minor rule from degree 11 carried
+  `quality: 'dim'`, which belongs to the chord the move starts from but was
+  applied to the chord it goes to, so every minor key offered a diminished
+  tonic under the reason "#vii° to i". The fixture changes in 12 entries, one
+  per minor key, all after degree 11: `Xdim` becomes `Xm`, and nothing else
+  moves. A score taken against the old baseline is stale for those contexts.
+  A new test checks every key: any suggestion of degree 0 is the key's own
+  tonic triad.
+- **Changing a pin keeps keyboard focus on it** (#38). The panel is rebuilt
+  on every render, so the select that had just changed was destroyed and
+  focus fell to `<body>`. Keyboard and screen-reader users lost their place
+  on every pin, and where ArrowDown fires `change` on each press (Windows and
+  Linux Chrome) they could only move one option per Tab cycle. Focus now
+  returns to the same chord's select. When the pins contradict, the selects
+  are gone, so focus goes to "Clear pins" on the conflict notice instead.
+- **Eb minor's flat sixth is spelled `Cb`, not `B`** (#37). Suggestions were
+  spelled from two twelve-name tables, sharp and flat, picked per key. No
+  table of twelve names can produce `Cb`, so "i to bVI" in Eb minor offered
+  `B`, a note outside the key, next to `Bb`. `spell()` now takes the tonic's
+  letter plus the degree's step, and the accidental is whatever reaches the
+  pitch class. This is the only change in the 288-context fixture: 4
+  entries, all Eb minor degree 8. A new test checks that every key's in-scale
+  suggestions use seven distinct letters. That property doesn't depend on
+  the step table, and the old "never uses a sharp" test could not see this.
+
 - `LICENSE` names the author the same way the README footer does —
   *Melissa de Britto*. It had said *Melissa Pereira*, inherited when the file
   was copied from tiny-model-lab, so the two spellings sat in one repo with
@@ -204,6 +230,22 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   like the rest of the table.
 
 ### Changed
+
+- **The page's wording now matches what it shows.** A live QA pass found
+  three places where the text described a different page. The uncertain
+  banner said "the reading below is the least bad one", but up to three
+  reading cards sit below it; it now says the top reading is the least bad
+  and none of them is a confident answer, and the withheld-suggestions note
+  and the screen-reader announcement say the same. The conflict notice and
+  its announcement said "clear a pin", but the only button clears all of
+  them and is labelled **Clear pins**, so both now name that button. And
+  the minor-key suggestion reasons spelled the scale's own third, sixth and
+  seventh with a flat — in A minor a `G` card read `VII` while its
+  suggestion said "bVII". `MINOR_MOVES` now uses the numerals
+  `DEGREES.minor` puts on the cards: `III`, `VI`, `VII`, and `#III`, `#VI`,
+  `#vii°` for the raised degrees. `fixtures/suggest-baseline.json` is
+  regenerated, and only its `reason` fields changed: 144 of them, twelve
+  rules in twelve minor keys. No symbol, degree or weight moved.
 
 - Setup no longer needs `rm experiments/experiment.yaml`, because the reason
   for it is gone. `harness init` used to copy a blank contract in under that

@@ -16,6 +16,8 @@ not a mistake on your part.** It runs entirely in your browser.
 
 About ten minutes. If something does not match, that is worth reporting.
 
+Last verified against `405b62c` on 2026-11-07.
+
 | Do this | You should see |
 |---|---|
 | Click `Am F C G` | A **Clear** banner for C major, with suggestions below |
@@ -23,7 +25,7 @@ About ten minutes. If something does not match, that is worth reporting.
 | Click `G7 C# E7 F9` | A **Model uncertainty** banner, dashed reading cards, and suggestions withheld with a reason |
 | Click `C G/B Am F` | The `G/B` row reads `V6` |
 | Click `Am F C G`, then change the `C` chord's numeral to `IV` | The top reading becomes G major, and a bar shows your pin with a button to clear it |
-| Click "Clear" on that bar | The original reading comes back |
+| Click "Clear pin" on that bar | The original reading comes back |
 | Type `Cm Fm G` | Suggestions use flats, such as `Ab`, never `G#` |
 | Type `Am Dm E` | Suggestions include `Am` and `F`, never `F#` |
 | Type `C H7 xyz` | A notice names the chords it could not read |
@@ -49,3 +51,6 @@ You need a GitHub account, and what you submit is public.
 Your reports do a second job. The page's thresholds are guesses until they can be
 compared with what people actually hear, so each one becomes a labelled example
 for calibrating them ([#15](https://github.com/melissa-pereira-deel/harmonic-parser/issues/15)).
+The feedback form asks you to release your submission under CC0 1.0, because
+submissions may become part of a public labelled corpus
+([#15](https://github.com/melissa-pereira-deel/harmonic-parser/issues/15)).

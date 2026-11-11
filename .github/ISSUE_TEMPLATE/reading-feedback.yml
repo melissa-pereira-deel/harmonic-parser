@@ -50,3 +50,11 @@ body:
     attributes:
       label: Anything else
       description: Confusing wording, wrong suggestions, anything that broke.
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Licence
+      description: Submissions may become part of a public labelled corpus (#15).
+      options:
+        - label: I release this submission under CC0 1.0
+          required: true

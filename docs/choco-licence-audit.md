@@ -162,8 +162,10 @@ the data, and this audit downloaded none.
   have no keys. A modal-ranking track would need to know which partitions can
   feed it.
 - **Traffic on scale degrees 1 and 6** (see #13): the share of chord-to-chord
-  moves whose last chord sits on `bII` or the tritone, where `suggest()` has
-  no rule.
+  moves whose last chord sits on `bII` or the tritone. When this audit was
+  written `suggest()` had no rule there; #33 added four per mode, all
+  hand-weighted. This share says how much the corpus can tell us about those
+  weights.
 - **Share of Harte chords outside the 17 qualities `src/chords.ts`
   supports**: maj, min, dim, aug, sus2, sus4, dom7, maj7, min7, min7b5, dim7,
   maj6, min6, add9, dom9, min9, dom7sus4. This decides how much a Harte parser

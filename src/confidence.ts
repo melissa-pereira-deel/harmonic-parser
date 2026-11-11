@@ -93,7 +93,7 @@ function summarise(
     return 'Nothing fits well, and the near-misses are tied. This is the model failing, not the music being clever.';
   }
   if (uncertain) {
-    return 'No key fits this well. The reading below is the least bad one, not a confident answer.';
+    return 'No key fits this well. The top reading below is the least bad one, and none of the readings is a confident answer.';
   }
   if (ambiguous) {
     return `${contenders} readings are genuinely close. Both are right; the music has not decided yet.`;
