@@ -1,0 +1,71 @@
+.motion-panel {
+  position: fixed;
+  inset: max(.75rem, env(safe-area-inset-top)) max(.75rem, env(safe-area-inset-right)) auto auto;
+  z-index: 2;
+  background: #182427f5;
+  border: 1px solid #9aa89057;
+  border-radius: .6rem;
+  color: #eef0e3;
+  font-size: .83rem;
+}
+
+#setup:not([hidden]) ~ .motion-panel { display: none; }
+
+.motion-panel[open] {
+  width: min(16rem, calc(100% - 1.5rem));
+  box-shadow: 0 .65rem 2rem #0a12178c;
+}
+
+.motion-panel summary {
+  padding: .65rem .8rem;
+  cursor: pointer;
+  border-radius: .55rem;
+}
+
+.motion-settings {
+  display: grid;
+  gap: .6rem;
+  padding: 0 .8rem .8rem;
+  max-height: calc(100dvh - 4.5rem);
+  overflow: auto;
+}
+
+.motion-presets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .4rem;
+}
+
+#room .motion-presets button {
+  min-height: 2.25rem;
+  padding: .25rem .4rem;
+}
+
+#room .motion-presets button[aria-pressed="true"] {
+  background: #d5dca3;
+  border-color: #d5dca3;
+  color: #1d2821;
+}
+
+.motion-settings label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .15rem .5rem;
+}
+
+.motion-settings label span {
+  color: #c3cec2;
+  font-variant-numeric: tabular-nums;
+}
+
+.motion-settings input {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+  accent-color: #d5dca3;
+}
+
+.motion-panel :is(summary, input):focus-visible {
+  outline: 2px solid #d5dca3;
+  outline-offset: 2px;
+}

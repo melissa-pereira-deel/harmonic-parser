@@ -9,6 +9,9 @@ export default defineConfig({
   base: './',
   build: {
     target: 'es2023',
+    rolldownOptions: {
+      input: ['index.html', 'room/index.html'],
+    },
     // The page is a few small modules and a stylesheet. A source map costs
     // nothing to ship and is the difference between a readable stack trace and
     // a minified one when someone files a bug against the deployed page.

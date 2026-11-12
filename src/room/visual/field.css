@@ -1,0 +1,20 @@
+/* The fallback is an intentional still of the mineral veil, not a blank screen. */
+#room {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 58% 48%, #a1aa982b, transparent 36%),
+    radial-gradient(ellipse at 35% 58%, #6d8b8a73, transparent 57%),
+    linear-gradient(166deg, #121d22 25%, #334c50 47%, #626d603b 49%, #362b2933 54%, #121d22 76%);
+}
+#room #field {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+#room #field[data-renderer='css'] { visibility: hidden; }
