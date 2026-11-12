@@ -3,7 +3,12 @@
 [![ci](https://github.com/melissa-pereira-deel/harmonic-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/melissa-pereira-deel/harmonic-parser/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-**Try it:** <https://melissa-pereira-deel.github.io/harmonic-parser/>
+**Try it on GitHub Pages**
+
+- Type chords to compare key readings, see each chord’s function, and get suggestions. [Open the chord parser](https://melissa-pereira-deel.github.io/harmonic-parser/)
+- Play a MIDI keyboard to shape an animated field and see harmony as you play. [Open the live room](https://melissa-pereira-deel.github.io/harmonic-parser/room/?setup=1)
+
+## Chord parser
 
 Type `Am F C G` into a box. The page tells you it is probably C major, puts a
 Roman numeral under each chord, and shows you the readings it did not pick.
@@ -40,13 +45,46 @@ completely invisible unless somebody shows you.
 > claims about its own confidence are placeholders.
 >
 > There is no grammar, no trained model, no Roman-numeral *analysis* beyond a
-> lookup from the inferred key, and no audio. The `'model'` source in
+> lookup from the inferred key. The `'model'` source in
 > `readings.ts` is a type, not a thing that exists.
 >
 > Treat every claim this page makes about its own confidence as a placeholder
 > with a plausible shape.
 
 Testing it? Start with the [tester guide](docs/tester-guide.md).
+
+## Live room
+
+In desktop Chrome, choose **C · Gesture and harmony**. To try it without a
+keyboard, select **Replay a chord progression** and click **Enter room**.
+The silent replay runs through `Am F G C` so you can see the field and the
+harmony readout change together.
+
+To play live, select **Play my keyboard**, click **Connect MIDI**, and choose
+your keyboard’s playing input. For the Arturia KeyLab Essential 49, choose
+**Arturia KeyLab Essential 49 MIDI In**. Click **Enter room** and use your usual
+instrument or synth for sound. Hold **C–E–G** to see **Chord · C**. The room can
+also show a possible key and a suggested next chord once it has enough context.
+Press **Esc** to return to setup.
+
+Use **A · Drifting on its own** to watch the field, or **B · Responding to
+gesture** to see how your playing changes the motion and color. For the full
+walkthrough and the development lab controls, see the [live room guide](docs/live-room-poc.md)
+and the [field motion guide](docs/field-motion.md).
+
+## Run locally
+
+With Node.js 24, install dependencies and start Vite.
+
+```bash
+npm ci
+npm run dev
+```
+
+Use the port Vite prints. Open `/` for the chord parser, `/room/?setup=1` for
+the live room, or `/room/?setup=1&lab=1` to try the **Motion** panel in development.
+Run `npm test` for the unit suite. The [browser test instructions](docs/live-room-poc.md#development-checks)
+cover both entry points.
 
 ## How it fits together
 
@@ -63,6 +101,10 @@ announce.ts    one spoken sentence once typing stops
 ui.ts          renders readings; shows their source, never branches on it
 main.ts        wiring: the box, the panel, the events
 ```
+
+The live room entry point lives in `room/`. Its MIDI input, replay, harmony
+readout and field renderer are in `src/room/`. Vite builds both pages, and
+GitHub Actions publishes them from `main`. [Pages workflow](.github/workflows/pages.yml)
 
 `Reading` carries a `source` field — `'key-profile' | 'grammar' | 'model'` —
 even though only the first producer exists. That is deliberate. A hand-written
@@ -85,12 +127,6 @@ a question the oracle cannot answer.
 music21 is pinned exactly rather than floored, which is a deliberate deviation
 from the sibling repo's policy. A floor says "at least this new"; here music21
 *is* the oracle, and a floor lets the oracle move underneath you.
-
-```bash
-npm install
-npm test          # green. 5 are it.fails on purpose; read experiments/ first.
-npm run dev
-```
 
 ## Models
 
