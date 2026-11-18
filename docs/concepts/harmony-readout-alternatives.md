@@ -6,6 +6,8 @@ What should condition C show as its next-chord cue, and is a next chord the righ
 
 **To see them:** `npm run dev`, then open `/explorer/`. Options 1 to 6 read the same typed progression through the real `rank()` and `suggest()`. The explorer's option 5 is 5b below. Options 5a, 7 and 8 are not mocked. The explorer is a development page and is not part of the build. Option 6 is a rough mock that assumes the current chord is held in root position. The explorer's options 1, 3, 4 and 6 always use the top-ranked key, while the room goes quiet when the reading is ambiguous and lets a heard cadence decide, so the mocks show more often than the room would.
 
+> **Decided for condition C ([E015](../project-memory.md#e015--2026-11-18--two-hearings-in-condition-c)).** The user chose option 5b: "Try next" stays in condition C during the comparison, as one suggestion per plausible key, each with a small keyboard. It is wired into the room. The rest of this brief, including the reasons to keep invitations apart from reflection, is kept as the record of what was weighed. "Where things stand" below describes the room before that change.
+
 ## Where things stand
 
 Condition C shows a text readout: **Chord**, **Possible key**, **Try next**. Three things about it matter here.

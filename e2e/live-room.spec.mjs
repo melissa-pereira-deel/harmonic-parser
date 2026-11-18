@@ -5,6 +5,54 @@ async function openLab(page, suffix = '') {
   await page.waitForFunction(() => Boolean(window.__roomLab));
 }
 
+/** A fake Web MIDI port. `window.playMockChord(notes)` releases the last chord and strikes the next. */
+async function mockMidi(page) {
+  await page.addInitScript(() => {
+    const input = {
+      id: 'keyboard',
+      name: 'Mock keyboard',
+      state: 'connected',
+      onmidimessage: null,
+      async open() {},
+      async close() {},
+    };
+    const access = { inputs: new Map([[input.id, input]]), onstatechange: null };
+    window.mockRequests = 0;
+    Object.defineProperty(navigator, 'requestMIDIAccess', {
+      value: async ({ sysex }) => {
+        if (sysex) throw new Error('Unexpected SysEx request');
+        window.mockRequests += 1;
+        return access;
+      },
+    });
+    let held = [];
+    window.playMockChord = notes => {
+      for (const note of held) input.onmidimessage?.({ data: new Uint8Array([0x80, note, 0]) });
+      for (const note of notes) input.onmidimessage?.({ data: new Uint8Array([0x90, note, 110]) });
+      held = notes;
+    };
+    window.disconnectMockKeyboard = () => {
+      input.state = 'disconnected';
+      access.onstatechange?.();
+    };
+  });
+}
+
+async function enterWithMidi(page, condition) {
+  await page.getByLabel('The room').selectOption(condition);
+  await page.getByLabel('Input', { exact: true }).selectOption('midi');
+  if (await page.getByRole('button', { name: 'Connect MIDI' }).isVisible()
+    && !(await page.getByText('Keyboard ready.').isVisible())) {
+    await page.getByRole('button', { name: 'Connect MIDI' }).click();
+  }
+  await expect(page.getByText('Keyboard ready.')).toBeVisible();
+  await page.getByRole('button', { name: 'Enter room' }).click();
+}
+
+const G7 = [55, 59, 62, 65];
+const DM7 = [50, 53, 57, 60];
+const CMAJ7 = [48, 52, 55, 59];
+
 test('serves both built entries under a project subpath without the lab', async ({ page }) => {
   const project = 'http://127.0.0.1:4318/harmonic-parser/';
   const errors = [];
@@ -78,36 +126,7 @@ test('exposes real annotated parser rankings while keeping the room quiet', asyn
 });
 
 test('keeps MIDI playing through live motion changes and recovers on disconnect', async ({ page }) => {
-  await page.addInitScript(() => {
-    const input = {
-      id: 'keyboard',
-      name: 'Mock keyboard',
-      state: 'connected',
-      onmidimessage: null,
-      async open() {},
-      async close() {},
-    };
-    const access = { inputs: new Map([[input.id, input]]), onstatechange: null };
-    window.mockRequests = 0;
-    Object.defineProperty(navigator, 'requestMIDIAccess', {
-      value: async ({ sysex }) => {
-        if (sysex) throw new Error('Unexpected SysEx request');
-        window.mockRequests += 1;
-        return access;
-      },
-    });
-    let held = [];
-    window.playMockChord = notes => {
-      for (const note of held) input.onmidimessage?.({ data: new Uint8Array([0x80, note, 0]) });
-      for (const note of notes) input.onmidimessage?.({ data: new Uint8Array([0x90, note, 110]) });
-      held = notes;
-    };
-    window.disconnectMockKeyboard = () => {
-      input.state = 'disconnected';
-      access.onstatechange?.();
-    };
-  });
-
+  await mockMidi(page);
   await openLab(page, '&setup=1');
   await page.getByLabel('The room').selectOption('C');
   await page.getByLabel('Input', { exact: true }).selectOption('midi');
@@ -168,6 +187,8 @@ test('keeps MIDI playing through live motion changes and recovers on disconnect'
   await expect(page.locator('#harmony-chord')).toHaveText('G');
   await expect(page.locator('#harmony-key')).toHaveText('C major');
   await expect(page.locator('#harmony-next')).toHaveText('C');
+  await expect(page.locator('#harmony-next').getByRole('img', { name: 'C on a keyboard: C, E, G' })).toBeVisible();
+  await expect(page.locator('#harmony-hearing-1')).toBeHidden();
   await page.keyboard.press('r');
   await expect(page.locator('#reflection')).toHaveText('Same phrase, different bass.');
   await expect(page.locator('#harmony')).toBeHidden();
@@ -178,6 +199,59 @@ test('keeps MIDI playing through live motion changes and recovers on disconnect'
   await expect(page.locator('#harmony')).toBeHidden();
   await page.getByLabel('Input', { exact: true }).selectOption('replay');
   await expect(page.getByRole('button', { name: 'Enter room' })).toBeEnabled();
+});
+
+test('offers one chord per hearing in C, and merges hearings that agree', async ({ page }) => {
+  await mockMidi(page);
+  await openLab(page, '&setup=1');
+  await enterWithMidi(page, 'C');
+
+  for (const [notes, name] of [[G7, 'G7'], [DM7, 'Dm7'], [CMAJ7, 'Cmaj7']]) {
+    await page.evaluate(notes => window.playMockChord(notes), notes);
+    await expect(page.locator('#harmony-chord')).toHaveText(name);
+  }
+  await expect(page.locator('#harmony')).toHaveAttribute('data-state', 'two-hearings');
+  await expect(page.locator('#harmony-key-item')).toBeHidden();
+  await expect(page.locator('#harmony-next-item')).toBeHidden();
+  const first = page.locator('#harmony-hearing-1');
+  const second = page.locator('#harmony-hearing-2');
+  await expect(first.locator('dt')).toHaveText('Heard in C major');
+  await expect(first.locator('dd')).toHaveText('F');
+  await expect(first.getByRole('img', { name: 'F on a keyboard: C, F, A' })).toBeVisible();
+  await expect(second.locator('dt')).toHaveText('Heard in G major');
+  await expect(second.locator('dd')).toHaveText('G');
+  await expect(second.getByRole('img', { name: 'G on a keyboard: D, G, B' })).toBeVisible();
+
+  // A fresh run, the same chords in an order whose two hearings agree.
+  await page.keyboard.press('Escape');
+  await enterWithMidi(page, 'C');
+  for (const [notes, name] of [[CMAJ7, 'Cmaj7'], [DM7, 'Dm7'], [G7, 'G7']]) {
+    await page.evaluate(notes => window.playMockChord(notes), notes);
+    await expect(page.locator('#harmony-chord')).toHaveText(name);
+  }
+  await expect(page.locator('#harmony')).toHaveAttribute('data-state', 'merged');
+  await expect(page.locator('#harmony-key-label')).toHaveText('Could be');
+  await expect(page.locator('#harmony-key')).toHaveText('C major or G major');
+  await expect(page.locator('#harmony-next')).toHaveText('C');
+  await expect(page.locator('#harmony-hearing-1')).toBeHidden();
+  await expect(page.locator('#harmony-hearing-2')).toBeHidden();
+});
+
+test('A and B show no readout and no keyboard for the same playing', async ({ page }) => {
+  await mockMidi(page);
+  await openLab(page, '&setup=1');
+  for (const condition of ['A', 'B']) {
+    await enterWithMidi(page, condition);
+    for (const notes of [G7, DM7, CMAJ7]) {
+      await page.evaluate(notes => window.playMockChord(notes), notes);
+      await page.waitForTimeout(250);
+    }
+    await expect(page.locator('#harmony')).toBeHidden();
+    await expect(page.locator('#harmony-chord')).toBeEmpty();
+    await expect(page.locator('svg.kb')).toHaveCount(0);
+    await page.evaluate(() => window.playMockChord([]));
+    await page.keyboard.press('Escape');
+  }
 });
 
 test('leaves replay available after MIDI permission denial', async ({ page }) => {

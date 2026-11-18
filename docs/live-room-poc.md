@@ -9,17 +9,20 @@ npm run dev
 
 Open [room setup](http://localhost:5173/room/?setup=1) using the port Vite prints. Press **Esc** to return to setup from the room.
 
-1. Choose **C · Gesture and harmony**, select **Replay a chord progression**, and click **Enter room**. The replay is silent. Watch **Chord** change through **Am → F → G → C**. The last chord should show **Possible key C major** and **Try next F**. The readout clears after the phrase.
+1. Choose **C · Gesture and harmony**, select **Replay a chord progression**, and click **Enter room**. The replay is silent. Watch **Chord** change through **Am → F → G → C**. The last chord should show **Possible key C major** and **Try next F**, with a small keyboard beside the **F** that lights F, A and C. The readout clears after the phrase.
 2. For live playing, press **Esc**, select **Play my keyboard**, and click **Connect MIDI**. Select **Arturia KeyLab Essential 49 MIDI In**, or the equivalent playing port for your controller. Click **Enter room** and use your usual instrument or synth for sound.
-3. Hold **C–E–G**, then **F–A–C**, then **G–B–D**. Hold each group together briefly. You should see **C → F → G**. On **G**, expect **Possible key C major** and **Try next C**.
+3. Hold **C–E–G**, then **F–A–C**, then **G–B–D**. Hold each group together briefly. You should see **C → F → G**. On **G**, expect **Possible key C major** and **Try next C**, with its keyboard.
+4. **Hear two keys.** Press **Esc**, enter C again, and hold **G–B–D–F**, then **D–F–A–C**, then **C–E–G–B**. On the last chord the readout shows two entries: **Heard in C major** with **F**, and **Heard in G major** with **G**, each with its own keyboard. Press **Esc**, enter again, and play the same chords as **C–E–G–B**, **D–F–A–C**, **G–B–D–F**. Both keys now suggest **C**, so they merge: **Could be C major or G major** and one **Try next C**. Played as **D–F–A–C**, **G–B–D–F**, **C–E–G–B**, the same chords are a ii–V–I, the room hears the cadence, and it shows **C major** alone.
 
 | Condition | What happens |
 | --- | --- |
 | A · Drifting on its own | The field moves on its own while you play. |
 | B · Responding to gesture | Strike, register and held notes shape the field. The palette also follows the pace and phrasing of the playing. |
-| C · Gesture and harmony | B's field plus a small harmony readout for live MIDI and the chord replay. The original phrase replay still offers its timed reflection. |
+| C · Gesture and harmony | B's field plus a small harmony readout for live MIDI and the chord replay. When two keys are about equally likely, it offers one chord per key. The original phrase replay still offers its timed reflection. |
 
 The readout names familiar voicings, including inversions. A short run of single notes can leave the readout quiet. The key and suggestion are provisional readings of the recent progression.
+
+The readout has four states, all from the parser's own confidence check. With fewer than three distinct chords, or when no key fits, it names the chord only. With one clear key, or a heard cadence, it shows **Possible key** and one **Try next**. When the top two keys are within the parser's ambiguity margin, it shows **Heard in** each key with that key's next chord, or merges them into **Could be … or …** when both suggest the same chord. Each suggested chord has a small keyboard beside its name. A one-key readout lingers 0.7 s after you let go; one with two keys lingers 1.5 s. On common four-chord loops, two keys tend to appear on the third chord and resolve on the fourth.
 
 ## Test the gradient with a KeyLab
 

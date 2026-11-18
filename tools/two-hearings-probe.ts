@@ -9,8 +9,9 @@
 import { readFileSync } from 'node:fs';
 
 import { parseProgression } from '../src/chords.ts';
-import { UNCERTAINTY_FLOOR } from '../src/confidence.ts';
+import { AMBIGUITY_MARGIN, UNCERTAINTY_FLOOR } from '../src/confidence.ts';
 import { rank } from '../src/readings.ts';
+import { readHarmony } from '../src/room/analysis/live.ts';
 import { suggest } from '../src/suggest.ts';
 
 const COMMON = [
@@ -53,3 +54,21 @@ for (const margin of [0.06, 0.1, 0.12, 0.15]) {
   const f = tally(generated, margin);
   console.log(`${margin.toFixed(2)}   | ${c.two}, ${c.differ} | ${f.two}, ${f.differ}, ${f.uncertain}`);
 }
+
+// The same 30 through the room's own rules (three distinct chords, the cadence
+// vote) at the shipped margin, read after each chord as it would be played.
+let anyTwo = 0;
+let anyMerged = 0;
+const lastStates = new Map<string, number>();
+for (const text of COMMON) {
+  const { chords } = parseProgression(text);
+  const states = chords.map((_, i) => readHarmony(chords.slice(0, i + 1)).state);
+  if (states.includes('two-hearings')) anyTwo += 1;
+  if (states.includes('merged')) anyMerged += 1;
+  const last = states[states.length - 1];
+  lastStates.set(last, (lastStates.get(last) ?? 0) + 1);
+}
+console.log(
+  `\nroom rules at ${AMBIGUITY_MARGIN} (common, 30): two hearings at some chord in ${anyTwo}, merged in ${anyMerged}; ` +
+    `at the last chord: ${[...lastStates].map(([state, n]) => `${state} ${n}`).join(', ')}`,
+);

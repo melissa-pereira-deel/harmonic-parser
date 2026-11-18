@@ -20,13 +20,15 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   a slash bass. From 6 px of key width up, colour is not the only signal; below
   that the drawing is keys alone and the root looks like any other tone unless
   the surface sets `--kb-root`. Pips mean root and bass in every diagram. One
-  number sizes it, and detail drops away as it shrinks — note names from 15 px. The markup carries classes and no colours; a surface
-  themes it with five `--kb-*` custom properties (`src/keyboard.css`).
+  number sizes it, and detail drops away as it shrinks — note names from 15
+  px. The markup carries classes and no colours; a surface themes it with five
+  `--kb-*` custom properties (`src/keyboard.css`).
 
-  **Nothing shipped uses it yet, on purpose.** Whether a next chord should be
-  drawn in the room at all is an open design question, set out in
-  `docs/concepts/harmony-readout-alternatives.md`. A review added cues that
-  work over a melody and a playing session to run before choosing.
+  **The live room's condition C draws its suggested chords with it** (see
+  Changed); the parser page does not use it yet. The options for drawing a next
+  chord are set out in `docs/concepts/harmony-readout-alternatives.md`. A
+  review added cues that work over a melody and a playing session to run
+  before choosing; the user then chose one suggestion per key for condition C.
   `/explorer/` is a development page that mocks six of the options on the real
   `rank()` and `suggest()`; its "what moves" mock keeps a slash bass as its own
   voice. It is not in the build's inputs and does not deploy.
@@ -253,6 +255,20 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
   like the rest of the table.
 
 ### Changed
+
+- **Condition C offers one next chord per plausible key.** The live room's
+  harmony readout used to name no key and suggest nothing whenever the
+  reading was ambiguous. It now follows the parser's confidence states: chord
+  only when too early or when nothing fits, one key and one suggestion when
+  clear, **Heard in** each of the top two keys with that key's next chord when
+  they are within `AMBIGUITY_MARGIN`, and **Could be … or …** with one
+  suggestion when both keys agree. Each suggestion carries a small keyboard
+  from `keyboardSvg()`. The room's rules for naming a key, the margin and the
+  floor are unchanged, and conditions A and B are untouched. A readout with
+  two keys lingers 1.5 s instead of 0.7 s. On the 30 common progressions in
+  `tools/two-hearings-probe.ts`, read chord by chord through the room's rules,
+  two keys appear at the third chord in 13 and none at the last; the probe now
+  prints this line. A heard ii–V–I still settles `Dm7 G7 Cmaj7` as C major.
 
 - **The page's wording now matches what it shows.** A live QA pass found
   three places where the text described a different page. The uncertain

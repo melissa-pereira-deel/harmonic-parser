@@ -1,5 +1,8 @@
 import './visual/field.css';
+import '../keyboard.css';
 import './room.css';
+import { parseChord } from '../chords.ts';
+import { keyboardSvg } from '../keyboard.ts';
 import type { LiveHarmony } from './analysis/live.ts';
 import type { Condition, ReplayFixture } from './contracts.ts';
 import { createMidiInput } from './input/midi.ts';
@@ -36,9 +39,13 @@ const reflection = element('reflection');
 const harmony = element('harmony');
 const harmonyChord = element('harmony-chord');
 const harmonyKey = element('harmony-key');
+const harmonyKeyLabel = element('harmony-key-label');
 const harmonyKeyItem = element('harmony-key-item');
 const harmonyNext = element('harmony-next');
 const harmonyNextItem = element('harmony-next-item');
+const harmonyHearings = [element('harmony-hearing-1'), element('harmony-hearing-2')];
+/** Key height of the small keyboard beside a suggested chord, in CSS pixels. */
+const SUGGESTION_KEYS_PX = 22;
 const params = new URLSearchParams(location.search);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const labEnabled = import.meta.env.DEV && params.has('lab');
@@ -139,15 +146,49 @@ function openSetup(notice = ''): void {
   conditionField.focus();
 }
 
+/** A suggested chord as a small keyboard and its name. The name stays text. */
+function showSuggestion(target: Element, symbol: string | null): void {
+  target.replaceChildren();
+  if (!symbol) return;
+  const chord = parseChord(symbol);
+  if (chord) {
+    const keys = document.createElement('span');
+    keys.className = 'harmony-keys';
+    keys.innerHTML = keyboardSvg(chord, {
+      window: 'octave', marks: 'fill', detail: 'compact', height: SUGGESTION_KEYS_PX,
+    });
+    target.append(keys);
+  }
+  const name = document.createElement('span');
+  name.className = 'harmony-symbol';
+  name.textContent = symbol;
+  target.append(name);
+}
+
 function showHarmony(reading: LiveHarmony | null): void {
   if (displayedHarmony === reading) return;
   displayedHarmony = reading;
   harmony.hidden = !reading;
+  harmony.dataset.state = reading?.state ?? '';
   harmonyChord.textContent = reading?.chord ?? '';
-  harmonyKey.textContent = reading?.key ?? '';
-  harmonyKeyItem.hidden = !reading?.key;
-  harmonyNext.textContent = reading?.next ?? '';
-  harmonyNextItem.hidden = !reading?.next;
+
+  const merged = reading?.state === 'merged';
+  const oneSuggestion = reading?.state === 'clear' || merged;
+  harmonyKeyLabel.textContent = merged ? 'Could be' : 'Possible key';
+  harmonyKey.textContent = merged
+    ? reading.hearings.map(({ key }) => key).join(' or ')
+    : reading?.key ?? '';
+  harmonyKeyItem.hidden = !harmonyKey.textContent;
+  showSuggestion(harmonyNext, oneSuggestion ? reading.next : null);
+  harmonyNextItem.hidden = !harmonyNext.hasChildNodes();
+
+  const hearings = reading?.state === 'two-hearings' ? reading.hearings : [];
+  for (const [index, item] of harmonyHearings.entries()) {
+    const hearing = hearings[index];
+    item.hidden = !hearing;
+    item.querySelector('dt')!.textContent = hearing ? `Heard in ${hearing.key}` : '';
+    showSuggestion(item.querySelector('dd')!, hearing?.next ?? null);
+  }
 }
 
 function draw(tMs: number, stepMs?: number) {
