@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Chord keyboard explorer</title>
+  </head>
+  <body>
+<main>
+  <header>
+    <h1>Chord keyboard explorer</h1>
+    <p class="lede">One function draws every keyboard on this page from the parser's own chord struct. Change the chord, the size and the surface, and see where it holds up.</p>
+  </header>
+
+  <section aria-labelledby="h-play">
+    <h2 id="h-play">Playground</h2>
+    <div id="stage" class="surface" data-themed>
+      <div id="stage-kb"></div>
+      <div id="stage-symbol"></div>
+    </div>
+    <p id="readout" aria-live="polite"></p>
+
+    <div class="controls">
+      <div class="field">
+        <label for="chord">Chord</label>
+        <input id="chord" type="text" value="Dm7" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="chord-error">
+        <span id="chord-error" hidden>The parser can't read that symbol. The last readable chord stays on screen.</span>
+        <div class="row chips">
+          <button type="button" data-set="chord:Dm7">Dm7</button>
+          <button type="button" data-set="chord:G7">G7</button>
+          <button type="button" data-set="chord:Cmaj7">Cmaj7</button>
+          <button type="button" data-set="chord:F#m7b5">F#m7b5</button>
+          <button type="button" data-set="chord:Bb9">Bb9</button>
+          <button type="button" data-set="chord:C/E">C/E</button>
+          <button type="button" data-set="chord:Ebsus4">Ebsus4</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="height">Key height · <span id="height-out"></span></label>
+        <input id="height" type="range" min="10" max="140" step="2" value="56">
+      </div>
+
+      <div class="field">
+        <span class="label">Window</span>
+        <div class="row">
+          <button type="button" data-set="window:octave">One octave, folded</button>
+          <button type="button" data-set="window:fit">Fit the voicing</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label">Marks</span>
+        <div class="row">
+          <button type="button" data-set="marks:fill">Colour the keys</button>
+          <button type="button" data-set="marks:dot">Dots only</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label">Surface</span>
+        <div class="row">
+          <button type="button" data-set="theme:room">Room</button>
+          <button type="button" data-set="theme:paper">Parser light</button>
+          <button type="button" data-set="theme:night">Parser dark</button>
+          <button type="button" data-set="theme:ink">One ink</button>
+          <button type="button" data-set="theme:blocks">Blocks</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-ladder">
+    <h2 id="h-ladder">The same chord from 12 to 112 px</h2>
+    <p class="note">Nothing is redrawn per size. The drawing scales, and only the detail changes: keys alone when small, a root pip from 6 px of key width, note names from 15 px.</p>
+    <div id="ladder" class="surface" data-themed></div>
+  </section>
+
+  <section aria-labelledby="h-context">
+    <h2 id="h-context">In the product</h2>
+    <div class="field">
+      <label for="progression">Progression</label>
+      <input id="progression" type="text" value="Dm7 G7 Cmaj7" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div class="row chips">
+        <button type="button" data-set="progression:Dm7 G7 Cmaj7">Dm7 G7 Cmaj7</button>
+        <button type="button" data-set="progression:Am F C G">Am F C G</button>
+        <button type="button" data-set="progression:C G F G">C G F G</button>
+        <button type="button" data-set="progression:Em G D A">Em G D A</button>
+        <button type="button" data-set="progression:C F# Bb E">C F# Bb E</button>
+      </div>
+    </div>
+
+    <h3>Harmony room readout, six options</h3>
+    <p class="note">Numbered as in the alternatives doc. All six read the same progression, so type one and compare.</p>
+    <p id="options-empty" class="note" hidden>Type a progression to see the readouts.</p>
+    <div id="options" class="surface room-mock" data-theme="room">
+      <div class="variant">
+        <span class="caption"><b>1 · Text readout</b> (today)</span>
+        <dl class="harmony" id="opt-1"></dl>
+        <p class="why">Fastest to glance at. Says nothing to a player who doesn't read chord symbols.</p>
+      </div>
+      <div class="variant">
+        <span class="caption"><b>2 · No "Try next"</b></span>
+        <dl class="harmony" id="opt-2"></dl>
+        <p class="why">The room reflects and never instructs. The cleanest version of the three-room study.</p>
+      </div>
+      <div class="variant">
+        <span class="caption"><b>3 · Keys beside the name</b></span>
+        <dl class="harmony" id="opt-3"></dl>
+        <p class="why">Works for symbol readers and ear players alike. A louder invitation than a word.</p>
+      </div>
+      <div class="variant">
+        <span class="caption"><b>4 · Keys alone</b></span>
+        <dl class="harmony" id="opt-4"></dl>
+        <p class="why">Most direct by ear. No name to remember or say.</p>
+      </div>
+      <div class="variant">
+        <span class="caption"><b>5 · Two hearings</b></span>
+        <dl class="harmony" id="opt-5"></dl>
+        <p class="why" id="opt-5-note" aria-live="polite"></p>
+        <div class="field">
+          <label for="margin">How close two keys must score · <span id="margin-out"></span></label>
+          <input id="margin" type="range" min="0.02" max="0.2" step="0.01" value="0.06">
+        </div>
+      </div>
+      <div class="variant">
+        <span class="caption"><b>6 · What moves</b> (rough mock)</span>
+        <dl class="harmony" id="opt-6"></dl>
+        <p class="why" id="opt-6-note" aria-live="polite"></p>
+        <p class="why">Pale keys stay down. A dot is a new note. A ring is a note to let go.</p>
+      </div>
+    </div>
+
+    <h3>Parser page</h3>
+    <div class="surface parser-mock" data-theme="ink" style="--kb-tone: var(--tone); --kb-pip: var(--card);">
+      <div id="strip" aria-label="The progression as keyboards"></div>
+      <h3 id="suggest-title"></h3>
+      <ul id="suggestions"></ul>
+    </div>
+    <p class="note">Keys and suggestions throughout are the repo's real <code>rank()</code> and <code>suggest()</code> running on what you typed.</p>
+  </section>
+
+  <section aria-labelledby="sheet-title">
+    <h2 id="sheet-title"></h2>
+    <div id="sheet" class="surface" data-themed></div>
+  </section>
+
+  <section aria-labelledby="h-findings">
+    <h2 id="h-findings">What the exploration turned up</h2>
+    <ul class="findings">
+      <li><b>Folded octave is the right default for a hint.</b> Every chord is seven keys wide, so diagrams line up in a list and a given key always means the same note. Try G7 or Bb9 in both windows: the fitted voicing shows the hand shape, at up to twice the width.</li>
+      <li><b>Coloured keys beat dots below about 24 px.</b> Dots need room to resolve. At readout size, colour alone carries the chord and the root pip carries the rest.</li>
+      <li><b>The root needs a mark of its own.</b> Folded into one octave, G7 and Bdim share three keys. The pip is what tells them apart, and it works in one ink.</li>
+      <li><b>The parser has no accent colour yet.</b> Green, amber and red already mean clear, ambiguous and uncertain. This page proposes a blue <code>--tone</code>; the room reuses its existing accent.</li>
+      <li><b>Two hearings hinge on one unmeasured number.</b> Across 30 common progressions, the repo's 0.06 margin finds two hearings in 1. At 0.10 it is 6, and at 0.12 it is 20. Drag the slider under option 5 on Am F C G to see the cliff.</li>
+      <li><b>Most of the hand usually stays.</b> In option 6, C to Am moves one finger. Drawn as two separate chords, that looks like a whole new shape.</li>
+      <li><b>Every keyboard is an invitation.</b> The concept brief keeps invitations apart from reflection, so options 3 to 6 change what the harmony room tests. Each can run as a fourth room instead.</li>
+    </ul>
+  </section>
+</main>
+    <script type="module" src="../src/explorer/main.ts"></script>
+  </body>
+</html>

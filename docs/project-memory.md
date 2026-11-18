@@ -2,7 +2,7 @@
 
 This journal tracks the live playing exploration alongside the existing chord-symbol parser. The snapshot is the place to resume. The dated entries preserve what led there so we can revisit a decision without reconstructing it from chat.
 
-## Current snapshot · 2026-11-11
+## Current snapshot · 2026-11-18
 
 - **User brief.** A private browser room for playing by ear. It opens to a fluid, slowly moving field of light, color and texture with no visible controls or copy. A connected MIDI keyboard can shape the field. Harmonic information should blend into the world when it appears. Its form and level of interaction are open.
 - **Playing practice.** Find a melody by ear, repeat it, and vary the rhythm, phrasing, or notes. The hard moment comes once a motif feels worth keeping. How can it gain tension, find release, or acquire harmonic depth without losing what made it compelling? Theory vocabulary should be optional in the playing experience.
@@ -17,6 +17,7 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **Phrase color.** In B and C, playing gradually shifts the palette toward violet with activity and toward amber at pauses and recognizable resolutions. The mapping is a proposed visual interpretation of timing and dynamics. The player's experience with a repeated motif is still open.
 - **Keyboard setup.** The player's KeyLab Essential 49 exposes two inputs. The player confirmed that **Arturia KeyLab Essential 49 MIDI In** drives the field. The sound-route check and listening comparison are still open.
 - **Live harmony exploration.** Condition C now has a small chord, possible key and next-chord readout. It uses recognizable held voicings and recent chord history. Its timing and usefulness are open for a playing test. [Try it](live-room-poc.md)
+- **Next-chord cue.** Open. The user wants a next chord shown as a small keyboard instead of a symbol, and raised showing one suggestion per reading. Six options for condition C are set out, with a development page that mocks all of them. Nothing is wired into the room or the parser page, and the choice is the user's. [Alternatives](concepts/harmony-readout-alternatives.md) · [E013](#e013--2026-11-18--chord-keyboards-and-the-next-chord-cue)
 - **Typography.** The user chose Rubik for the live room's setup, controls, harmony readout and reflection. [Design system](design-system.md#typography)
 
 ## Journal
@@ -97,6 +98,15 @@ This journal tracks the live playing exploration alongside the existing chord-sy
 - **User direction.** Add a small lab panel to adjust speed, warp, detail and strike response with the KeyLab and compare Current and Gentle without reloading.
 - **Implementation.** A collapsible panel applies presets and slider changes in the current session. Changes ease from the values currently on screen. Speed changes advance or hold the existing phase. Strength and attack have independent controls. [Motion panel](field-motion.md#controls-to-try)
 - **Open.** Compare the two presets on the physical KeyLab and record the motion and response settings that feel best.
+
+### E013 · 2026-11-18 · Chord keyboards and the next-chord cue
+
+- **User direction.** Show a next chord as a flat, minimal keyboard that marks its keys with colour and perhaps a small dot, as a system that can be resized to explore the UI as the rooms evolve. Then: could the room show a next chord per reading? Write the alternatives down to decide later, mock what can be mocked, and open a PR.
+- **Implementation.** [`src/keyboard.ts`](../src/keyboard.ts) draws any parsed chord as an SVG sized by one number, with detail that drops away as it shrinks and colours set by the surface it sits on. It is tested and unused: no shipped page imports it. A development page at `/explorer/` mocks six readouts for condition C on the real `rank()` and `suggest()`.
+- **Observed.** At the current `AMBIGUITY_MARGIN` of 0.06, 1 of 30 hand-picked common progressions reads as two hearings; at 0.12, 20 do. On the generated fixture at 0.06, 41 of 57 two-hearing cases suggest different next chords. `node tools/two-hearings-probe.ts` reproduces this. It is an observation with no threshold set in advance, on typed symbols, and says nothing yet about played phrases.
+- **Observed.** Condition C returns no key and no suggestion when the reading is ambiguous ([`live.ts`](../src/room/analysis/live.ts)), so the room is quiet where the parser page has the most to say.
+- **Proposed.** Treat every keyboard as an invitation, which [E002](#e002--2026-11-07--playing-practice-and-the-study) asked to test separately from reflection. Keep condition C as it is, or remove "Try next", while the three conditions are compared. Put keyboards on the parser page first. Explore two hearings and a "what moves" cue in a fourth condition, and decide when a cue may appear before how it looks. [Alternatives and reasoning](concepts/harmony-readout-alternatives.md)
+- **Open.** All of the above. The user has not chosen an option, and has not said whether "Try next" from [E008](#e008--2026-11-08--minimal-harmony-readout) stays in condition C.
 
 ## How to continue
 
