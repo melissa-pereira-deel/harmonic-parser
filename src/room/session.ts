@@ -66,7 +66,15 @@ export function createRoomSession(condition: Condition, fixture: ReplayFixture |
         mood?.sample(tMs) ?? { energy: 0, warmth: 0 });
       if (reflection && tMs >= reflection.startMs + reflection.durationMs) reflection = null;
       const cue = condition === 'C' ? (fixture ? replayCueAt(fixture, tMs) : reflection) : null;
-      return { frame, gesture: snapshot, cue, harmony: condition === 'C' && showHarmony ? reading : null };
+      return {
+        frame,
+        gesture: snapshot,
+        cue,
+        harmony: condition === 'C' && showHarmony ? reading : null,
+        // What the analysis heard whether or not it is shown, so the lab can
+        // log B as a baseline. Null in A, which has no analysis.
+        heard: reading,
+      };
     },
     reset(): void {
       replay?.reset();

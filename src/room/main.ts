@@ -1,10 +1,14 @@
 import './visual/field.css';
+import '../keyboard.css';
 import './room.css';
+import { parseChord } from '../chords.ts';
+import { keyboardSvg } from '../keyboard.ts';
 import type { LiveHarmony } from './analysis/live.ts';
 import type { Condition, ReplayFixture } from './contracts.ts';
 import { createMidiInput } from './input/midi.ts';
 import type { MidiStatus } from './input/midi.ts';
 import type { RoomMetrics } from './lab.ts';
+import type { ReadoutLog } from './readout-log.ts';
 import { chordReplay, motifReplay } from './replay/motif.ts';
 import { createRoomSession } from './session.ts';
 import { createRoomRenderer } from './visual/renderer.ts';
@@ -36,9 +40,13 @@ const reflection = element('reflection');
 const harmony = element('harmony');
 const harmonyChord = element('harmony-chord');
 const harmonyKey = element('harmony-key');
+const harmonyKeyLabel = element('harmony-key-label');
 const harmonyKeyItem = element('harmony-key-item');
 const harmonyNext = element('harmony-next');
 const harmonyNextItem = element('harmony-next-item');
+const harmonyHearings = [element('harmony-hearing-1'), element('harmony-hearing-2')];
+/** Key height of the small keyboard beside a suggested chord, in CSS pixels. */
+const SUGGESTION_KEYS_PX = 22;
 const params = new URLSearchParams(location.search);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const labEnabled = import.meta.env.DEV && params.has('lab');
@@ -62,6 +70,9 @@ let previousFrameMs: number | null = null;
 let field = { impulse: 0, register: 0.5, envelope: 0, energy: 0, warmth: 0 };
 let status: MidiStatus = { kind: 'idle', ports: [], selectedId: null };
 let metrics: RoomMetrics | undefined;
+let readouts: ReadoutLog | undefined;
+/** Counts entries into the room with MIDI, so the readout log can tell runs apart. */
+let midiRun = 0;
 let displayedHarmony: LiveHarmony | null = null;
 
 const elapsed = () => performance.now() - startMs;
@@ -122,6 +133,7 @@ function begin(next: Condition, mode: 'midi' | 'replay' | null, replay: ReplayFi
   startMs = performance.now();
   frozenMs = null;
   metrics?.reset();
+  if (mode === 'midi') midiRun += 1;
   reflection.textContent = '';
   showHarmony(null);
   setup.hidden = true;
@@ -139,15 +151,49 @@ function openSetup(notice = ''): void {
   conditionField.focus();
 }
 
+/** A suggested chord as a small keyboard and its name. The name stays text. */
+function showSuggestion(target: Element, symbol: string | null): void {
+  target.replaceChildren();
+  if (!symbol) return;
+  const chord = parseChord(symbol);
+  if (chord) {
+    const keys = document.createElement('span');
+    keys.className = 'harmony-keys';
+    keys.innerHTML = keyboardSvg(chord, {
+      window: 'octave', marks: 'fill', detail: 'compact', height: SUGGESTION_KEYS_PX,
+    });
+    target.append(keys);
+  }
+  const name = document.createElement('span');
+  name.className = 'harmony-symbol';
+  name.textContent = symbol;
+  target.append(name);
+}
+
 function showHarmony(reading: LiveHarmony | null): void {
   if (displayedHarmony === reading) return;
   displayedHarmony = reading;
   harmony.hidden = !reading;
+  harmony.dataset.state = reading?.state ?? '';
   harmonyChord.textContent = reading?.chord ?? '';
-  harmonyKey.textContent = reading?.key ?? '';
-  harmonyKeyItem.hidden = !reading?.key;
-  harmonyNext.textContent = reading?.next ?? '';
-  harmonyNextItem.hidden = !reading?.next;
+
+  const merged = reading?.state === 'merged';
+  const oneSuggestion = reading?.state === 'clear' || merged;
+  harmonyKeyLabel.textContent = merged ? 'Could be' : 'Possible key';
+  harmonyKey.textContent = merged
+    ? reading.hearings.map(({ key }) => key).join(' or ')
+    : reading?.key ?? '';
+  harmonyKeyItem.hidden = !harmonyKey.textContent;
+  showSuggestion(harmonyNext, oneSuggestion ? reading.next : null);
+  harmonyNextItem.hidden = !harmonyNext.hasChildNodes();
+
+  const hearings = reading?.state === 'two-hearings' ? reading.hearings : [];
+  for (const [index, item] of harmonyHearings.entries()) {
+    const hearing = hearings[index];
+    item.hidden = !hearing;
+    item.querySelector('dt')!.textContent = hearing ? `Heard in ${hearing.key}` : '';
+    showSuggestion(item.querySelector('dd')!, hearing?.next ?? null);
+  }
 }
 
 function draw(tMs: number, stepMs?: number) {
@@ -181,6 +227,15 @@ function draw(tMs: number, stepMs?: number) {
   const text = state.cue?.text ?? '';
   if (reflection.textContent !== text) reflection.textContent = text;
   showHarmony(text ? null : state.harmony);
+  if (source === 'midi' && frozenMs === null) {
+    readouts?.observe({
+      run: midiRun,
+      condition,
+      tMs,
+      reading: state.heard,
+      shown: state.heard !== null && displayedHarmony === state.heard,
+    });
+  }
   return { ...state, renderer: renderer.kind };
 }
 
@@ -245,8 +300,10 @@ if (labEnabled) {
       motionTransition = { from: tuning, to: next, elapsedMs: 0 };
     });
   });
-  void import('./lab.ts').then(({ installRoomLab, createRoomMetrics }) => {
+  void Promise.all([import('./lab.ts'), import('./readout-log.ts')]).then(([lab, log]) => {
+    const { installRoomLab, createRoomMetrics } = lab;
     metrics = createRoomMetrics();
+    readouts = log.createReadoutLog();
     installRoomLab({
       start(next, replay) {
         begin(next, 'replay', replay);
@@ -260,6 +317,8 @@ if (labEnabled) {
         return draw(tMs);
       },
       stats: metrics.stats,
+      readouts: readouts.report,
+      clearReadouts: readouts.clear,
     });
   });
 }

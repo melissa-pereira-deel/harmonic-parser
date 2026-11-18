@@ -1,5 +1,6 @@
 import { analyzeAnnotatedChords } from './analysis/annotated.ts';
 import type { Condition, ReplayFixture } from './contracts.ts';
+import type { ReadoutReport } from './readout-log.ts';
 import { chordReplay, motifReplay } from './replay/motif.ts';
 import type { createRoomSession } from './session.ts';
 
@@ -82,6 +83,8 @@ export function installRoomLab(controls: {
   start(condition: Condition, fixture: ReplayFixture): Sample;
   sampleAt(tMs: number): Sample;
   stats(): ReturnType<RoomMetrics['stats']>;
+  readouts(): ReadoutReport;
+  clearReadouts(): void;
 }): void {
   let fixture = motifReplay;
 
@@ -101,6 +104,9 @@ export function installRoomLab(controls: {
         };
       },
       stats: controls.stats,
+      /** The playing session's readout log. Copy it out with `copy(__roomLab.readouts())`. */
+      readouts: controls.readouts,
+      clearReadouts: controls.clearReadouts,
     },
   });
 }

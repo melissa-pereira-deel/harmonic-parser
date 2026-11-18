@@ -109,4 +109,23 @@ body { margin: 0; }
 #harmony dt { color: #c3cec2; font-size: .72rem; }
 #harmony dd { margin: .15rem 0 0; font-size: 1rem; line-height: 1.2; }
 #harmony-chord { font-size: 1.35rem; font-weight: 500; }
-#harmony-next { color: #d5dca3; }
+
+/* The suggested chord's keyboard (src/keyboard.css), from the room's own
+   palette: idle keys in the setup controls' border and the page colour, the
+   sounding keys in the readout's accent, and the root pip in the start
+   button's ink. The root is told apart by its pip, not a colour. */
+#harmony {
+  --kb-white: #809187;
+  --kb-black: #121d22;
+  --kb-tone: #d5dca3;
+  --kb-root: #d5dca3;
+  --kb-pip: #1d2821;
+}
+#harmony .harmony-try {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  color: #d5dca3;
+}
+#harmony .harmony-keys { display: inline-flex; }

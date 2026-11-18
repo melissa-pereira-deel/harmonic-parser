@@ -9,17 +9,20 @@ npm run dev
 
 Open [room setup](http://localhost:5173/room/?setup=1) using the port Vite prints. Press **Esc** to return to setup from the room.
 
-1. Choose **C · Gesture and harmony**, select **Replay a chord progression**, and click **Enter room**. The replay is silent. Watch **Chord** change through **Am → F → G → C**. The last chord should show **Possible key C major** and **Try next F**. The readout clears after the phrase.
+1. Choose **C · Gesture and harmony**, select **Replay a chord progression**, and click **Enter room**. The replay is silent. Watch **Chord** change through **Am → F → G → C**. The last chord should show **Possible key C major** and **Try next F**, with a small keyboard beside the **F** that lights F, A and C. The readout clears after the phrase.
 2. For live playing, press **Esc**, select **Play my keyboard**, and click **Connect MIDI**. Select **Arturia KeyLab Essential 49 MIDI In**, or the equivalent playing port for your controller. Click **Enter room** and use your usual instrument or synth for sound.
-3. Hold **C–E–G**, then **F–A–C**, then **G–B–D**. Hold each group together briefly. You should see **C → F → G**. On **G**, expect **Possible key C major** and **Try next C**.
+3. Hold **C–E–G**, then **F–A–C**, then **G–B–D**. Hold each group together briefly. You should see **C → F → G**. On **G**, expect **Possible key C major** and **Try next C**, with its keyboard.
+4. **Hear two keys.** Press **Esc**, enter C again, and hold **G–B–D–F**, then **D–F–A–C**, then **C–E–G–B**. On the last chord the readout shows two entries: **Heard in C major** with **F**, and **Heard in G major** with **G**, each with its own keyboard. Press **Esc**, enter again, and play the same chords as **C–E–G–B**, **D–F–A–C**, **G–B–D–F**. Both keys now suggest **C**, so they merge: **Could be C major or G major** and one **Try next C**. Played as **D–F–A–C**, **G–B–D–F**, **C–E–G–B**, the same chords are a ii–V–I, the room hears the cadence, and it shows **C major** alone.
 
 | Condition | What happens |
 | --- | --- |
 | A · Drifting on its own | The field moves on its own while you play. |
 | B · Responding to gesture | Strike, register and held notes shape the field. The palette also follows the pace and phrasing of the playing. |
-| C · Gesture and harmony | B's field plus a small harmony readout for live MIDI and the chord replay. The original phrase replay still offers its timed reflection. |
+| C · Gesture and harmony | B's field plus a small harmony readout for live MIDI and the chord replay. When two keys are about equally likely, it offers one chord per key. The original phrase replay still offers its timed reflection. |
 
 The readout names familiar voicings, including inversions. A short run of single notes can leave the readout quiet. The key and suggestion are provisional readings of the recent progression.
+
+The readout has four states, all from the parser's own confidence check. With fewer than three distinct chords, or when no key fits, it names the chord only. With one clear key, or a heard cadence, it shows **Possible key** and one **Try next**. When the top two keys are within the parser's ambiguity margin, it shows **Heard in** each key with that key's next chord, or merges them into **Could be … or …** when both suggest the same chord. Each suggested chord has a small keyboard beside its name. A one-key readout lingers 0.7 s after you let go; one with two keys lingers 1.5 s. On common four-chord loops, two keys tend to appear on the third chord and resolve on the fourth.
 
 ## Test the gradient with a KeyLab
 
@@ -38,7 +41,7 @@ Note which step made the color feel connected to your playing, and whether a sna
 1. Record browser and OS, refresh rate, viewport, sound route and which MIDI input is selected. Check that your instrument or DAW still sounds while the room listens.
 2. Try a soft and hard strike, a pedal-held note, releasing the pedal, unplugging while a note is held, reconnecting, and leaving and returning to the tab. A disconnect should return to setup and leave replay available.
 3. For the technical check, use `/room/?setup=1&lab=1` in the development server. Keep each condition foregrounded for two minutes at a documented 60 Hz. In B and C, play at least 100 note onsets and run `window.__roomLab.stats()` in the browser console before leaving the condition. Compare frame cadence across A, B and C. Compare input handler to draw-submission delay in B and C. Coalesced strikes and pending strikes are reported separately. The browser measurement excludes physical key travel and display output.
-4. For the playing comparison, note the condition order, which variation you wanted to keep, whether you glanced at the screen, and what you played after any cue. On a later run, change the condition order to help separate the effect from warming up.
+4. For the playing comparison, use the [first playing session sheet](first-playing-session.md). It sets the bar before you play, walks through A, B and C with one motif, checks the two-key readout, and saves a log of what the readout offered and what you played next. On a later run, change the condition order to help separate the effect from warming up.
 
 ## Development checks
 
@@ -57,6 +60,14 @@ The development-only lab can sample the same frame in each condition and show re
 ```js
 window.__roomLab.start('C', 'chords')
 window.__roomLab.sampleAt(4000).analysis
+```
+
+With MIDI input, the lab also logs every chord the room recognises in B and C, what the readout offered or in B would have offered, and the next chord you played. It stays in the tab until you copy it:
+
+```js
+console.table(window.__roomLab.readouts().summary)
+copy(window.__roomLab.readouts())
+window.__roomLab.clearReadouts()
 ```
 
 The annotated fixture is distinct from the melody-first replay. The lab still exposes rankings from its supplied annotations. The visible harmony readout uses the MIDI note events in that fixture. See the [synthetic live-note probe](../experiments/live-room-note-evidence.spike.md) for why the experimental readout waits for recognizable chords.

@@ -14,7 +14,16 @@ const QUALITIES = {
   maj6: '6', min6: 'm6', add9: 'add9',
 } satisfies Partial<Record<Quality, string>>;
 const HOLD_MS = 125;
-const LINGER_MS = 700;
+/** How long a one-key readout stays after the chord is released or changes. */
+export const LINGER_MS = 700;
+/**
+ * How long a readout with two keys stays. Two labelled entries, each with a
+ * keyboard and a chord name, are about twice as much to read as one, so this
+ * is roughly double `LINGER_MS` with a little room for the eye to arrive. It
+ * stays under the facilitated reflection's 2.1 s so it never outlasts a
+ * deliberate cue. Unmeasured, like `LINGER_MS`.
+ */
+export const TWO_HEARINGS_LINGER_MS = 1_500;
 const CONTEXT_MS = 12_000;
 const MAX_CHORDS = 12;
 
@@ -36,10 +45,33 @@ interface Voicing {
   symbol: string;
 }
 
-export interface LiveHarmony {
-  chord: string;
-  key: string | null;
-  next: string | null;
+/** One way of hearing the recent chords: a key and the chord it suggests next. */
+export interface Hearing {
+  readonly key: string;
+  readonly next: string | null;
+}
+
+/**
+ * - `chord-only`: too few distinct chords to name a key, or nothing fits.
+ * - `clear`: one key, or a heard cadence settled it.
+ * - `two-hearings`: the top two keys sit within the parser's ambiguity
+ *   margin and suggest different chords.
+ * - `merged`: they sit within the margin and suggest the same chord.
+ */
+export type HarmonyState = 'chord-only' | 'clear' | 'two-hearings' | 'merged';
+
+export interface HarmonyReading {
+  readonly state: HarmonyState;
+  /** The key, only when the reading is `clear`. */
+  readonly key: string | null;
+  /** The one chord to try: the clear key's, or the one two hearings share. */
+  readonly next: string | null;
+  /** Every plausible key with its own next chord: none, one, or two. */
+  readonly hearings: readonly Hearing[];
+}
+
+export interface LiveHarmony extends HarmonyReading {
+  readonly chord: string;
 }
 
 function identify(notes: readonly ActiveNote[]): Voicing | null {
@@ -77,14 +109,51 @@ function cadentialKey(chords: readonly Chord[]): Key | null {
   return null;
 }
 
-function possibleKey(chords: readonly Chord[], cadence: Key | null): Key | null {
-  if (new Set(chords.map(chord => chord.symbol)).size < 3) return null;
+const CHORD_ONLY: HarmonyReading = { state: 'chord-only', key: null, next: null, hearings: [] };
+
+function nextIn(chords: readonly Chord[], key: Key): string | null {
+  return suggest(chords, key, 1)[0]?.symbol ?? null;
+}
+
+function hearing(chords: readonly Chord[], key: Key): Hearing {
+  return { key: keyName(key), next: nextIn(chords, key) };
+}
+
+function clearReading(chords: readonly Chord[], key: Key): HarmonyReading {
+  const only = hearing(chords, key);
+  return { state: 'clear', key: only.key, next: only.next, hearings: [only] };
+}
+
+/** The reading, and whether a heard cadence is what made it clear. */
+function interpret(chords: readonly Chord[], cadence: Key | null): { reading: HarmonyReading; voted: boolean } {
+  if (new Set(chords.map(chord => chord.symbol)).size < 3) return { reading: CHORD_ONLY, voted: false };
   const readings = rank(chords);
   // The profile is order independent. Give an audible dominant resolution a vote.
   if (cadence && readings.some(({ key, score }) =>
-    key.tonic === cadence.tonic && key.mode === cadence.mode && score >= UNCERTAINTY_FLOOR)) return cadence;
+    key.tonic === cadence.tonic && key.mode === cadence.mode && score >= UNCERTAINTY_FLOOR)) {
+    return { reading: clearReading(chords, cadence), voted: true };
+  }
   const confidence = assess(readings);
-  return confidence.uncertain || confidence.ambiguous ? null : readings[0].key;
+  if (confidence.uncertain) return { reading: CHORD_ONLY, voted: false };
+  if (!confidence.ambiguous) return { reading: clearReading(chords, readings[0].key), voted: false };
+  const [first, second] = confidence.contenders.slice(0, 2).map(({ key }) => hearing(chords, key));
+  const reading: HarmonyReading = first.next === second.next
+    ? { state: 'merged', key: null, next: first.next, hearings: [first, second] }
+    : { state: 'two-hearings', key: null, next: null, hearings: [first, second] };
+  return { reading, voted: false };
+}
+
+/**
+ * What condition C says about `chords`, oldest first. Pure: the room's rules
+ * (three distinct chords, the cadence vote) and the parser's confidence
+ * states, with `AMBIGUITY_MARGIN` and `UNCERTAINTY_FLOOR` as they are.
+ * Pass `cadence: null` to read the chords as the parser page would.
+ */
+export function readHarmony(
+  chords: readonly Chord[],
+  cadence: Key | null = cadentialKey(chords),
+): HarmonyReading {
+  return interpret(chords, cadence).reading;
 }
 
 export function createLiveHarmony(onCadence?: (tMs: number) => void) {
@@ -105,14 +174,9 @@ export function createLiveHarmony(onCadence?: (tMs: number) => void) {
     history.push({ chord, tMs: acceptedAt });
     history = history.slice(-MAX_CHORDS);
     const chords = history.map(item => item.chord);
-    const cadence = cadentialKey(chords);
-    const key = possibleKey(chords, cadence);
-    if (!repeated && cadence && key === cadence) onCadence?.(acceptedAt);
-    reading = {
-      chord: pending.symbol,
-      key: key ? keyName(key) : null,
-      next: key ? suggest(chords, key, 1)[0]?.symbol ?? null : null,
-    };
+    const { reading: heard, voted } = interpret(chords, cadentialKey(chords));
+    if (!repeated && voted) onCadence?.(acceptedAt);
+    reading = { chord: pending.symbol, ...heard };
     settled = true;
   }
 
@@ -121,7 +185,9 @@ export function createLiveHarmony(onCadence?: (tMs: number) => void) {
       settle(tMs);
       const next = identify(notes);
       if (pending?.symbol === next?.symbol) return;
-      if (settled) expiresAt = tMs + LINGER_MS;
+      if (settled) {
+        expiresAt = tMs + ((reading?.hearings.length ?? 0) > 1 ? TWO_HEARINGS_LINGER_MS : LINGER_MS);
+      }
       pending = next;
       since = tMs;
       settled = false;

@@ -109,7 +109,7 @@ export const INTERVALS: Readonly<Record<Quality, readonly number[]>> = {
  * slash bass on that quality would notice. Keep each row the same length as
  * its `INTERVALS` row by hand.
  */
-const LETTER_OFFSETS: Readonly<Record<Quality, readonly number[]>> = {
+export const LETTER_OFFSETS: Readonly<Record<Quality, readonly number[]>> = {
   maj: [0, 2, 4],
   min: [0, 2, 4],
   dim: [0, 2, 4],

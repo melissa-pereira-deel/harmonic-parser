@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ReplayFixture, RoomEvent } from '../../src/room/contracts.ts';
+import { LINGER_MS, TWO_HEARINGS_LINGER_MS } from '../../src/room/analysis/live.ts';
 import { createPlayingMood } from '../../src/room/analysis/mood.ts';
 import { createRoomSession } from '../../src/room/session.ts';
 
@@ -84,7 +85,9 @@ describe('live harmony', () => {
 
   it('names a held inversion without inferring a key from one chord', () => {
     const room = playChords([[52, 55, 60, 72]]);
-    expect(room.sample(400, false).harmony).toEqual({ chord: 'C/E', key: null, next: null });
+    expect(room.sample(400, false).harmony).toEqual({
+      chord: 'C/E', state: 'chord-only', key: null, next: null, hearings: [],
+    });
     expect(room.sample(1200, false).harmony).toBeNull();
   });
 
@@ -93,7 +96,9 @@ describe('live harmony', () => {
     const room = playChords(chords);
     const c = room.sample(1600, false);
     const b = playChords(chords, 'B').sample(1600, false);
-    expect(c.harmony).toEqual({ chord: 'C', key: 'C major', next: 'F' });
+    expect(c.harmony).toEqual({
+      chord: 'C', state: 'clear', key: 'C major', next: 'F', hearings: [{ key: 'C major', next: 'F' }],
+    });
     expect(b.harmony).toBeNull();
     expect(b.frame).toEqual(c.frame);
     expect(c.frame.warmth).toBeGreaterThan(0.15);
@@ -101,10 +106,42 @@ describe('live harmony', () => {
     expect(room.sample(0, false)).toMatchObject({ harmony: null, frame: { warmth: 0, energy: 0 } });
   });
 
-  it('withholds key and suggestions when the key profiles tie', () => {
+  it('keeps a played Dm7 G7 Cmaj7 clear, because the room hears the cadence', () => {
+    const room = playChords([[50, 53, 57, 60], [55, 59, 62, 65], [48, 52, 55, 59]]);
+    expect(room.sample(1600, false).harmony).toMatchObject({ chord: 'Cmaj7', state: 'clear', key: 'C major' });
+  });
+
+  it('offers one chord per hearing when two keys are close, and only in C', () => {
+    const chords = [[55, 59, 62, 65], [50, 53, 57, 60], [48, 52, 55, 59]];
+    const c = playChords(chords).sample(1600, false);
+    const b = playChords(chords, 'B').sample(1600, false);
+    expect(c.harmony).toEqual({
+      chord: 'Cmaj7',
+      state: 'two-hearings',
+      key: null,
+      next: null,
+      hearings: [{ key: 'C major', next: 'F' }, { key: 'G major', next: 'G' }],
+    });
+    expect(b.harmony).toBeNull();
+    expect(b.frame).toEqual(c.frame);
+  });
+
+  it('lets two hearings linger longer than one after the hands lift', () => {
+    const twoHearings = playChords([[55, 59, 62, 65], [50, 53, 57, 60], [48, 52, 55, 59]]);
+    const clear = playChords([[50, 53, 57], [55, 59, 62], [48, 52, 55]]);
+    // Both release their last chord at 1600 ms.
+    expect(clear.sample(1600 + LINGER_MS - 1, false).harmony).not.toBeNull();
+    expect(clear.sample(1600 + LINGER_MS, false).harmony).toBeNull();
+    expect(twoHearings.sample(1600 + LINGER_MS, false).harmony?.state).toBe('two-hearings');
+    expect(twoHearings.sample(1600 + TWO_HEARINGS_LINGER_MS - 1, false).harmony).not.toBeNull();
+    expect(twoHearings.sample(1600 + TWO_HEARINGS_LINGER_MS, false).harmony).toBeNull();
+  });
+
+  it('shows two hearings where it used to withhold the key', () => {
     const room = playChords([[48, 52, 55], [55, 59, 62], [57, 60, 64]]);
     const state = room.sample(1600, false);
-    expect(state.harmony).toEqual({ chord: 'Am', key: null, next: null });
+    expect(state.harmony).toMatchObject({ chord: 'Am', key: null });
+    expect(state.harmony?.hearings).toHaveLength(2);
     expect(state.frame.warmth).toBe(0);
   });
 });

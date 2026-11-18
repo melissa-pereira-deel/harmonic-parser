@@ -1,0 +1,42 @@
+/* The chord keyboard (src/keyboard.ts). Imported by both entry points.
+
+   The markup carries classes and no colours. A surface themes it by setting
+   five custom properties; anything unset falls back to the current text
+   colour, so an unthemed diagram is a legible one-ink drawing, not a hole.
+
+     --kb-white  idle white keys
+     --kb-black  idle black keys
+     --kb-tone   sounding keys (fill marks) or their dots (dot marks)
+     --kb-root   the root, when it should differ from the other tones
+     --kb-pip    the root and bass pips drawn on top of a filled key */
+
+.kb {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.kb-white { fill: var(--kb-white, color-mix(in srgb, currentColor 16%, transparent)); }
+.kb-black { fill: var(--kb-black, color-mix(in srgb, currentColor 52%, transparent)); }
+
+.kb[data-marks='fill'] .kb-key:is(.is-tone, .is-bass) { fill: var(--kb-tone, currentColor); }
+.kb[data-marks='fill'] .kb-key.is-root { fill: var(--kb-root, var(--kb-tone, currentColor)); }
+
+.kb-pip { fill: var(--kb-pip, Canvas); }
+.kb-pip.is-hollow { fill: none; stroke: var(--kb-pip, Canvas); stroke-width: 0.9; }
+
+.kb[data-marks='dot'] .kb-pip { fill: var(--kb-tone, currentColor); }
+.kb[data-marks='dot'] .kb-pip.is-root { fill: var(--kb-root, var(--kb-tone, currentColor)); }
+.kb[data-marks='dot'] .kb-pip.is-hollow {
+  fill: none;
+  stroke: var(--kb-tone, currentColor);
+}
+
+.kb-label {
+  fill: currentColor;
+  font-size: 5.6px;
+  text-anchor: middle;
+  opacity: 0.75;
+}
+.kb-label.is-root { opacity: 1; font-weight: 600; }
