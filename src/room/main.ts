@@ -8,6 +8,7 @@ import type { Condition, ReplayFixture } from './contracts.ts';
 import { createMidiInput } from './input/midi.ts';
 import type { MidiStatus } from './input/midi.ts';
 import type { RoomMetrics } from './lab.ts';
+import type { ReadoutLog } from './readout-log.ts';
 import { chordReplay, motifReplay } from './replay/motif.ts';
 import { createRoomSession } from './session.ts';
 import { createRoomRenderer } from './visual/renderer.ts';
@@ -69,6 +70,9 @@ let previousFrameMs: number | null = null;
 let field = { impulse: 0, register: 0.5, envelope: 0, energy: 0, warmth: 0 };
 let status: MidiStatus = { kind: 'idle', ports: [], selectedId: null };
 let metrics: RoomMetrics | undefined;
+let readouts: ReadoutLog | undefined;
+/** Counts entries into the room with MIDI, so the readout log can tell runs apart. */
+let midiRun = 0;
 let displayedHarmony: LiveHarmony | null = null;
 
 const elapsed = () => performance.now() - startMs;
@@ -129,6 +133,7 @@ function begin(next: Condition, mode: 'midi' | 'replay' | null, replay: ReplayFi
   startMs = performance.now();
   frozenMs = null;
   metrics?.reset();
+  if (mode === 'midi') midiRun += 1;
   reflection.textContent = '';
   showHarmony(null);
   setup.hidden = true;
@@ -222,6 +227,15 @@ function draw(tMs: number, stepMs?: number) {
   const text = state.cue?.text ?? '';
   if (reflection.textContent !== text) reflection.textContent = text;
   showHarmony(text ? null : state.harmony);
+  if (source === 'midi' && frozenMs === null) {
+    readouts?.observe({
+      run: midiRun,
+      condition,
+      tMs,
+      reading: state.heard,
+      shown: state.heard !== null && displayedHarmony === state.heard,
+    });
+  }
   return { ...state, renderer: renderer.kind };
 }
 
@@ -286,8 +300,10 @@ if (labEnabled) {
       motionTransition = { from: tuning, to: next, elapsedMs: 0 };
     });
   });
-  void import('./lab.ts').then(({ installRoomLab, createRoomMetrics }) => {
+  void Promise.all([import('./lab.ts'), import('./readout-log.ts')]).then(([lab, log]) => {
+    const { installRoomLab, createRoomMetrics } = lab;
     metrics = createRoomMetrics();
+    readouts = log.createReadoutLog();
     installRoomLab({
       start(next, replay) {
         begin(next, 'replay', replay);
@@ -301,6 +317,8 @@ if (labEnabled) {
         return draw(tMs);
       },
       stats: metrics.stats,
+      readouts: readouts.report,
+      clearReadouts: readouts.clear,
     });
   });
 }

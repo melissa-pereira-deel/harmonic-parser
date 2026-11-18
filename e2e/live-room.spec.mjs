@@ -254,6 +254,32 @@ test('A and B show no readout and no keyboard for the same playing', async ({ pa
   }
 });
 
+test('logs what the readout offered in B and C, and nothing in A', async ({ page }) => {
+  await mockMidi(page);
+  await openLab(page, '&setup=1');
+  const loop = [[48, 52, 55], [53, 57, 60], [55, 59, 62], [48, 52, 55]];
+  for (const condition of ['A', 'B', 'C']) {
+    await enterWithMidi(page, condition);
+    for (const notes of loop) {
+      await page.evaluate(notes => window.playMockChord(notes), notes);
+      await page.waitForTimeout(250);
+    }
+    await page.evaluate(() => window.playMockChord([]));
+    await page.keyboard.press('Escape');
+  }
+  const { entries, summary } = await page.evaluate(() => window.__roomLab.readouts());
+  expect(summary).toEqual([
+    { condition: 'B', chords: 4, shown: 0, offered: 2, followed: 1, twoKeys: 0, followedFromTwoKeys: 0 },
+    { condition: 'C', chords: 4, shown: 4, offered: 2, followed: 1, twoKeys: 0, followedFromTwoKeys: 0 },
+  ]);
+  const inC = entries.filter(entry => entry.condition === 'C');
+  expect(inC.map(entry => [entry.chord, entry.offered, entry.followed])).toEqual([
+    ['C', [], null], ['F', [], null], ['G', ['C'], 'C'], ['C', ['F'], null],
+  ]);
+  await page.evaluate(() => window.__roomLab.clearReadouts());
+  expect(await page.evaluate(() => window.__roomLab.readouts().entries)).toEqual([]);
+});
+
 test('leaves replay available after MIDI permission denial', async ({ page }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'requestMIDIAccess', {

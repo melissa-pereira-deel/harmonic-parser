@@ -41,7 +41,7 @@ Note which step made the color feel connected to your playing, and whether a sna
 1. Record browser and OS, refresh rate, viewport, sound route and which MIDI input is selected. Check that your instrument or DAW still sounds while the room listens.
 2. Try a soft and hard strike, a pedal-held note, releasing the pedal, unplugging while a note is held, reconnecting, and leaving and returning to the tab. A disconnect should return to setup and leave replay available.
 3. For the technical check, use `/room/?setup=1&lab=1` in the development server. Keep each condition foregrounded for two minutes at a documented 60 Hz. In B and C, play at least 100 note onsets and run `window.__roomLab.stats()` in the browser console before leaving the condition. Compare frame cadence across A, B and C. Compare input handler to draw-submission delay in B and C. Coalesced strikes and pending strikes are reported separately. The browser measurement excludes physical key travel and display output.
-4. For the playing comparison, note the condition order, which variation you wanted to keep, whether you glanced at the screen, and what you played after any cue. On a later run, change the condition order to help separate the effect from warming up.
+4. For the playing comparison, use the [first playing session sheet](first-playing-session.md). It sets the bar before you play, walks through A, B and C with one motif, checks the two-key readout, and saves a log of what the readout offered and what you played next. On a later run, change the condition order to help separate the effect from warming up.
 
 ## Development checks
 
@@ -60,6 +60,14 @@ The development-only lab can sample the same frame in each condition and show re
 ```js
 window.__roomLab.start('C', 'chords')
 window.__roomLab.sampleAt(4000).analysis
+```
+
+With MIDI input, the lab also logs every chord the room recognises in B and C, what the readout offered or in B would have offered, and the next chord you played. It stays in the tab until you copy it:
+
+```js
+console.table(window.__roomLab.readouts().summary)
+copy(window.__roomLab.readouts())
+window.__roomLab.clearReadouts()
 ```
 
 The annotated fixture is distinct from the melody-first replay. The lab still exposes rankings from its supplied annotations. The visible harmony readout uses the MIDI note events in that fixture. See the [synthetic live-note probe](../experiments/live-room-note-evidence.spike.md) for why the experimental readout waits for recognizable chords.

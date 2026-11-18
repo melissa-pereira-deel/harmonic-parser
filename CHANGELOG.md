@@ -14,6 +14,17 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 
 ### Added
 
+- **A sheet and a log for the first playing session.**
+  `docs/first-playing-session.md` sets a bar before playing, runs A, B and C
+  with one motif, checks the two-key readout on the KeyLab, and says how to
+  save the log. With `?lab=1` and MIDI input, `src/room/readout-log.ts` records
+  each chord the room recognises, what condition C's readout offered (or, in
+  B, would have offered without showing it), and whether the next chord played
+  matched an offer. `window.__roomLab.readouts()` returns it and
+  `clearReadouts()` empties it. It is development-only, and nothing leaves the
+  tab. The room session now also reports what its analysis heard, whether
+  shown or not, so the lab can log B; nothing the player sees changes.
+
 - **A chord as a small keyboard, and a page for deciding where it goes.**
   `src/keyboard.ts` turns a parsed `Chord` into one inline SVG: a flat octave
   with the sounding keys coloured, a solid pip on the root and a hollow one on
