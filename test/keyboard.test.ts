@@ -10,7 +10,8 @@ import { describe, expect, it } from 'vitest';
 
 import { INTERVALS, parseChord } from '../src/chords.ts';
 import type { Chord, Quality } from '../src/chords.ts';
-import { detailFor, keyboardLayout, keyboardSvg } from '../src/keyboard.ts';
+import type { KeyboardLayout } from '../src/keyboard.ts';
+import { detailFor, keyboardLayout, keyboardSvg, layoutSvg } from '../src/keyboard.ts';
 
 function chord(symbol: string): Chord {
   const parsed = parseChord(symbol);
@@ -102,11 +103,25 @@ describe('keyboardSvg', () => {
     expect(keyboardSvg(hostile)).not.toContain('<script>');
   });
 
-  it('gives the root a pip so colour is never the only signal', () => {
+  it('gives the root a pip from compact detail, so colour is not the only signal there', () => {
     const svg = keyboardSvg(chord('Dm'), { detail: 'compact' });
     expect(svg.match(/kb-pip/g)).toHaveLength(1);
     expect(svg).toContain('kb-pip on-white is-root');
     expect(keyboardSvg(chord('C/E'), { detail: 'compact' })).toContain('is-bass is-hollow');
+  });
+
+  it('keeps pips for root and bass, so a move never borrows their meaning', () => {
+    const layout: KeyboardLayout = {
+      whiteCount: 7,
+      keys: keyboardLayout(chord('C'), 'octave').keys.map((k) => ({
+        ...k,
+        role: k.pc === 0 ? 'stay' : k.pc === 4 ? 'leave' : k.pc === 9 ? 'arrive' : 'idle',
+      })),
+    };
+    const svg = layoutSvg(layout, 'C toward Am', { detail: 'compact' });
+    expect(svg).not.toContain('kb-pip');
+    expect(svg).toContain('kb-white is-leave');
+    expect(svg).toContain('kb-white is-arrive');
   });
 
   it('dots every sounding key in dot marks', () => {

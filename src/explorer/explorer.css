@@ -157,10 +157,11 @@ button[data-set]:focus-visible { outline: 2px solid var(--tone); outline-offset:
 .room-mock .field { width: min(100%, 22rem); }
 .room-mock input[type="range"] { accent-color: #d5dca3; }
 
-/* "What moves": pale keys stay, a solid pip is a new note, a ring is one to let go. */
+/* "What moves": pale keys stay, a filled key is a new note, an outlined key is
+   one to let go. No pips: those mean root and bass everywhere else. */
 .kb-moves .kb-key.is-stay { fill: color-mix(in srgb, var(--kb-tone) 50%, var(--kb-white)); }
 .kb-moves .kb-key.is-arrive { fill: var(--kb-tone); }
-.kb-moves .kb-pip.is-leave { stroke: var(--kb-tone); }
+.kb-moves .kb-key.is-leave { stroke: var(--kb-tone); stroke-width: 1.2; stroke-dasharray: 2 1.2; }
 
 .parser-mock { padding: 1rem; display: grid; gap: .9rem; background: var(--card); color: var(--fg); }
 #strip { display: flex; flex-wrap: wrap; gap: .5rem .9rem; }

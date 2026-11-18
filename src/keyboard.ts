@@ -9,9 +9,11 @@
  * **Nothing here picks a colour.** Every shape gets a class and the page's
  * stylesheet fills it from `--kb-*` custom properties (`keyboard.css`), so the
  * same markup sits in the parser's light and dark palettes and in the room
- * without a branch. Colour is also never the only signal: the root carries a
- * solid pip and a slash bass a hollow one, so the diagram still reads in one
- * ink, and the `aria-label` spells the notes out for anyone not looking.
+ * without a branch. From the `compact` tier up, colour is not the only
+ * signal: the root carries a solid pip and a slash bass a hollow one, so the
+ * diagram still reads in one ink. At `glyph` size there is no room for pips,
+ * and root and bass look like any other tone unless the surface sets
+ * `--kb-root`. The `aria-label` spells the notes out for anyone not looking.
  *
  * **One number sizes it.** `height` is the height of the keys in CSS pixels;
  * the width follows from how many keys the window holds. The drawing itself
@@ -249,12 +251,15 @@ function blackPath(slot: number): string {
   );
 }
 
-/** Roles that get a pip: solid for where the hand lands, hollow for where it was. */
+/**
+ * Roles that get a pip: solid for the root, hollow for a slash bass. Only
+ * those two, so a pip means the same thing in every diagram. The move roles
+ * (`stay`, `leave`, `arrive`) are told apart by how the key itself is drawn,
+ * which is the surface's stylesheet's job.
+ */
 const PIP: Readonly<Partial<Record<KeyRole, 'solid' | 'hollow'>>> = {
   root: 'solid',
   bass: 'hollow',
-  arrive: 'solid',
-  leave: 'hollow',
 };
 
 /**

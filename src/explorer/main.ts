@@ -128,7 +128,8 @@ function renderSingleReadouts(chords: readonly Chord[]): void {
     detail: 'compact',
   });
   $('opt-6').innerHTML = chord + item(`Toward ${next.symbol}`, `<span class="kb-moves">${drawing}</span>`, 'next');
-  $('opt-6-note').textContent = `${moves.sentence} Assumes ${last.symbol} is held in root position.`;
+  const held = last.bass === last.root ? 'in root position' : 'in root position over its bass';
+  $('opt-6-note').textContent = `${moves.sentence} Assumes ${last.symbol} is held ${held}.`;
 }
 
 /** Option 5: one suggestion per plausible key. */

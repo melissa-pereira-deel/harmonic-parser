@@ -17,16 +17,19 @@ and a change to *that* is a `Changed` with the disagreement rate quoted.
 - **A chord as a small keyboard, and a page for deciding where it goes.**
   `src/keyboard.ts` turns a parsed `Chord` into one inline SVG: a flat octave
   with the sounding keys coloured, a solid pip on the root and a hollow one on
-  a slash bass, so colour is never the only signal. One number sizes it, and
-  detail drops away as it shrinks — keys alone below 6 px of key width, note
-  names from 15 px. The markup carries classes and no colours; a surface
+  a slash bass. From 6 px of key width up, colour is not the only signal; below
+  that the drawing is keys alone and the root looks like any other tone unless
+  the surface sets `--kb-root`. Pips mean root and bass in every diagram. One
+  number sizes it, and detail drops away as it shrinks — note names from 15 px. The markup carries classes and no colours; a surface
   themes it with five `--kb-*` custom properties (`src/keyboard.css`).
 
   **Nothing shipped uses it yet, on purpose.** Whether a next chord should be
   drawn in the room at all is an open design question, set out in
-  `docs/concepts/harmony-readout-alternatives.md` with six options.
-  `/explorer/` is a development page that mocks all six on the real `rank()`
-  and `suggest()`. It is not in the build's inputs and does not deploy.
+  `docs/concepts/harmony-readout-alternatives.md`. A review added cues that
+  work over a melody and a playing session to run before choosing.
+  `/explorer/` is a development page that mocks six of the options on the real
+  `rank()` and `suggest()`; its "what moves" mock keeps a slash bass as its own
+  voice. It is not in the build's inputs and does not deploy.
   `tools/two-hearings-probe.ts` measures how often one of those options would
   appear: on 30 common progressions, once at the current ambiguity margin and
   twenty times at 0.12.
